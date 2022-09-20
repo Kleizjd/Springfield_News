@@ -177,7 +177,7 @@ $(document).ready(function () {
 			llamarVista("noticia", "noticia", "visualizarNoticia", {idNoticia: data.id}, true);});});
 
 	$(function viewEditProduct() {
-		$(document).on("click", "#viewEditarProducto", function () {
+		$(document).on("click", "#viewEditarNoticia", function () {
 			let data = $("#tableModalSearchNoticia").DataTable().row($(this).parents("tr")).data();
 			llamarVista("noticia", "noticia", "viewEditarNoticia", {codigo: data.id}, true);
 		});

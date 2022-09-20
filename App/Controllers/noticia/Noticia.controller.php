@@ -13,14 +13,15 @@ class Noticia extends Core{
 
     public function visualizarNoticia(){
         extract($_POST);
-        $sqlProduct = $this->select_all("SELECT * FROM noticias WHERE id = $idNoticia");
+        $sqlNoticia = $this->select_all("SELECT * FROM noticias WHERE id = $idNoticia");
         include_once "../../views/noticia/view.verNoticia.php";
            
     }
 
     public function viewEditarNoticia(){
         extract($_POST);
-        $sqlProduct = $this->select_all("SELECT * FROM noticias WHERE codigo = $codigo");
+        // var_dump($_POST);
+        $sqlNoticia = $this->select_all("SELECT * FROM noticias WHERE id = $codigo");
         include_once "../../views/noticia/view.EditNoticia.php";
     }
 

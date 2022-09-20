@@ -23,8 +23,8 @@
             </div>
     </div>
     <div class="card-body">
-        <form action="" id="form_EditProduct" method="POST" autocomplete="off" >
-            <?php foreach($sqlProduct as $product){}?>
+        <form action="" id="form_Editnoticia" method="POST" autocomplete="off" >
+            <?php foreach($sqlNoticia as $noticia){}?>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm">
@@ -38,39 +38,31 @@
                                 
                             </div>
                             <div class="col-sm-1">
-                                <button type="button" class="btn btn-danger" id="deleteProduct" title="Eliminar Noticia"><i class="fas fa-trash-alt"></i> </button>
+                                <button type="button" class="btn btn-danger" id="deletenoticia" title="Eliminar Noticia"><i class="fas fa-trash-alt"></i> </button>
                                 
-                            </div>
-                            <div class="col-sm-3 offset-1">
-								<h4><span class="badge badge-success" id = "statProduct" ><?=$product["estado"];?></span></h4>
                             </div>
                             
                         </div>
                        
                         <div class="row pb-3">
                              <div class="col-sm-1">
-                                <label for="code">Codigo</label>
+                                <label for="code">Id</label>
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" id="code_product" name = "code_product" value="<?=$product["codigo"];?>" readonly >
+                                <input type="text" class="form-control" id="code_noticia" name = "code_noticia" value="<?=$noticia["id"];?>" readonly >
                             </div>
                             <div class="col-sm-1">
-                                <label for="product">Noticia</label>
+                                <label for="noticia">Noticia</label>
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" id="product" name = "product" value="<?=$product["producto"];?>" >
+                                <input type="text" class="form-control" id="noticia" name = "noticia" value="<?=$noticia["titulo"];?>" >
                             </div>
+                           
                             <div class="col-sm-1">
-                                <label for="price">Valor Unitario</label>
+                                <label for="estado">Estado</label>
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="price" value="<?=$product["precio"];?>">
-                            </div>
-                            <div class="col-sm-1">
-                                <label for="amount">Cantidad</label>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="number" class="form-control" id="amount" name = "amount" value="<?=$product["cantidad"];?>" >
+                            <h4><span class="badge badge-success" id = "statnoticia" ><?=$noticia["estado"];?></span></h4>
                             </div>
                         </div>
                         
@@ -80,7 +72,7 @@
                                 <label for="description">Descripcion</label>
                             </div>
                             <div class="col-sm">
-                                <textarea rows="4" cols="4" class="form-control" id="description" name="description" ><?=$product["descripcion"];?></textarea>
+                                <textarea rows="4" cols="4" class="form-control" id="description" name="description" ><?=$noticia["descripcion"];?></textarea>
                             </div>
                         </div>
                     </div>
@@ -90,12 +82,12 @@
     </div>
 </div>
 <!-- Modal BUSCAR -->
-<div class="modal fade" id="modalSearchProduct">
+<div class="modal fade" id="modalSearchnoticia">
 	<div class="modal-dialog modal-lg" role="document" style="max-width: 80%;">
 		<div class="modal-content">
 
 			<div class="text-center modal-header">
-				<h3 class="w-100 modal-title">Búsqueda de productos</h3>
+				<h3 class="w-100 modal-title">Búsqueda de noticiaos</h3>
 				<button type="button" class="close" data-dismiss="modal" title="Cerrar">
 					<i class="fa fa-window-close fa-2x text-danger"></i>
 				</button>
@@ -111,14 +103,14 @@
 <!--  -->
 <script>
 $(document).ready( function(){
-    $(function EditProduct() {
-		$(document).on("submit", "#form_EditProduct", function (event) {
+    $(function Editnoticia() {
+		$(document).on("submit", "#form_Editnoticia", function (event) {
 			event.preventDefault();
 			
 			var formData = new FormData(event.target);
-			formData.append("modulo", "producto");
-			formData.append("controlador", "producto");
-			formData.append("funcion", "editarProducto");
+			formData.append("modulo", "noticiao");
+			formData.append("controlador", "noticiao");
+			formData.append("funcion", "editarnoticiao");
 			$.ajax({
 				url: "../../app/lib/ajax.php",
 				method: "post",
@@ -133,9 +125,9 @@ $(document).ready( function(){
 			});
 		});
     });
-    $(function deleteProduct() {
-        $(document).on("click", "#deleteProduct", function () {
-            let status = $("#statProduct").text();
+    $(function deletenoticia() {
+        $(document).on("click", "#deletenoticia", function () {
+            let status = $("#statnoticia").text();
             // alert(status);
             
             // if(status = "Existente"){
@@ -152,11 +144,11 @@ $(document).ready( function(){
                     allowEscapeKey: false,
                 }).then((result) => {
                     if (result.value) {
-                        var formData = new FormData($("#form_EditProduct")[0]);
-                        formData.append("modulo", "producto");
-                        formData.append("controlador", "producto");
-                        formData.append("funcion", "borrarProducto");
-                        formData.append("codigo", $("#code_product").val());
+                        var formData = new FormData($("#form_Editnoticia")[0]);
+                        formData.append("modulo", "noticiao");
+                        formData.append("controlador", "noticiao");
+                        formData.append("funcion", "borrarnoticiao");
+                        formData.append("Id", $("#code_noticia").val());
                         $.ajax({
                             url: "../../App/lib/ajax.php",
                             method: "POST",
@@ -169,7 +161,7 @@ $(document).ready( function(){
                             if (res.tipoRespuesta == true) {
                                 // alertify.notify(res.mensaje, res.tipoRespuesta, 4);
                                 swal({ title: 'Noticia Eliminada exitosamente', type: 'success', });
-                                var menu = "producto";
+                                var menu = "noticiao";
                                 llamarVista(menu, menu, menu);;
                             } 
                         });
