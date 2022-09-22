@@ -58,10 +58,10 @@
                                     <input type="text" class="form-control" id="noticia" value="<?= $noticia["titulo"]; ?>" readonly>
                                 </div>
                                 <div class="col-sm">
-                                    <label for="estado">Cantidad</label>
+                                    <label for="estado">Categoria</label>
                                 </div>
                                 <div class="col-sm">
-                                    <input type="text" class="form-control" id="estado" value="<?= $noticia["estado"]; ?>" readonly>
+                                    <input type="text" class="form-control" id="estado" value="<?= $noticia["categoria"]; ?>" readonly>
                                 </div>
                             </div>
                             <div class="row">

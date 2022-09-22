@@ -2,14 +2,14 @@
 $(document).ready(function () {
     /***************************/ //CREATE PRODUCT// /**************************/
     $(function RegistrarProducto() {
-		$(document).on("submit", "#frm_Product", function (event) {
+		$(document).on("submit", "#frm_Noticia", function (event) {
 			event.preventDefault();
 			// alert("sd")
 			var formData = new FormData(event.target);
             
-			formData.append("modulo", "producto");
-			formData.append("controlador", "producto");
-			formData.append("funcion", "crearProducto");
+			formData.append("modulo", "noticia");
+			formData.append("controlador", "noticia");
+			formData.append("funcion", "crearNoticia");
 			$.ajax({
 				url: "../../App/lib/ajax.php",
 				method: "POST",

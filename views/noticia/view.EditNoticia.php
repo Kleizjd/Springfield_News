@@ -57,6 +57,12 @@
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" id="noticia" name = "noticia" value="<?=$noticia["titulo"];?>" >
                             </div>
+                            <div class="col-sm-1">
+                                <label for="noticia">Categoria</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="noticia" name = "noticia" value="<?=$noticia["categoria"];?>" >
+                            </div>
                            
                             <div class="col-sm-1">
                                 <label for="estado">Estado</label>

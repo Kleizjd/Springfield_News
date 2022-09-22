@@ -1,10 +1,10 @@
-
+<!-- 
 <style>
     div.dataTables_wrapper {
         margin: 0 auto;
         width: 80%;
     }
-</style>
+</style> -->
 <!-- Modal BUSCAR -->
 <div class="modal fade" id="modalNoticia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -43,7 +43,7 @@
                                         <select name="status" id="status" class="form-control">
                                             <option value="">Seleccione ...</option>
                                             <option value="T">Todos</option>
-                                            <option value="Existentes">Actual</option>
+                                            <option value="A">Actual</option>
                                         </select>
                                     </div>
                                 </div>

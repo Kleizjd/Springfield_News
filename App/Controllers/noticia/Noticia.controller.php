@@ -5,8 +5,8 @@ include_once "../../Config/core.php";
 class Noticia extends Core{
     
     public function noticia(){
+        // $data =  array();
 		$data['page_functions_js'] = "functions_noticia.js";
-
         include_once "../../views/noticia/Noticia.php";
         
     }
@@ -64,15 +64,14 @@ class Noticia extends Core{
         
         extract($_POST);
         // var_dump($_POST);
-        $codigo_noticia = $_POST["codigo"];
-        $noticia = $_POST["noticia"];
-        $valor =  $_POST["valor"];
-        $cantidad =  $_POST["cantidad"];
+        $titulo = $_POST["titulo"];
+        $categoria =  $_POST["categoria"];
         $descripcion =  $_POST["descripcion"];
 
-       $sql= "INSERT INTO noticia (codigo, noticia) VALUES  (?,?)";	
 
-       $arrData = array($codigo_noticia, $noticia);
+       $sql= "INSERT INTO noticias (titulo, categoria, estado,descripcion) VALUES  (?,?,?,?)";	
+
+       $arrData = array($titulo, $categoria, "A", $descripcion);
        $sql = $this->insert($sql, $arrData);
     
        
@@ -83,7 +82,7 @@ class Noticia extends Core{
         extract($_POST);
         $respuesta = array();
 
-        $sql = "UPDATE noticia SET noticia ='$product',  cantidad = '$amount', descripcion = '$description' WHERE codigo='$code_product'";
+        $sql = "UPDATE noticias SET noticia ='$product',  cantidad = '$amount', descripcion = '$description' WHERE codigo='$code_product'";
        $actualizarNoticia = $this->select($sql);	
     
         // if ($actualizarNoticia) {  $respuesta["tipoRespuesta"] = true; }
@@ -98,7 +97,7 @@ class Noticia extends Core{
         extract($_POST);
         $respuesta = array();
 
-        $sql = "DELETE FROM noticia WHERE codigo='$codigo'";
+        $sql = "DELETE FROM noticias WHERE codigo='$codigo'";
         $borrarNoticia = $this->delete($sql);
         if ($borrarNoticia) { $respuesta["tipoRespuesta"] = true;  }
         

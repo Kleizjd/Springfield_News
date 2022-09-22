@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="" id="frm_Product" method="POST" autocomplete="off">
+            <form action="" id="frm_Noticia" method="POST" autocomplete="off">
                 <?php foreach ($sqlUsuario as $usuario) {} ?>
                 <div class="container-fluid">
                     <div class="row">
