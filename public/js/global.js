@@ -277,16 +277,18 @@ $(document).on("change", ".subirArchivo", function (e) {
 							alt: "Cargando...",
 							title: "Cargando..."
 						});
-						$("#img_profile_header").parent().parent().find("a").find("img").prop({
+						// $("#img_profile").attr("src", "../../views/perfil/Files/" + res.address);
+
+						$("#img_profile_header").parent().parent().find("#image_user").find("img").prop({
 							src: res.ruta,
 							alt: archivoSinExtension,
 							title: archivoSinExtension
 						});
-						// $("#img_profile_herence_carga").parent().parent().find("a").find("img").prop({
-						// 	src: res.ruta,
-						// 	alt: archivoSinExtension,
-						// 	title: archivoSinExtension
-						// });
+						$("#img_profile_herence_carga").parent().parent().find("#image_user_list").find("img").prop({
+							src: res.ruta,
+							alt: archivoSinExtension,
+							title: archivoSinExtension
+						});
 						setTimeout(() => {
 							$(this).parent().parent().find(".nombreArchivo").text(res.archivo);
 							if ($(this).parent().parent().find(".borrarArchivo").length == 1) {

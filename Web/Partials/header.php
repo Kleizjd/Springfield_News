@@ -15,14 +15,14 @@
         <a class="dropdown-item" href="#">THIS PROGRAM WAS DEVELOPED BY JOSE DANIEL GRIJALBA OSORIO</a>
       </div>
     </li>
-    <li class="nav-item dropdown no-arrow ">
+    <li class="nav-item dropdown no-arrow " id="img_profile_header">
 
-      <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10" data-toggle="dropdown">
-        <div class=""><img src="../../public/img/user_circle.png" alt="user" class="img-circle" id="img_profile" width="60"></div>
+      <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10 " data-toggle="dropdown" id="image_user">
+        <img src="../../public/img/user_circle.png" alt="user" class="img-circle" id="img_profile" width="60">
       </div>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-        <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10">
-          <div class="" id="img_profile_herence_carga"><img src="../../public/img/user_circle.png" alt="user" id="img_profile_herence" class="img-circle" width="60"></div>
+        <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10" id="img_profile_herence_carga">
+          <div id="image_user_list" ><img src="../../public/img/user_circle.png" alt="user" id="img_profile_herence" class="img-circle" width="60"></div>
           <div class="m-l-10">
             <h7 class="m-b-0" id="complete_name_window"></h7>
             <p class=" m-b-0">
