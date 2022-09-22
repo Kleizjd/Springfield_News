@@ -33,6 +33,7 @@ $(document).ready(function() {
                 processData: false,
                 contentType: false
             }).done((res) => {
+              
                 if (res.tipoRespuesta == "success") {
                     location.href = "web/pages"
                 } else {
@@ -45,8 +46,7 @@ $(document).ready(function() {
         });
 }());
  (function create_account() {
-    $("#create_account").on("submit", function (event) {
-        event.preventDefault();
+    $("#create_account").on("submit", function (event) { event.preventDefault();
 
            var formData = new FormData(event.target);
             formData.append("modulo", "login");
@@ -58,7 +58,6 @@ $(document).ready(function() {
             formData.append('nombre', $("#nombre").val());
             formData.append('apellido', $("#apellido").val());
 
-
             $.ajax({
                 url: 'app/lib/ajax.php',
                 method: $(this).attr('method'),
@@ -69,40 +68,14 @@ $(document).ready(function() {
                 contentType: false
             }).done((res) => {
                 if (res.tipoRespuesta == "success") {
-                    location.href = "web/pages"
-                } else {
-                    swal({
-                        title: "Usuario o Contraseña incorrectos",
-                        type: "error"
-                    });
-                }
+                    swal({ title: "Creacion de usuario exitoso", type: res.tipoRespuesta});
+                } else if(res.tipoRespuesta == "duplicate"){swal({ title: "Usuario existente",type: "error"});
+                } else {swal({ title: "la clave tiene que ser la misma", type:"error"});}
             })
         });
 }());
 });
 
-$('#to_register').on("click", function() {
-    $('#login_form').hide();
-    $("#create_account").show();
-});
-$('.panel_join').on("click", function() {
-    $('#create_account').hide();
-    $("#login_form").show();
-});
+$('#to_register').on("click", function() {$('#login_form').hide();$("#create_account").show();});
+$('.panel_join').on("click", function() {$('#create_account').hide();$("#login_form").show();});
 
-// (function closeSession(){
-//     $(document).on("click", "#exit", function (event) {
-//         var formData = new FormData(event.target);
-//         formData.append("modulo", "login");
-//         formData.append("controlador", "login");
-//         formData.append("funcion", "registarUsuario");
-//         $.ajax({
-//             // url: "../App/Controllers/login.controller.php",
-//             method: "post",
-//             data: { function: "cerrar_sesion", }
-//         }).done(() => {
-//             window.location.href = "../";
-//         });
-//     });
-
-// }());

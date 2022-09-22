@@ -43,8 +43,7 @@
                                         <select name="status" id="status" class="form-control">
                                             <option value="">Seleccione ...</option>
                                             <option value="T">Todos</option>
-                                            <option value="Existentes">Existente</option>
-                                            <option value="Agotado">Agotado</option>
+                                            <option value="Existentes">Actual</option>
                                         </select>
                                     </div>
                                 </div>

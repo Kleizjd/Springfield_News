@@ -70,11 +70,14 @@ class Login extends Core
                     $answer["tipoRespuesta"] = "success";
                 }
             } else {
-                $answer['tipoRespuesta'] = "error";
+                $answer['tipoRespuesta'] = "duplicate";
             }
-
-            echo json_encode($answer);
+            
+        }  else {
+            $answer['tipoRespuesta'] = "error";
         }
+        echo json_encode($answer);
+
     }
 
 
@@ -172,5 +175,6 @@ class Login extends Core
     {
         @session_unset();
         @session_destroy();
+        
     }
 }

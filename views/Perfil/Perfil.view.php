@@ -1,6 +1,6 @@
 <?php @session_start(); ?>
 <div class="card shadow-lg mt-2">
-    <div class="badge-primary card-header">
+    <div class="badge-dark card-header">
         <div class="row">
             <h4>
                 <b>Configuracion</b>
