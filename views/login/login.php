@@ -26,7 +26,7 @@
                   </div>
                 </div>
               </div>
-    
+
 
               <div class="form-group m-b-0">
                 <div class="col-sm-12 text-center">
@@ -35,10 +35,11 @@
               </div>
               <div class="form-group m-b-0">
                 <div class="col-sm-12 text-center">
-                <span class="ml-auto"><a href="#" id="resetByEmail" class="forgot-pass">Olvidaste tu contraseña?</a></span>
+                  <span class="ml-auto"><a href="#" id="resetByEmail" class="forgot-pass">Olvidaste tu contraseña?</a></span>
                 </div>
               </div>
             </form>
+
             <!--[ REGISTRAR USUARIO ]-->
             <form id="create_account" method="POST" autocomplete="off" class="overflow-auto" style="display: none">
               <div id="register_users" class="animate form registration_form">
@@ -57,7 +58,7 @@
                 <div class="form-group">
                   <input type="password" class="form-control" placeholder="Validar Contrase&ntilde;a" required id="password_verify" />
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                <button type="submit" class="btn btn-primary btn-block" >Enviar</button>
 
                 <div class="separator">
                   <p class="change_link">Ya estas Registrado ?
