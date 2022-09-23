@@ -15,4 +15,5 @@ $(document).ready(function () {
         $(document).on("click", "#contactanos", function () { var menu = "home"; llamarVista(menu, menu, "contactanos"); })
         $(document).on("click", "#contributors", function () { var menu = "home"; llamarVista(menu, menu, "contributors"); })
         $(document).on("click", "#join", function () { var menu = "home"; llamarVista(menu, menu, "join"); })
+        $(document).on("click", "#resetByEmail", function () { var menu = "home"; llamarVista(menu, menu, "resetByEmail"); })
     });

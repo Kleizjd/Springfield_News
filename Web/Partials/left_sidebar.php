@@ -11,7 +11,11 @@
                     <div class="list-group list-group-flush">
 
                         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="./"><i class="fas fa-home"></i>Home - Dashboard</a>
-                        <a class="list-group-item list-group-item-action list-group-item-light p-3" id="verNoticia">Noticias</a>
+                        <?php if ($_SESSION["rolid"] != 2) : ?>
+
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" id="verNoticia">Noticias</a>
+                        <?php endif; ?>
+
                         <!-- <a class="list-group-item list-group-item-action list-group-item-light p-3" id="verCliente">Clientes</a> -->
                         <!-- <a class="list-group-item list-group-item-action list-group-item-light p-3" id="proveedor">Proveedores</a> -->
                     </div>

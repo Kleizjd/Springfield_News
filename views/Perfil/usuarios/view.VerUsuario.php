@@ -60,9 +60,9 @@
                                 <div class="col-sm">
                                     <label for="rol">Rol</label>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     <input type="text" class="form-control" id="rol" value="<?php
-                                    echo (($usuario["rolid"] == '1') ?  "vendedor" : 'cliente'); ?>" readonly>
+                                    echo (($usuario["rolid"] == '2') ?   'Columnista':'Lector'); ?>" readonly>
                                 </div>
                             </div>
                             <div class="row">

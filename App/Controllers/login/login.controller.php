@@ -1,6 +1,6 @@
 
 <?php
-    include_once "../../Config/Core.php";
+include_once "../../Config/Core.php";
 
 class Login extends Core
 {
@@ -63,7 +63,7 @@ class Login extends Core
 
                 $sql = "INSERT INTO usuarios(nombre, apellido, email, password, estado_usuario, rolid) VALUES (?,?,?,?,?,?)";
 
-                $arrData = array( $nombre, $apellido, $email, $passEncrypt, 'A', '2');
+                $arrData = array($nombre, $apellido, $email, $passEncrypt, 'A', '2');
                 $sql = $this->insert($sql, $arrData);
 
                 if ($sql != null) {
@@ -72,14 +72,19 @@ class Login extends Core
             } else {
                 $answer['tipoRespuesta'] = "duplicate";
             }
-            
-        }  else {
+        } else {
             $answer['tipoRespuesta'] = "error";
         }
         echo json_encode($answer);
-
     }
+    public function resetPassword()
+    {
+        extract($_POST);
+        $answer = array();
 
+        $answer['tipoRespuesta'] = "success";
+        echo json_encode($answer);
+    }
 
 
 
@@ -175,6 +180,5 @@ class Login extends Core
     {
         @session_unset();
         @session_destroy();
-        
     }
 }

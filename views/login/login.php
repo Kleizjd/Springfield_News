@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
-            <h3>Ingresar a<strong>Springfield</strong></h3>
+            <h3>Ingresar a <strong>Springfield</strong></h3>
             <p class="mb-4">Los Usarios son nuestra razon de ser.</p>
             <form id="login_form" method="post" autocomplete="off">
               <div class="form-group ">
@@ -18,6 +18,7 @@
                   <i class="fas fa-eye"></i>
                 </button>
               </div>
+
               <div class="form-group">
                 <div class="row">
                   <div class="col-12">
@@ -25,14 +26,20 @@
                   </div>
                 </div>
               </div>
+    
+
               <div class="form-group m-b-0">
                 <div class="col-sm-12 text-center">
                   No tienes cuenta? <a id="to_register" class="text-info m-l-5"><b>Registrate</b></a>
                 </div>
               </div>
+              <div class="form-group m-b-0">
+                <div class="col-sm-12 text-center">
+                <span class="ml-auto"><a href="#" id="resetByEmail" class="forgot-pass">Olvidaste tu contraseña?</a></span>
+                </div>
+              </div>
             </form>
             <!--[ REGISTRAR USUARIO ]-->
-
             <form id="create_account" method="POST" autocomplete="off" class="overflow-auto" style="display: none">
               <div id="register_users" class="animate form registration_form">
                 <div class="form-group">
@@ -58,12 +65,10 @@
                   </p>
 
                   <div>
-                    <span> &copy;Copyright <?= date("Y"); ?> Best -José Daniel Grijalba</span>
+                    <span> &copy;Copyright <?= date("Y"); ?> Aunar Papper</span>
                   </div>
                 </div>
             </form>
-
-
             <!--[ !REGISTRAR USUARIO ]-->
 
           </div>

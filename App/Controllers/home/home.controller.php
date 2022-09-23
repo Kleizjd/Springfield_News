@@ -24,4 +24,10 @@ class home extends Core{
         include_once "views/login/login.php";
         
     }
+    public function resetByEmail(){
+        
+        include_once "views/login/email.php";
+        
+    }
+ 
 }

@@ -14,32 +14,7 @@ $(document).ready(function() {
         });
 
 
- (function resetPassword() {
-    $(document).on("submit", "#reset_password", function (event) {
-        event.preventDefault();
-           var formData = new FormData(event.target);
-            formData.append("modulo", "login");
-            formData.append("controlador", "login");
-            formData.append("funcion", "resetPassword");
-
-            $.ajax({
-                url: 'app/lib/ajax.php',
-                method: $(this).attr('method'),
-                dataType: 'JSON',
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false
-            }).done((res) => {
-              
-                if (res.tipoRespuesta == "success") {
-                    location.href = "web/pages"
-                } else {
-                    swal({ title: "Cambio de contraseña exitosa", type: "error" });
-                }
-            })
-        });
-}());
+ 
  (function validarLogin() {
     $(document).on("submit", "#login_form", function (event) {
         event.preventDefault();
@@ -118,6 +93,59 @@ $(document).ready(function() {
             }
             
     });
+}());
+// INCOMPLETO
+(function resetPassword() {
+    $(document).on("submit", "#reset_password", function (event) {
+        event.preventDefault();
+           var formData = new FormData(event.target);
+            formData.append("modulo", "login");
+            formData.append("controlador", "login");
+            formData.append("funcion", "resetPassword");
+
+            $.ajax({
+                url: 'app/lib/ajax.php',
+                method: $(this).attr('method'),
+                dataType: 'JSON',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false
+            }).done((res) => {
+              
+                if (res.tipoRespuesta == "success") {
+                    location.href = "web/pages"
+                } else {
+                    swal({ title: "Cambio de contraseña exitosa", type: "error" });
+                }
+            })
+        });
+}());
+ (function sendEmail() {
+    $(document).on("submit", "#reset_email", function (event) {
+        event.preventDefault();
+           var formData = new FormData(event.target);
+            formData.append("modulo", "login");
+            formData.append("controlador", "login");
+            formData.append("funcion", "sendEmail");
+
+            $.ajax({
+                url: 'app/lib/ajax.php',
+                method: $(this).attr('method'),
+                dataType: 'JSON',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false
+            }).done((res) => {
+              
+                if (res.tipoRespuesta == "success") {
+                    location.href = "web/pages"
+                } else {
+                    swal({ title: "Cambio de contraseña exitosa", type: "error" });
+                }
+            })
+        });
 }());
 });
 
