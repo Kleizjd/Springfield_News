@@ -82,7 +82,7 @@ function obtenerMesesEntreDosFechas(fecha_desde, fecha_hasta) {
     return resultado;
 }
 
-// ENCRIPTAR Y DECRIPTAR DATOS
+// ENCRIPTAR Y DECRIPTAR DATOSs
 function encriptar(dato){
 	let encrypted = CryptoJS.AES.encrypt(JSON.stringify(dato), "", {format: CryptoJSAesJson}).toString();
 	return encrypted;
