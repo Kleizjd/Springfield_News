@@ -1,22 +1,13 @@
 
-// var input=  document.getElementById('password_user');
-// input.addEventListener('input',function(){
-//   if (this.value.length > 7) {
-//     // this.value = this.value.slice(0,12); 
-//     swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error"});
-
-//   }
-// })
 $(document).ready(function() {
-    // document.body.classList.add("login_register");
-		$(document).on("click", ".showPassword", function() {
-            let inputPassword = $(this).parent().find("input");
-            if ($(inputPassword).val() != "") {
-                if ($(inputPassword).prop("type") == "password") {
-                    $(inputPassword).prop("type", "text");
+		$(document).on("click", ".showpassword", function() {
+            let inputpassword = $(this).parent().find("input");
+            if ($(inputpassword).val() != "") {
+                if ($(inputpassword).prop("type") == "password") {
+                    $(inputpassword).prop("type", "text");
                     $(this).html('<i class="fas fa-eye-slash"></i>');
-                } else if ($(inputPassword).prop("type") == "text") {
-                    $(inputPassword).prop("type", "password");
+                } else if ($(inputpassword).prop("type") == "text") {
+                    $(inputpassword).prop("type", "password");
                     $(this).html('<i class="fas fa-eye"></i>');
                 }
             }
@@ -25,8 +16,6 @@ $(document).ready(function() {
 
  (function validarLogin() {
     $(document).on("submit", "#login_form", function (event) {
-
-    // $("#login_form").on("submit", function (event) {
         event.preventDefault();
            var formData = new FormData(event.target);
             formData.append("modulo", "login");
@@ -64,12 +53,10 @@ $(document).ready(function() {
             formData.append('nombre', $("#nombre").val());
             formData.append('apellido', $("#apellido").val());
             var password = $('#password_user').val(); 
-
             if (password.length  > 7 || $("#password_user").val().length  > 7 ) {
-            // var reg=/^[!@#$%^&*]/;
             if(password.match(/\d/)){//numeros
             if(password.match(/[A-Z]/) && password.match(/[A-z]/)){//Aa
-            // if(password.match(reg)){
+            if(password.match(/[@#$%^&+=]/)){
                 $.ajax({
                     url: 'app/lib/ajax.php',
                     method: $(this).attr('method'),
@@ -84,10 +71,10 @@ $(document).ready(function() {
                     } else if(res.tipoRespuesta == "duplicate"){swal({ title: "Usuario existente",type: "error"});
                     } else {swal({ title: "la clave tiene que ser la misma", type:"error"});}
                 })
-            // } else {
-            //     swal({ title: "la contraseña debe de almenos tener 1 caracter especial", type: "error"});
+            } else {
+                swal({ title: "la contraseña debe de almenos tener 1 caracter especial", type: "error"});
 
-            // }
+            }
             } else {
                 swal({ title: "la contraseña debe de almenos tener 1 una letra en Mayuscula y 1 una en Minuscula ", type: "error"});
             }
@@ -105,4 +92,3 @@ $(document).ready(function() {
 $('#to_register').on("click", function() {$('#login_form').hide();$("#create_account").show();});
 $('.panel_join').on("click", function() {$('#create_account').hide();$("#login_form").show();});
 
-                // !/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)
