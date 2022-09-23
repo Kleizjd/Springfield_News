@@ -1,3 +1,12 @@
+
+// var input=  document.getElementById('password_user');
+// input.addEventListener('input',function(){
+//   if (this.value.length > 7) {
+//     // this.value = this.value.slice(0,12); 
+//     swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error"});
+
+//   }
+// })
 $(document).ready(function() {
     // document.body.classList.add("login_register");
 		$(document).on("click", ".showPassword", function() {
@@ -37,10 +46,7 @@ $(document).ready(function() {
                 if (res.tipoRespuesta == "success") {
                     location.href = "web/pages"
                 } else {
-                    swal({
-                        title: "Usuario o Contraseña incorrectos",
-                        type: "error"
-                    });
+                    swal({ title: "Usuario o Contraseña incorrectos", type: "error" });
                 }
             })
         });
@@ -57,25 +63,46 @@ $(document).ready(function() {
             formData.append('password_verify', $("#password_verify").val());
             formData.append('nombre', $("#nombre").val());
             formData.append('apellido', $("#apellido").val());
+            var password = $('#password_user').val(); 
 
-            $.ajax({
-                url: 'app/lib/ajax.php',
-                method: $(this).attr('method'),
-                dataType: 'JSON',
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false
-            }).done((res) => {
-                if (res.tipoRespuesta == "success") {
-                    swal({ title: "Creacion de usuario exitoso", type: res.tipoRespuesta});
-                } else if(res.tipoRespuesta == "duplicate"){swal({ title: "Usuario existente",type: "error"});
-                } else {swal({ title: "la clave tiene que ser la misma", type:"error"});}
-            })
-        });
+            if (password.length  > 7 || $("#password_user").val().length  > 7 ) {
+            // var reg=/^[!@#$%^&*]/;
+            if(password.match(/\d/)){//numeros
+            if(password.match(/[A-Z]/) && password.match(/[A-z]/)){//Aa
+            // if(password.match(reg)){
+                $.ajax({
+                    url: 'app/lib/ajax.php',
+                    method: $(this).attr('method'),
+                    dataType: 'JSON',
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false
+                }).done((res) => {
+                    if (res.tipoRespuesta == "success") {
+                        swal({ title: "Creacion de usuario exitoso", type: res.tipoRespuesta});
+                    } else if(res.tipoRespuesta == "duplicate"){swal({ title: "Usuario existente",type: "error"});
+                    } else {swal({ title: "la clave tiene que ser la misma", type:"error"});}
+                })
+            // } else {
+            //     swal({ title: "la contraseña debe de almenos tener 1 caracter especial", type: "error"});
+
+            // }
+            } else {
+                swal({ title: "la contraseña debe de almenos tener 1 una letra en Mayuscula y 1 una en Minuscula ", type: "error"});
+            }
+            } else {
+                swal({ title: "la contraseña debe de almenos tener 1 numero ", type: "error"});
+            }
+      
+        } else {
+            swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error"});
+        }
+    });
 }());
 });
 
 $('#to_register').on("click", function() {$('#login_form').hide();$("#create_account").show();});
 $('.panel_join').on("click", function() {$('#create_account').hide();$("#login_form").show();});
 
+                // !/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)
