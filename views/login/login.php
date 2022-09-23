@@ -6,7 +6,7 @@
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
             <h3>Ingresar a <strong>Springfield</strong></h3>
-            <p class="mb-4">Los Usarios son nuestra razon de ser.</p>
+            <p class="mb-4">Las Noticias son nuestra razon de ser.</p>
             <form id="login_form" method="post" autocomplete="off">
               <div class="form-group ">
                 <input type="text" class="form-control" placeholder="Login" name="user" id="user" autofocus required>
