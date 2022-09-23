@@ -1,3 +1,3 @@
 "# Springfield_News" 
 
-Este programa esta diseñado para la universidad Aunar en la asignarutoa de ing. del software
+Este programa esta diseñado para la universidad Aunar en la asignatuta de ing. del software

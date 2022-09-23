@@ -14,6 +14,32 @@ $(document).ready(function() {
         });
 
 
+ (function resetPassword() {
+    $(document).on("submit", "#reset_password", function (event) {
+        event.preventDefault();
+           var formData = new FormData(event.target);
+            formData.append("modulo", "login");
+            formData.append("controlador", "login");
+            formData.append("funcion", "resetPassword");
+
+            $.ajax({
+                url: 'app/lib/ajax.php',
+                method: $(this).attr('method'),
+                dataType: 'JSON',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false
+            }).done((res) => {
+              
+                if (res.tipoRespuesta == "success") {
+                    location.href = "web/pages"
+                } else {
+                    swal({ title: "Cambio de contraseña exitosa", type: "error" });
+                }
+            })
+        });
+}());
  (function validarLogin() {
     $(document).on("submit", "#login_form", function (event) {
         event.preventDefault();
@@ -53,38 +79,44 @@ $(document).ready(function() {
             formData.append('nombre', $("#nombre").val());
             formData.append('apellido', $("#apellido").val());
             var password = $('#password_user').val(); 
-            if (password.length  > 7 || $("#password_user").val().length  > 7 ) {
-            if(password.match(/\d/)){//numeros
-            if(password.match(/[A-Z]/) && password.match(/[A-z]/)){//Aa
-            if(password.match(/[@#$%^&+=]/)){
-                $.ajax({
-                    url: 'app/lib/ajax.php',
-                    method: $(this).attr('method'),
-                    dataType: 'JSON',
-                    data: formData,
-                    cache: false,
-                    processData: false,
-                    contentType: false
-                }).done((res) => {
-                    if (res.tipoRespuesta == "success") {
-                        swal({ title: "Creacion de usuario exitoso", type: res.tipoRespuesta});
-                    } else if(res.tipoRespuesta == "duplicate"){swal({ title: "Usuario existente",type: "error"});
-                    } else {swal({ title: "la clave tiene que ser la misma", type:"error"});}
-                })
+            if ($("#nombre").val().length  <= 15 && $("#apellido").val().length  <= 15){
+                if (password.length  > 7 || $("#password_user").val().length  > 7 ) {
+                    if(password.match(/\d/)){//numeros
+                    if(password.match(/[A-Z]/) && password.match(/[A-z]/)){//Aa
+                    if(password.match(/[@#$%^&+=]/)){
+                        $.ajax({
+                            url: 'app/lib/ajax.php',
+                            method: $(this).attr('method'),
+                            dataType: 'JSON',
+                            data: formData,
+                            cache: false,
+                            processData: false,
+                            contentType: false
+                        }).done((res) => {
+                            if (res.tipoRespuesta == "success") {
+                                $(event.target)[0].reset();
+                                swal({ title: "Creacion de usuario exitoso", type: res.tipoRespuesta});
+                            } else if(res.tipoRespuesta == "duplicate"){swal({ title: "Usuario existente",type: "error"});
+                            } else {swal({ title: "la clave tiene que ser la misma", type:"error"});}
+                        })
+                    } else {
+                        swal({ title: "la contraseña debe de almenos tener 1 caracter especial", type: "error"});
+        
+                    }
+                    } else {
+                        swal({ title: "la contraseña debe de almenos tener 1 una letra en Mayuscula y 1 una en Minuscula ", type: "error"});
+                    }
+                    } else {
+                        swal({ title: "la contraseña debe de almenos tener 1 numero ", type: "error"});
+                    }
+              
+                } else {
+                    swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error"});
+                }
             } else {
-                swal({ title: "la contraseña debe de almenos tener 1 caracter especial", type: "error"});
-
+                swal({ title: "El Nombre o Apellido de usuario no debe superar 15 caracteres", type: "error"});
             }
-            } else {
-                swal({ title: "la contraseña debe de almenos tener 1 una letra en Mayuscula y 1 una en Minuscula ", type: "error"});
-            }
-            } else {
-                swal({ title: "la contraseña debe de almenos tener 1 numero ", type: "error"});
-            }
-      
-        } else {
-            swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error"});
-        }
+            
     });
 }());
 });
