@@ -83,7 +83,7 @@
                 <!--[ MODIFICAR CONTRASEÑA ]-->
                 <form id="reset_password" method="POST" autocomplete="off" class="overflow-auto form-horizontal">
                     <div align="center">
-                        <label id="correo" name="correo"></label>
+                        <label id="email_user" name="email_user"></label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Nueva contraseña" name="nueva_clave" id="nueva_clave" required />

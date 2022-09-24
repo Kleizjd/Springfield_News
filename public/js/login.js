@@ -103,35 +103,6 @@ $(document).ready(function () {
         });
     }());
     // INCOMPLETO
-    (function resetPassword() {
-        $(document).on("submit", "#reset_password", function (event) {
-            event.preventDefault();
-            var formData = new FormData(event.target);
-            formData.append("modulo", "login");
-            formData.append("controlador", "login");
-            formData.append("funcion", "resetPassword");
-
-            $.ajax({
-                url: 'app/lib/ajax.php',
-                method: $(this).attr('method'),
-                dataType: 'JSON',
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false
-            }).done((res) => {
-
-                if (res.tipoRespuesta == "success") {
-                    swal({ title: "Cambio de contraseña exitosa", type: "error" });
-            
-                } else {
-                    swal({ title: "contraseña en los campos es diferente", type: "error" });
-                }
-            })
-        });
-    }());
-    
-  
     (function sendEmail() {
         $(document).on("submit", "#reset_email", function (event) {
             event.preventDefault();
@@ -157,6 +128,7 @@ $(document).ready(function () {
                   
                     $("#correo").text(res.correo);
                     $("#pregunta").text(res.pregunta);
+                    $("#email_user").text(res.correo);
                                       
                     // $(#estilo).load("/www/Springfield_News/views/login/reset.php", function() {
                     // $("#correo").text(res.correo);
@@ -168,6 +140,40 @@ $(document).ready(function () {
             })
         });
     }());
+    (function resetPassword() {
+        $(document).on("submit", "#reset_password", function (event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+            formData.append("modulo", "login");
+            formData.append("controlador", "login");
+            formData.append("funcion", "camposPassword");
+            formData.append("email", $('#correo').text());
+            formData.append("respuesta", $('#respuesta').val());
+
+            $.ajax({
+                url: 'app/lib/ajax.php',
+                method: $(this).attr('method'),
+                dataType: 'JSON',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false
+            }).done((res) => {
+
+                if (res.tipoRespuesta == "success") {
+                    swal({ type: "success" });
+                    $("#pregunta_segura_valida").hide();
+                    $('#cambio_clave_pornueva').show();
+                    
+                } else {
+                    swal({ title: "respuesta incorrecta", type: "error" });
+                }
+            })
+        });
+    }());
+    
+  
+   
 });
 
 $('#to_register').on("click", function () { $('#login_form').hide(); $("#create_account").show(); });

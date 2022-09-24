@@ -79,17 +79,33 @@ class Login extends Core
         }
         echo json_encode($answer);
     }
+    public function camposPassword()
+    {
+        extract($_POST);
+        // var_dump($_POST);
+
+        $answer = array();
+        $sqlPssword = $this->select_all("SELECT * FROM usuarios WHERE respuesta = '$respuesta' and email ='$email'");
+        if ($sqlPssword) {
+            $answer['tipoRespuesta'] = "success";
+        } else {
+            $answer['tipoRespuesta'] = "error";
+        }
+        echo json_encode($answer);
+    }
     public function resetPassword()
     {
         extract($_POST);
         var_dump($_POST);
 
         $answer = array();
-        // $sqlPssword = $this->select_all("SELECT * FROM usuarios WHERE email = $email");
-        // $answer['tipoRespuesta'] = "success";
-        // include_once "reset.php";
-
-        // echo json_encode($answer);
+        $sql = "UPDATE usuarios SET password ='$product',  cantidad = '$amount', descripcion = '$description' WHERE email='$code_product'";
+        if ($sqlPssword) {
+            $answer['tipoRespuesta'] = "success";
+        } else {
+            $answer['tipoRespuesta'] = "error";
+        }
+        echo json_encode($answer);
     }
     public function resetByEmail()
     {
