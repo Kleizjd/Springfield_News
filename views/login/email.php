@@ -83,13 +83,13 @@
                 <!--[ MODIFICAR CONTRASEÑA ]-->
                 <form id="reset_password" method="POST" autocomplete="off" class="overflow-auto form-horizontal">
                     <div align="center">
-                        <label id="correo"></label>
+                        <label id="correo" name="correo"></label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nueva contraseña" id="nueva_clave" required />
+                        <input type="text" class="form-control" placeholder="Nueva contraseña" name="nueva_clave" id="nueva_clave" required />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Verifica contraseña" id="verifica_clave" required />
+                        <input type="text" class="form-control" placeholder="Verifica contraseña" name="verifica_clave"  id="verifica_clave" required />
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Enviar</button>
                 </form>

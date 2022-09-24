@@ -85,7 +85,7 @@ class Login extends Core
         var_dump($_POST);
 
         $answer = array();
-        $sqlPssword = $this->select_all("SELECT * FROM usuarios WHERE email = $email");
+        // $sqlPssword = $this->select_all("SELECT * FROM usuarios WHERE email = $email");
         // $answer['tipoRespuesta'] = "success";
         // include_once "reset.php";
 

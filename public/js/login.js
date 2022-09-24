@@ -122,12 +122,16 @@ $(document).ready(function () {
             }).done((res) => {
 
                 if (res.tipoRespuesta == "success") {
-                } else {
                     swal({ title: "Cambio de contraseña exitosa", type: "error" });
+            
+                } else {
+                    swal({ title: "contraseña en los campos es diferente", type: "error" });
                 }
             })
         });
     }());
+    
+  
     (function sendEmail() {
         $(document).on("submit", "#reset_email", function (event) {
             event.preventDefault();
