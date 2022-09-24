@@ -13,7 +13,8 @@ class Noticia extends Core{
 
     public function visualizarNoticia(){
         extract($_POST);
-        $sqlNoticia = $this->select_all("SELECT * FROM noticias WHERE id = $idNoticia");
+        // var_dump($_POST);
+        $sqlNoticia = $this->select_all("SELECT * FROM usuarios WHERE id = $email");
         include_once "../../views/noticia/view.verNoticia.php";
            
     }

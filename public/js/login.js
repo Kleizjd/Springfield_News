@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(document).on("click", ".showpassword", function () {
+    $(document).on("click", ".showPassword", function () {
         let inputpassword = $(this).parent().find("input");
         if ($(inputpassword).val() != "") {
             if ($(inputpassword).prop("type") == "password") {
@@ -54,6 +54,8 @@ $(document).ready(function () {
             formData.append('password_verify', $("#password_verify").val());
             formData.append('nombre', $("#nombre").val());
             formData.append('apellido', $("#apellido").val());
+            formData.append('pregunta', $("#pregunta").val());
+            formData.append('respuesta', $("#respuesta").val());
             var password = $('#password_user').val();
             var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
             var esValido = expReg.test($("#email").val());
@@ -101,40 +103,40 @@ $(document).ready(function () {
         });
     }());
     // INCOMPLETO
-    (function resetPassword() {
-        $(document).on("submit", "#reset_password", function (event) {
-            event.preventDefault();
-            var formData = new FormData(event.target);
-            formData.append("modulo", "login");
-            formData.append("controlador", "login");
-            formData.append("funcion", "resetPassword");
+    // (function resetPassword() {
+    //     $(document).on("submit", "#reset_password", function (event) {
+    //         event.preventDefault();
+    //         var formData = new FormData(event.target);
+    //         formData.append("modulo", "login");
+    //         formData.append("controlador", "login");
+    //         formData.append("funcion", "resetPassword");
 
-            $.ajax({
-                url: 'app/lib/ajax.php',
-                method: $(this).attr('method'),
-                dataType: 'JSON',
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false
-            }).done((res) => {
+    //         $.ajax({
+    //             url: 'app/lib/ajax.php',
+    //             method: $(this).attr('method'),
+    //             dataType: 'JSON',
+    //             data: formData,
+    //             cache: false,
+    //             processData: false,
+    //             contentType: false
+    //         }).done((res) => {
 
-                if (res.tipoRespuesta == "success") {
-                    location.href = "web/pages"
-                } else {
-                    swal({ title: "Cambio de contraseña exitosa", type: "error" });
-                }
-            })
-        });
-    }());
+    //             if (res.tipoRespuesta == "success") {
+    //                 location.href = "web/pages"
+    //             } else {
+    //                 swal({ title: "Cambio de contraseña exitosa", type: "error" });
+    //             }
+    //         })
+    //     });
+    // }());
     (function sendEmail() {
         $(document).on("submit", "#reset_email", function (event) {
             event.preventDefault();
             var formData = new FormData(event.target);
             formData.append("modulo", "login");
             formData.append("controlador", "login");
-            formData.append("funcion", "sendEmail");
-
+            formData.append("funcion", "resetByEmail");
+           
             $.ajax({
                 url: 'app/lib/ajax.php',
                 method: $(this).attr('method'),
@@ -144,11 +146,19 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false
             }).done((res) => {
-
+                
                 if (res.tipoRespuesta == "success") {
-                    location.href = "web/pages"
+                    
+                    // $("#estilo").removeClass("order");
+                    // $("#correo_recuperacion").removeClass("contents");
+                    $("#estilo").css("background-image", "");
+                    $("#flex").attr('class', '');
+                    document.getElementById("correo_recuperacion").innerHTML = "";
+                    // $("#correo_recuperacion").html("");
+                    $("#estilo").load("/www/Springfield_News/views/login/reset.php");
+
                 } else {
-                    swal({ title: "Cambio de contraseña exitosa", type: "error" });
+                    swal({ title: "No existe correo", type: "error" });
                 }
             })
         });
@@ -157,4 +167,5 @@ $(document).ready(function () {
 
 $('#to_register').on("click", function () { $('#login_form').hide(); $("#create_account").show(); });
 $('.panel_join').on("click", function () { $('#create_account').hide(); $("#login_form").show(); });
+$('#next').on("click", function () { $('#next').hide();$("#pregunta_segura").show(); });
 

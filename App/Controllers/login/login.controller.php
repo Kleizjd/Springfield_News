@@ -50,6 +50,8 @@ class Login extends Core
         $apellido = $_POST['apellido'];
         $password = $_POST['password_user'];
         $password_verify = $_POST['password_verify'];
+        $pregunta = $_POST['pregunta'];
+        $respuesta = $_POST['respuesta'];
         $estado = "'A'";
 
         if ($password === $password_verify) {
@@ -61,9 +63,9 @@ class Login extends Core
                 $passEncrypt = password_hash($password, PASSWORD_DEFAULT); //password encripted
                 //-------------------------------------------------------------------------------
 
-                $sql = "INSERT INTO usuarios(nombre, apellido, email, password, estado_usuario, rolid) VALUES (?,?,?,?,?,?)";
+                $sql = "INSERT INTO usuarios(nombre, apellido, email, password, estado_usuario, rolid, id_pregunta, respuesta) VALUES (?,?,?,?,?,?,?,?)";
 
-                $arrData = array($nombre, $apellido, $email, $passEncrypt, 'A', '2');
+                $arrData = array($nombre, $apellido, $email, $passEncrypt, 'A', '2', $pregunta,$respuesta );
                 $sql = $this->insert($sql, $arrData);
 
                 if ($sql != null) {
@@ -80,9 +82,28 @@ class Login extends Core
     public function resetPassword()
     {
         extract($_POST);
-        $answer = array();
+        var_dump($_POST);
 
-        $answer['tipoRespuesta'] = "success";
+        $answer = array();
+        $sqlPssword = $this->select_all("SELECT * FROM usuarios WHERE email = $email");
+        // $answer['tipoRespuesta'] = "success";
+        // include_once "reset.php";
+
+        // echo json_encode($answer);
+    }
+    public function resetByEmail()
+    {
+        extract($_POST);
+        $answer = array();
+        $sqlPssword = $this->select_all("SELECT * FROM usuarios, preguntas WHERE email = '$email' and usuarios.id_pregunta = preguntas.id");
+        // include_once "../../views/login/reset.php";
+        // var_dump($sqlPssword);
+        if ($sqlPssword) {
+            $answer['tipoRespuesta'] = "success";
+            $answer['pregunta'] = "pregunta";
+        } else {
+            $answer['tipoRespuesta'] = "error";
+        }
         echo json_encode($answer);
     }
 

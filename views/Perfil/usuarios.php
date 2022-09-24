@@ -33,7 +33,7 @@
                                     <option value="">Seleccione ...</option>
                                     <option value="T">Todos</option>
                                     <option value="activo">Activo</option>
-                                    <option value="aesactivado">Desactivado</option>
+                                    <option value="desactivado">Desactivado</option>
                                 </select>
                             </div>
                         </div>

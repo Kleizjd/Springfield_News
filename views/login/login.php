@@ -4,7 +4,7 @@
 
       <div class="container">
         <div class="row align-items-center justify-content-center">
-          <div class="col-md-7">
+          <div class="col-md-9">
             <h3>Ingresar a <strong>Springfield</strong></h3>
             <p class="mb-4">Las Noticias son nuestra razon de ser.</p>
             <form id="login_form" method="post" autocomplete="off">
@@ -52,13 +52,37 @@
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="Apellido" id="apellido" required />
                 </div>
-                <div class="form-group">
+                <div class="input-group form-group">
                   <input type="password" class="form-control" placeholder="Contrase&ntilde;a" id="password_user" required />
+                  <button type="button" class="btn btn-outline-primary showPassword">
+                    <i class="fas fa-eye"></i>
+                  </button>
                 </div>
-                <div class="form-group">
+                <div class=" input-group form-group">
                   <input type="password" class="form-control" placeholder="Validar Contrase&ntilde;a" required id="password_verify" />
+                  <button type="button" class="btn btn-outline-primary showPassword">
+                    <i class="fas fa-eye"></i>
+                  </button>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block" >Enviar</button>
+                <div id="pregunta_segura" style="display: none" class="">
+                  <!--[ PREGUNTA DE SEGURIDAD ]-->
+                  <div class="form-group">
+
+                    <select name="pregunta" id="pregunta" class="custom-select" required>
+                      <option selected value="">Seleccione...</option>
+                      <option value="1">cual fue el nombre de su primera mascota?</option>
+                      <option value="3">lugar de nacimiento?</option>
+                      <option value="4">color favorito?</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control border border-primary rounded" placeholder="Respuesta" id="respuesta" required />
+                  </div>
+                  <!--[ !PREGUNTA DE SEGURIDAD ]-->
+                  <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                </div>
+
+                <button type="button" id="next" class="btn btn-primary btn-block">Siguiente</button>
 
                 <div class="separator">
                   <p class="change_link">Ya estas Registrado ?
@@ -71,6 +95,7 @@
                 </div>
             </form>
             <!--[ !REGISTRAR USUARIO ]-->
+
 
           </div>
         </div>
