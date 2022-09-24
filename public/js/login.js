@@ -103,32 +103,31 @@ $(document).ready(function () {
         });
     }());
     // INCOMPLETO
-    // (function resetPassword() {
-    //     $(document).on("submit", "#reset_password", function (event) {
-    //         event.preventDefault();
-    //         var formData = new FormData(event.target);
-    //         formData.append("modulo", "login");
-    //         formData.append("controlador", "login");
-    //         formData.append("funcion", "resetPassword");
+    (function resetPassword() {
+        $(document).on("submit", "#reset_password", function (event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+            formData.append("modulo", "login");
+            formData.append("controlador", "login");
+            formData.append("funcion", "resetPassword");
 
-    //         $.ajax({
-    //             url: 'app/lib/ajax.php',
-    //             method: $(this).attr('method'),
-    //             dataType: 'JSON',
-    //             data: formData,
-    //             cache: false,
-    //             processData: false,
-    //             contentType: false
-    //         }).done((res) => {
+            $.ajax({
+                url: 'app/lib/ajax.php',
+                method: $(this).attr('method'),
+                dataType: 'JSON',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false
+            }).done((res) => {
 
-    //             if (res.tipoRespuesta == "success") {
-    //                 location.href = "web/pages"
-    //             } else {
-    //                 swal({ title: "Cambio de contraseña exitosa", type: "error" });
-    //             }
-    //         })
-    //     });
-    // }());
+                if (res.tipoRespuesta == "success") {
+                } else {
+                    swal({ title: "Cambio de contraseña exitosa", type: "error" });
+                }
+            })
+        });
+    }());
     (function sendEmail() {
         $(document).on("submit", "#reset_email", function (event) {
             event.preventDefault();
@@ -148,14 +147,16 @@ $(document).ready(function () {
             }).done((res) => {
                 
                 if (res.tipoRespuesta == "success") {
-                    
-                    // $("#estilo").removeClass("order");
-                    // $("#correo_recuperacion").removeClass("contents");
-                    $("#estilo").css("background-image", "");
-                    $("#flex").attr('class', '');
-                    document.getElementById("correo_recuperacion").innerHTML = "";
-                    // $("#correo_recuperacion").html("");
-                    $("#estilo").load("/www/Springfield_News/views/login/reset.php");
+                    $('#correo_recuperacion').hide();
+                    $("#pregunta_segura_valida").show();
+                    swal({  type: "success" });
+                  
+                    $("#correo").text(res.correo);
+                    $("#pregunta").text(res.pregunta);
+                                      
+                    // $(#estilo).load("/www/Springfield_News/views/login/reset.php", function() {
+                    // $("#correo").text(res.correo);
+                    // $("#pregunta").text(res.pregunta); });
 
                 } else {
                     swal({ title: "No existe correo", type: "error" });

@@ -95,12 +95,12 @@ class Login extends Core
     {
         extract($_POST);
         $answer = array();
-        $sqlPssword = $this->select_all("SELECT * FROM usuarios, preguntas WHERE email = '$email' and usuarios.id_pregunta = preguntas.id");
-        // include_once "../../views/login/reset.php";
+        $sqlPssword = $this->select("SELECT * FROM usuarios, preguntas WHERE email = '$email' and usuarios.id_pregunta = preguntas.id");
         // var_dump($sqlPssword);
         if ($sqlPssword) {
             $answer['tipoRespuesta'] = "success";
-            $answer['pregunta'] = "pregunta";
+            $answer['pregunta'] = $sqlPssword["pregunta"];
+            $answer['correo'] = $sqlPssword["email"];
         } else {
             $answer['tipoRespuesta'] = "error";
         }

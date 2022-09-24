@@ -1,14 +1,21 @@
+<div class="login-box card login-box">
+    <div class="card-header">
+        <div class="justify-content-center row">
+            <div class="col-10">
+                <h3>Recuperar <strong>Contraseña</strong></h3>
 
-
-<div class="container">
-    <div class="row align-items-center justify-content-center">
-        <div class="col">
-            <h3>Recuperar <strong>Contraseña</strong></h3>
+            </div>
+        </div>
+        <div class="card-body">
             <!--[ MODIFICAR CONTRASEÑA ]-->
-            <form id="reset_password" method="POST" autocomplete="off" class="overflow-auto">
-                <div class="form-group">
-                    <label>Pregunta:</label>
-                    <input type="question" class="form-control" placeholder="Preguta de seguridad" id="question" required />
+            <form id="reset_password" method="POST" autocomplete="off" class="overflow-auto form-horizontal">
+                <div align="center">
+                <label id="correo"></label>
+
+                </div>
+                <div class="">
+                    <label class="font-weight-bold">Pregunta:</label>
+                    <label id="pregunta"></label>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Respuesta" id="respuesta" required />
@@ -19,5 +26,6 @@
         </div>
     </div>
 </div>
+
 
 <script src="public/js/login.js"></script>
