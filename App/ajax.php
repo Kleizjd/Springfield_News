@@ -25,8 +25,7 @@ if (!empty($_POST)) {
             }
         } else {
             // echo "<script> alert('servira :'+'../App/Controllers/" . $modulo . "/" . $controlador . ".controller.php'); </script>";
-            // echo $modulo;
-            // echo $ruta;
+       
             die("El módulo especificado no existe");
         }
     } else {
@@ -42,6 +41,6 @@ if (!empty($_POST)) {
     if(file_exists("views/home/main.php")){
         include_once("views/home/main.php");
     } else{
-        include_once "../../views/bienvenida.php";
+        include_once "../../views/noticias.php";
     }
 }
