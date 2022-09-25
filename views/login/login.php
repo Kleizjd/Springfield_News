@@ -67,7 +67,6 @@
                 <div id="pregunta_segura" style="display: none" class="">
                   <!--[ PREGUNTA DE SEGURIDAD ]-->
                   <div class="form-group">
-                    <!-- <p>PREGUNTA DE SEGURIDAD</p> -->
                     <h4>PREGUNTA DE SEGURIDAD</h4>
                   </div>
                   <div class="form-group">
