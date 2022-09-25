@@ -58,7 +58,7 @@
                     <i class="fas fa-eye"></i>
                   </button>
                 </div>
-                <div class=" input-group form-group">
+                <div class="input-group form-group">
                   <input type="password" class="form-control" placeholder="Validar Contrase&ntilde;a" required id="password_verify" />
                   <button type="button" class="btn btn-outline-primary showPassword">
                     <i class="fas fa-eye"></i>

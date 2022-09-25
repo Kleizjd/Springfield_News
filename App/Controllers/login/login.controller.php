@@ -65,7 +65,7 @@ class Login extends Core
 
                 $sql = "INSERT INTO usuarios(nombre, apellido, email, password, estado_usuario, rolid, id_pregunta, respuesta) VALUES (?,?,?,?,?,?,?,?)";
 
-                $arrData = array($nombre, $apellido, $email, $passEncrypt, 'A', '2', $pregunta,$respuesta );
+                $arrData = array($nombre, $apellido, $email, $passEncrypt, 'A', '2', $pregunta, $respuesta);
                 $sql = $this->insert($sql, $arrData);
 
                 if ($sql != null) {
@@ -79,9 +79,11 @@ class Login extends Core
         }
         echo json_encode($answer);
     }
-    public function camposPassword(){
+    // 1
+public function camposPassword()
+    {
         extract($_POST);
-        var_dump($_POST);
+        // var_dump($_POST);
 
         $answer = array();
         $sqlPssword = $this->select_all("SELECT * FROM usuarios WHERE respuesta = '$respuesta' and email ='$email'");
@@ -90,27 +92,14 @@ class Login extends Core
         } else {
             $answer['tipoRespuesta'] = "error";
         }
-        // echo json_encode($answer);
-    }
-    public function resetPassword()
-    {
-        extract($_POST);
-        var_dump($_POST);
-
-        $answer = array();
-        $sql = "UPDATE usuarios SET password ='$product',  cantidad = '$amount', descripcion = '$description' WHERE email='$code_product'";
-        if ($sqlPssword) {
-            $answer['tipoRespuesta'] = "success";
-        } else {
-            $answer['tipoRespuesta'] = "error";
-        }
         echo json_encode($answer);
     }
+    //    2
     public function resetByEmail()
     {
         extract($_POST);
         $answer = array();
-        echo ("SELECT * FROM usuarios, preguntas WHERE email = '$email' and usuarios.id_pregunta = preguntas.id");
+        $sqlPssword = $this->select("SELECT * FROM usuarios, preguntas WHERE email = '$email' and usuarios.id_pregunta = preguntas.id");
         // var_dump($sqlPssword);
         if ($sqlPssword) {
             $answer['tipoRespuesta'] = "success";
@@ -121,7 +110,37 @@ class Login extends Core
         }
         echo json_encode($answer);
     }
+  
+    // 3
+    public function editarPassword()
+    {
+        extract($_POST);
+        // var_dump($_POST);
 
+        $answer = array();
+        if($nueva_clave === $verifica_clave){
+            //Encriptar-----------------------------------------------------------------------
+            $passEncrypt = password_hash($nueva_clave, PASSWORD_DEFAULT); //password encripted
+            //-------------------------------------------------------------------------------
+            $sql = "UPDATE usuarios SET password = ? WHERE email='$email'";
+
+            $arrData = array($passEncrypt);
+            $request = $this->update($sql, $arrData);
+    
+            if ($request != 0) {
+                $answer['tipoRespuesta'] = "success";
+            }
+            // if ($sqlPssword) {
+            //     $answer['tipoRespuesta'] = "success";
+            // } else {
+            //     $answer['tipoRespuesta'] = "error";
+            // }
+        } else {
+            $answer['tipoRespuesta'] = "error";
+        }
+        echo json_encode($answer);
+
+    }
 
 
 

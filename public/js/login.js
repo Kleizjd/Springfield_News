@@ -33,7 +33,7 @@ $(document).ready(function () {
             }).done((res) => {
 
                 if (res.tipoRespuesta == "success") {
-                    location.href = "web/pages"
+                    location.href = "web/pages";
                 } else {
                     swal({ title: "Usuario o Contraseña incorrectos", type: "error" });
                 }
@@ -78,7 +78,7 @@ $(document).ready(function () {
                     if (password.length > 7 || $("#password_user").val().length > 7) {
                         if (password.match(/\d/)) {//numeros
                             if (password.match(/[A-Z]/) && password.match(/[A-z]/)) {//Aa
-                                if (password.match(/[@#$%^&+=]/)) {
+                                // if (password.match(/[@#$%^&+=]/)) {
                                     $.ajax({
                                         url: 'app/lib/ajax.php',
                                         method: $(this).attr('method'),
@@ -95,9 +95,9 @@ $(document).ready(function () {
                                             swal({ title: "Usuario existente", type: "error" });
                                         } else { swal({ title: "la clave tiene que ser la misma", type: "error" }); }
                                     })
-                                } else {
-                                    swal({ title: "la contraseña debe de almenos tener 1 caracter especial", type: "error" });
-                                }
+                                // } else {
+                                //     swal({ title: "la contraseña debe de almenos tener 1 caracter especial", type: "error" });
+                                // }
                             } else {
                                 swal({ title: "la contraseña debe de almenos tener 1 una letra en Mayuscula y 1 una en Minuscula ", type: "error" });
                             }
@@ -114,7 +114,7 @@ $(document).ready(function () {
             }
         });
     }());
-    // INCOMPLETO
+    // 1
     (function sendEmail() {
         $(document).on("submit", "#reset_email", function (event) {
             event.preventDefault();
@@ -152,6 +152,7 @@ $(document).ready(function () {
             })
         });
     }());
+    // 2
     (function resetPassword() {
         $(document).on("submit", "#reset_password", function (event) {
             event.preventDefault();
@@ -183,6 +184,62 @@ $(document).ready(function () {
             })
         });
     }());
+    // 3
+    (function editarClave() {
+      $(document).on("submit", "#editarCLave", function (event) {
+        event.preventDefault();
+        var formData = new FormData(event.target);
+        formData.append("modulo", "login");
+        formData.append("controlador", "login");
+        formData.append("funcion", "editarPassword");
+        formData.append("email", $("#email_user").text());
+        formData.append("password", $("#nueva_clave").val());
+        formData.append("verifica_clave", $("#verifica_clave").val());
+        var password = $("#nueva_clave").val();
+        if (password.length > 7 || $("#verifica_clave").val().length > 7) {
+          if (password.match(/\d/)) {
+            // numeros
+            if (password.match(/[A-Z]/) && password.match(/[A-z]/)) {
+            //   Aa
+              $.ajax({
+                url: "app/lib/ajax.php",
+                method: $(this).attr("method"),
+                dataType: "JSON",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+              }).done((res) => {
+                if (res.tipoRespuesta == "success") {
+                  swal({ type: "success" });
+                  location.href = "";
+
+                } else {
+                  swal({ title: "las claves no son iguales", type: "error" });
+                }
+              });
+            } else {
+              swal({
+                title:
+                  "la contraseña debe de almenos tener 1 una letra en Mayuscula y 1 una en Minuscula ",
+                type: "error",
+              });
+            }
+          } else {
+            swal({
+              title: "la contraseña debe de almenos tener 1 numero ",
+              type: "error",
+            });
+          }
+        } else {
+          swal({
+            title: "la contraseña debe de tener mas de  8 caracteres",
+            type: "error",
+          });
+        }
+      });
+    })();
+    
     
   
    

@@ -81,19 +81,26 @@
             </div>
             <div class="card-body">
                 <!--[ MODIFICAR CONTRASEÑA ]-->
-                <form id="reset_password" method="POST" autocomplete="off" class="overflow-auto form-horizontal">
+                <form id="editarCLave" method="POST" autocomplete="off" class="overflow-auto form-horizontal">
                     <div align="center">
                         <label id="email_user" name="email_user"></label>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nueva contraseña" name="nueva_clave" id="nueva_clave" required />
+                    <div class="input-group form-group">
+                        <input type="password" class="form-control" placeholder="Nueva contraseña" name="nueva_clave" id="nueva_clave" required />
+                        <button type="button" class="btn btn-outline-primary showPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Verifica contraseña" name="verifica_clave"  id="verifica_clave" required />
+                    <div class="input-group form-group">
+                        <input type="password" class="form-control" placeholder="Verifica contraseña" name="verifica_clave" id="verifica_clave" required />
+                        <button type="button" class="btn btn-outline-primary showPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Enviar</button>
                 </form>
                 <!--[ !MODIFICAR CONTRASEÑA ]-->
+
             </div>
         </div>
     </div>
