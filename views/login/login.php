@@ -67,7 +67,10 @@
                 <div id="pregunta_segura" style="display: none" class="">
                   <!--[ PREGUNTA DE SEGURIDAD ]-->
                   <div class="form-group">
-
+                    <!-- <p>PREGUNTA DE SEGURIDAD</p> -->
+                    <h4>PREGUNTA DE SEGURIDAD</h4>
+                  </div>
+                  <div class="form-group">
                     <select name="pregunta" id="pregunta" class="custom-select" required>
                       <option selected value="">Seleccione...</option>
                       <option value="1">cual fue el nombre de su primera mascota?</option>
