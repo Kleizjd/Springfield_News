@@ -57,10 +57,22 @@ $(document).ready(function () {
             formData.append('pregunta', $("#pregunta").val());
             formData.append('respuesta', $("#respuesta").val());
             var password = $('#password_user').val();
+
             var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-            var esValido = expReg.test($("#email").val());
-            if (esValido != true) {
+
+            var validaTexto = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/;//crea un objeto con una expresion regular
+
+
+            var correoValido = expReg.test($("#email").val());
+            var nombreValido = validaTexto.test($("#nombre").val());
+            var apellidoValido = validaTexto.test($("#apellido").val());
+            
+            if (correoValido != true) {
                 swal({ title: "El correo electronico NO es válido", type: "error" });
+            }else if (nombreValido != true) {
+                swal({ title: "El nombre NO es válido", type: "error" });
+            }else if (apellidoValido != true) {
+                swal({ title: "El apellido NO es válido", type: "error" });
             } else {
                 if ($("#nombre").val().length <= 15 && $("#apellido").val().length <= 15) {
                     if (password.length > 7 || $("#password_user").val().length > 7) {

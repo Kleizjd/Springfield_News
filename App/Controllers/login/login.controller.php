@@ -79,10 +79,9 @@ class Login extends Core
         }
         echo json_encode($answer);
     }
-    public function camposPassword()
-    {
+    public function camposPassword(){
         extract($_POST);
-        // var_dump($_POST);
+        var_dump($_POST);
 
         $answer = array();
         $sqlPssword = $this->select_all("SELECT * FROM usuarios WHERE respuesta = '$respuesta' and email ='$email'");
@@ -91,7 +90,7 @@ class Login extends Core
         } else {
             $answer['tipoRespuesta'] = "error";
         }
-        echo json_encode($answer);
+        // echo json_encode($answer);
     }
     public function resetPassword()
     {
@@ -111,7 +110,7 @@ class Login extends Core
     {
         extract($_POST);
         $answer = array();
-        $sqlPssword = $this->select("SELECT * FROM usuarios, preguntas WHERE email = '$email' and usuarios.id_pregunta = preguntas.id");
+        echo ("SELECT * FROM usuarios, preguntas WHERE email = '$email' and usuarios.id_pregunta = preguntas.id");
         // var_dump($sqlPssword);
         if ($sqlPssword) {
             $answer['tipoRespuesta'] = "success";
