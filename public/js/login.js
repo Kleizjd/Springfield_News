@@ -78,6 +78,8 @@ $(document).ready(function () {
                 swal({ title: "la respuesta tiene que ser en letras", type: "error" });
             } else {
                 if ($("#nombre").val().length <= 15 && $("#apellido").val().length <= 15) {
+                if ($("#respuesta").val().length <= 15) {
+
                     if (password.length > 7 || $("#password_user").val().length > 7) {
                         if (password.match(/\d/)) {//numeros
                             if (password.match(/[A-Z]/) && password.match(/[A-z]/)) {//Aa
@@ -115,6 +117,9 @@ $(document).ready(function () {
                     } else {
                         swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error" });
                     }
+                } else {
+                    swal({ title: "La respuesta no debe ser mayor a 15 caracteres", type: "error" });
+                }
                 } else {
                     swal({ title: "El Nombre o Apellido de usuario no debe superar 15 caracteres", type: "error" });
                 }
