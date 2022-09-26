@@ -66,6 +66,7 @@ $(document).ready(function () {
             var correoValido = expReg.test($("#email").val());
             var nombreValido = validaTexto.test($("#nombre").val());
             var apellidoValido = validaTexto.test($("#apellido").val());
+            var respuesta = validaTexto.test($("#respuesta").val());
             
             if (correoValido != true) {
                 swal({ title: "El correo electronico NO es válido", type: "error" });
@@ -73,12 +74,15 @@ $(document).ready(function () {
                 swal({ title: "El nombre NO es válido", type: "error" });
             }else if (apellidoValido != true) {
                 swal({ title: "El apellido NO es válido", type: "error" });
+            }else if (respuesta != true) {
+                swal({ title: "la respuesta tiene que ser en letras", type: "error" });
             } else {
                 if ($("#nombre").val().length <= 15 && $("#apellido").val().length <= 15) {
                     if (password.length > 7 || $("#password_user").val().length > 7) {
                         if (password.match(/\d/)) {//numeros
                             if (password.match(/[A-Z]/) && password.match(/[A-z]/)) {//Aa
                                 // if (password.match(/[@#$%^&+=]/)) {
+                                if (password.match(/[A-z]/)) {
                                     $.ajax({
                                         url: 'app/lib/ajax.php',
                                         method: $(this).attr('method'),
@@ -99,7 +103,10 @@ $(document).ready(function () {
                                 //     swal({ title: "la contraseña debe de almenos tener 1 caracter especial", type: "error" });
                                 // }
                             } else {
-                                swal({ title: "la contraseña debe de almenos tener 1 una letra en Mayuscula y 1 una en Minuscula ", type: "error" });
+                                swal({ title: "la contraseña debe de almenos tener 1 una letra en Minuscula", type: "error" });
+                            }
+                            } else {
+                                swal({ title: "la contraseña debe de almenos tener 1 una en Mayuscula", type: "error" });
                             }
                         } else {
                             swal({ title: "la contraseña debe de almenos tener 1 numero ", type: "error" });
