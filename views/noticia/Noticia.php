@@ -1,89 +1,118 @@
 <?php getModal('modalNoticia'); ?>
 
+<!-- Modal -->
 <div class="card">
-    <div class="card-header">
-        <h4>Noticia</h4>
-    </div>
-    <div class="card-body">
-        <form action="" id="frm_Noticia" method="POST" autocomplete="off">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="row pb-3">
-                            <div class="col-sm-1">
-                                <button type="submit" class="btn btn-primary" title="Crear Noticia"><i class="fa fa-save"></i> </button>
-
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" title="Buscar" data-target="#modalNoticia"><i class="fa fa-search"></i></button>
-
-                                <!--  -->
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="reset" class="btn btn-primary" id="reset" title="Limpiar"><i class="fa fa-file"></i> </button>
-                            </div>
-                        </div>
-
-                        <div class="row pb-3">
-                            <!-- <div class="col-sm-1">
-                                <label for="validateKey">Id</label>
-                            </div> -->
-                            <!-- <div class="col-sm-2">
-                                <input type="text" class="form-control" id="validateKey" name="id" required '>
-                                <input type="text" class="form-control" id="validateKey" name="code" required 
-                                data='<?= json_encode(array("typeNit" => "producto", "table" => "product", "field" => "Code_Product")); ?>'>
-                            </div> -->
-                            <!-- IMAGE ADMIN -->
-                            <div class="col-sm">
-                                <label for="imagen_noticia" class="d-flex justify-content-center">
-                                    <div class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
-                                        <?php if (!empty($perfil["imagen_noticia"])) : ?>
-
-                                            <i class="shadow-hover-efect"></i>
-                                            <i class="far fa-edit img__description">Cambiar</i>
-                                        <?php else : ?>
-                                            <img class="img__img" src="../../public/img/svg/upload-user.svg" />
-                                            <i class="shadow-hover-efect"></i>
-                                            <i class="far fa-edit img__description">Cambiar</i>
-                                        <?php endif; ?>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="text-center col-sm">
-                                <div class="nombreArchivo"></div>
-                                <div class="ContenedorPrevisualizarArchivo"></div>
-                                <input type="file" class="subirArchivo" name="imagen_usuario" id="imagen_usuario" accept="image/png, image/jpeg" style="display: none;" data-file-upload="<?= encriptar("usuarios|" . $perfil["id_usuario"] . "|$ruta"); ?>">
-                            </div>
-                            <div class="col">
-                                <label for="titulo">Noticia</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" name="titulo" id="titulo" placeholder="titulo" required>
-                            </div>
-                            <div class="col">
-                                <label for="categoria">Categoria</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" name="categoria" id="categoria" required>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-sm-3">
-                                    <label for="descripcion">Descripcion</label>
-                                </div>
-                                <div class="col-sm">
-                                    <textarea rows="4" cols="4" class="form-control" name="descripcion" id="descripcion"></textarea>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
+  <div class="card-header headerRegister">
+    <h5 class="card-title" id="titleModal">Nueva Noticia</h5>
+  </div>
+  <div class="card-body">
+    <form id="frm_Noticia" name="frm_Noticia" class="form-horizontal">
+      <input type="hidden" id="idCategoria" name="idCategoria" value="">
+      <input type="hidden" id="foto_actual" name="foto_actual" value="">
+      <input type="hidden" id="foto_remove" name="foto_remove" value="0">
+      <p class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</p>
+      <div class="row pb-3">
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-primary" data-toggle="modal" title="Buscar" data-target="#modalNoticia"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="control-label" for="titulo">Noticia<span class="required">*</span></label>
+            <input class="form-control" id="txtTitulo" name="txtTitulo" type="text" placeholder="Titulo" required="">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Descripción <span class="required">*</span></label>
+            <textarea class="form-control" id="txtDescripcion" name="txtDescripcion" rows="2" placeholder="Descripción de la Noticia" required=""></textarea>
+          </div>
+          <div class="form-group">
+            <label for="categoria">Categoria<span class="required">*</span></label>
+            <select class="form-control selectpicker" id="categoria" name="categoria" required="">
+              <option value="">Seleccione...</option>
+              <?php foreach ($sqlNoticia as $noticia) : ?>
+                <option value="<?= $noticia["id"]; ?>"><?= $noticia["nombre"]; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <label for="exampleSelect1">Estado <span class="required">*</span></label>
+            <select class="form-control selectpicker" id="listStatus" name="listStatus" required="">
+              <option value="1">Activo</option>
+              <option value="2">Inactivo</option>
+            </select>
+          </div> -->
+        </div>
+        <div class="col-md-6">
+          <div class="photo">
+            <label for="foto">Foto (570x380)</label>
+            <div class="prevPhoto">
+              <span class="delPhoto notBlock">X</span>
+              <label for="foto"></label>
+              <div>
+                <img id="img" src="<?= media(); ?>/img/uploads/portada_categoria.png">
+              </div>
             </div>
-        </form>
-    </div>
+            <div class="upimg">
+              <input type="file" name="foto" id="foto">
+            </div>
+            <div id="form_alert"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile-footer">
+        <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText" title="Crear Noticia">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+        <!-- <button class="btn btn-danger" type="button" data-dismiss="card"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button> -->
+      </div>
+    </form>
+  </div>
 </div>
+
+
+<!-- Modal -->
+<!-- <div class="card fade" id="cardViewCategoria" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="card-dialog" >
+    <div class="card-content">
+      <div class="card-header header-primary">
+        <h5 class="card-title" id="titleModal">Datos de la categoría</h5>
+        <button type="button" class="close" data-dismiss="card" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>ID:</td>
+              <td id="celId"></td>
+            </tr>
+            <tr>
+              <td>Nombres:</td>
+              <td id="celNombre"></td>
+            </tr>
+            <tr>
+              <td>Descripción:</td>
+              <td id="celDescripcion"></td>
+            </tr>
+            <tr>
+              <td>Estado:</td>
+              <td id="celEstado"></td>
+            </tr>
+            <tr>
+              <td>Foto:</td>
+              <td id="imgCategoria"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="card">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
 
 <script src="<?= media(); ?>/js/<?= $data['page_functions_js']; ?>"></script>

@@ -36,3 +36,10 @@ function openModal()
     // document.querySelector("#formCategoria").reset();
     $('#modalFormProductos').modal('show');
 }
+// function removePhoto(){
+//     document.querySelector('#foto').value ="";
+//     document.querySelector('.delPhoto').classList.add("notBlock");
+//     if(document.querySelector('#img')){
+//         document.querySelector('#img').remove();
+//     }
+// }
