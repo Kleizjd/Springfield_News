@@ -36,7 +36,8 @@
                                                 <div class="font-weight-bold" style="font-size: 18px;" id="complete_name"><?= $perfil['nombre'] . " " . $perfil['apellido']; ?><span></span></div>
                                                 <input type="hidden" name="userId" id="userId" value="<?= $perfil['id_usuario']; ?>">
                                             </div>
-                                        </div><!-- IMAGE ADMIN -->
+                                        </div>
+                                        <!-- IMAGE ADMIN -->
                                         <div class="row">
                                             <div class="col-sm">
                                                 <label for="imagen_usuario" class="d-flex justify-content-center">
