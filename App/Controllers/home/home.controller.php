@@ -26,7 +26,7 @@ class home extends Core{
     }
     public function resetByEmail(){
         
-        include_once "views/login/email.php";
+        include_once "views/login/reset.php";
         
     }
  

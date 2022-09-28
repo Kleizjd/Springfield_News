@@ -6,8 +6,8 @@
 		<form action="" id="frm_Noticia" method="POST" autocomplete="off">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-sm">
-						<div class="card" style="width: 18rem;">
+				<div class="col-sm">
+						<div class="card" style="height: 25rem;">
 							<img src="../../views/noticia/news/Explainer.jpg" class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title">Card title</h5>
@@ -17,7 +17,7 @@
 						</div>
 					</div>
 					<div class="col-sm">
-						<div class="card" style="width: 18rem;">
+						<div class="card" style="height: 25rem;">
 							<img src="../../views/noticia/news/fakenews.jpg" class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title">Card title</h5>
@@ -27,7 +27,7 @@
 						</div>
 					</div>
 					<div class="col-sm">
-						<div class="card" style="width: 18rem;">
+						<div class="card" style="height: 25rem;">
 							<img src="../../views/noticia/news/stock.jpg" class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title">Card title</h5>
@@ -37,7 +37,7 @@
 						</div>
 					</div>
 					<div class="col-sm">
-						<div class="card" style="width: 18rem;">
+						<div class="card" style="height: 25rem;">
 							<img src="../../views/noticia/news/whats_new.jpg" class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title">Card title</h5>

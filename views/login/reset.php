@@ -1,7 +1,4 @@
-<!-- <div class="d-lg-flex half" id="flex">
-    <div class="bg order-1 order-md-2" style="background-image: url('./public/img/bg_notice.jpg');" id="estilo"></div>
 
-    <div class="contents order-2 order-md-1"> -->
 <!-- CORREO RECUPERA -->
 <div class="container" id="correo_recuperacion">
     <div class="login-box card login-box">

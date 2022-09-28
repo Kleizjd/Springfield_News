@@ -14,7 +14,9 @@ include_once "App/lib/Helpers.php"; ?>
   <link rel="stylesheet" href="./vendor/fontawesome/css/all.min.css" type="text/css">
   <link rel="stylesheet" href="./vendor/sweetalert/css/sweetalert2.min.css">
   <link rel="stylesheet" href="./public/css/login_register.css">
-  <link rel="shortcut icon" href="public/img/favicon/logo.png" type="image/x-icon">
+  <!-- <link rel="shortcut icon" href="public/img/favicon/logo.png" type="image/x-icon"> -->
+  <link rel="shortcut icon" href="<?= base_url() ?>/public/favicon.ico" type="image/x-icon">
+
   <link rel="stylesheet" href="./public/css/style.css">
 
   <title>Sprinfield News</title>
