@@ -29,8 +29,10 @@
     <script>
         $(document).ready(function() {
             $(function borraClass() {
-                $("#hey").removeClass("col-md-9");
-                $("#hey").removeClass("col-lg-10");
+                $("#lector").removeClass("col-md-9");
+                $("#lector").removeClass("col-lg-10");
+                $("#lector").removeClass("ml-sm-auto");
+                $("#lector").addClass("mx-auto");
             });
         });
     </script>

@@ -28,6 +28,7 @@ class Noticia extends Core
         extract($_POST);
         // var_dump($_POST);
         $sqlNoticia = $this->select_all("SELECT * FROM noticias WHERE id = $codigo");
+        $noticias_categoria = $this->select_all("SELECT id, nombre FROM categorias");
         include_once "../../views/noticia/view.EditNoticia.php";
     }
 
@@ -79,8 +80,8 @@ class Noticia extends Core
     {
 
 
-        extract($_POST);
-        dep($_POST);
+        // extract($_POST);
+        // dep($_POST);
         if ($_POST) {
             if (empty($_POST['txtTitulo']) || empty($_POST['txtDescripcion'])) {
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
@@ -101,12 +102,15 @@ class Noticia extends Core
                 $url_temp        = $foto['tmp_name'];
                 $imgPortada      = 'portada_noticia.png';
                 $request_insert  = "";
-                if ($nombre_foto != '') { $imgPortada = 'img_' . md5(date('d-m-Y H:i:s')) . '.jpg'; }
+                if ($nombre_foto != '') {
+                    $imgPortada = 'img_' . md5(date('d-m-Y H:i:s')) . '.jpg';
+                }
 
                 if ($intIdnoticia == 0) {
 
                     $sql = "SELECT * FROM noticias WHERE titulo = '{$strTitulo}' ";
                     $request = $this->select_all($sql);
+                    // echo "hola" . " Crear";
 
                     if (empty($request)) {
                         $query_insert  = "INSERT INTO noticias(titulo, categoria, descripcion, ruta, portada) VALUES(?,?,?,?,?)";
@@ -119,6 +123,8 @@ class Noticia extends Core
                     $option = 1;
                 } else {
                     //Actualizar
+                    // echo "hola"."  Actualizar";
+
                     if ($nombre_foto == '') {
                         if ($_POST['foto_actual'] != 'portada_noticia.png' && $_POST['foto_remove'] == 0) {
                             $imgPortada = $_POST['foto_actual'];
@@ -126,7 +132,7 @@ class Noticia extends Core
                     }
                     $sql = "SELECT * FROM noticias WHERE titulo = '{$strTitulo}' AND id != $this->intIdnoticia";
                     $request = $this->select_all($sql);
-                    echo "hola";
+                    // echo "hola";
                     if (empty($request)) {
                         $sql = "UPDATE categoria SET nombre = ?, descripcion = ?, portada = ?, ruta = ?, status = ? WHERE idcategoria = $this->intIdnoticia ";
                         $arrData = array($strTitulo, $categoria, $strDescripcion, $ruta, $imgPortada);
@@ -138,23 +144,28 @@ class Noticia extends Core
                 }
                 if ($request_insert > 0) {
                     if ($option == 1) {
-                        $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+                        // echo "hola"." Crear arrResponse";
+
+                        $arrResponse = array('status' => true, 'msg' => 'Noticia Ingresado exitosamente');
                         if ($nombre_foto != '') {
                             uploadImage($foto, $imgPortada);
                         }
                     } else {
-                        $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
-                        //         if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
+                        $arrResponse = array('status' => true, 'msg' => 'Noticia Actualizada correctamente.');
+                        if ($nombre_foto != '') {
+                            uploadImage($foto, $imgPortada);
+                        }
 
-                        //         if(($nombre_foto == '' && $_POST['foto_remove'] == 1 && $_POST['foto_actual'] != 'portada_categoria.png')
-                        //             || ($nombre_foto != '' && $_POST['foto_actual'] != 'portada_categoria.png')){
-                        //             deleteFile($_POST['foto_actual']);
+                        if (($nombre_foto == '' && $_POST['foto_remove'] == 1 && $_POST['foto_actual'] != 'portada_categoria.png')
+                            || ($nombre_foto != '' && $_POST['foto_actual'] != 'portada_noticia.png')
+                        ) {
+                            deleteFile($_POST['foto_actual']);
+                        }
                     }
-                    // }
-                    // }else if($request_cateria == 'exist'){
-                    //     $arrResponse = array('status' => false, 'msg' => '¡Atención! La categoría ya existe.');
-                    // }else{
-                    //     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+                } else if ($request_insert == 'exist') {
+                    $arrResponse = array('status' => false, 'msg' => '¡Atención! La noticia ya existe.');
+                } else {
+                    $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -177,11 +188,11 @@ class Noticia extends Core
 
     public function borrarNoticia()
     {
-        // $this->getCore(); 
         extract($_POST);
+        // var_dump($_POST);
         $respuesta = array();
 
-        $sql = "DELETE FROM noticias WHERE codigo='$codigo'";
+        $sql = "DELETE FROM noticias WHERE id='$Id'";
         $borrarNoticia = $this->delete($sql);
         if ($borrarNoticia) {
             $respuesta["tipoRespuesta"] = true;

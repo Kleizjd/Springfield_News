@@ -160,3 +160,6 @@ function uploadImage(array $data, string $name){
     $move = move_uploaded_file($url_temp, $destino);
     return $move;
 }
+function deleteFile(string $name){
+    unlink('../../public/img/uploads/'.$name);
+}

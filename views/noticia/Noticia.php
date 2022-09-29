@@ -35,13 +35,7 @@
               <?php endforeach; ?>
             </select>
           </div>
-          <!-- <div class="form-group">
-            <label for="exampleSelect1">Estado <span class="required">*</span></label>
-            <select class="form-control selectpicker" id="listStatus" name="listStatus" required="">
-              <option value="1">Activo</option>
-              <option value="2">Inactivo</option>
-            </select>
-          </div> -->
+     
         </div>
         <div class="col-md-6">
           <div class="photo">
@@ -68,50 +62,6 @@
     </form>
   </div>
 </div>
-
-
-<!-- Modal -->
-<!-- <div class="card fade" id="cardViewCategoria" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="card-dialog" >
-    <div class="card-content">
-      <div class="card-header header-primary">
-        <h5 class="card-title" id="titleModal">Datos de la categoría</h5>
-        <button type="button" class="close" data-dismiss="card" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="card-body">
-        <table class="table table-bordered">
-          <tbody>
-            <tr>
-              <td>ID:</td>
-              <td id="celId"></td>
-            </tr>
-            <tr>
-              <td>Nombres:</td>
-              <td id="celNombre"></td>
-            </tr>
-            <tr>
-              <td>Descripción:</td>
-              <td id="celDescripcion"></td>
-            </tr>
-            <tr>
-              <td>Estado:</td>
-              <td id="celEstado"></td>
-            </tr>
-            <tr>
-              <td>Foto:</td>
-              <td id="imgCategoria"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="card">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 
 

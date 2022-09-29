@@ -19,7 +19,7 @@ $(document).ready(function () {
 				processData: false,
 				contentType: false
 			}).done((res) => {
-                if (res.tipoRespuesta == true) {  swal({ title: 'Noticia Ingresado exitosamente', type: 'success' });} 
+                if (res.status == true) {  swal({ title: res.msg , type: 'success' });} else {  swal({ title: res.msg , type: 'error' });}
 			});
 		});
 	});
@@ -36,10 +36,3 @@ function openModal()
     // document.querySelector("#formCategoria").reset();
     $('#modalFormProductos').modal('show');
 }
-// function removePhoto(){
-//     document.querySelector('#foto').value ="";
-//     document.querySelector('.delPhoto').classList.add("notBlock");
-//     if(document.querySelector('#img')){
-//         document.querySelector('#img').remove();
-//     }
-// }

@@ -15,7 +15,7 @@
       <div class="container-fluid">
         <div class="row">
           <?php include_once "../Partials/left_sidebar.php"; ?>
-          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="hey">
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="lector">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3 border-bottom">
               <div class="container-fluid" id="cargarVista">
                 <?php include_once "../../App/ajax.php"; ?>
