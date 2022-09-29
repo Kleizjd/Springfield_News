@@ -97,10 +97,10 @@ class Noticia extends Core
                 $foto            = $_FILES['foto'];
                 // var_dump($foto);
                 $nombre_foto     = $foto['name'];
-                $type              = $foto['type'];
+                $type            = $foto['type'];
                 $url_temp        = $foto['tmp_name'];
-                $imgPortada     = 'portada_noticia.png';
-                $request_insert = "";
+                $imgPortada      = 'portada_noticia.png';
+                $request_insert  = "";
                 if ($nombre_foto != '') { $imgPortada = 'img_' . md5(date('d-m-Y H:i:s')) . '.jpg'; }
 
                 if ($intIdnoticia == 0) {
