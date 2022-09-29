@@ -154,3 +154,9 @@ function clear_cadena(string $cadena)
     );
     return $cadena;
 }
+function uploadImage(array $data, string $name){
+    $url_temp = $data['tmp_name'];
+    $destino    = '../../public/img/uploads/'.$name;        
+    $move = move_uploaded_file($url_temp, $destino);
+    return $move;
+}

@@ -81,7 +81,6 @@
                                 <th>Id</th>
                                 <th>titulo</th>
                                 <th>categoria</th>
-                                <th>estado</th>
                                 <th>Descripcion</th>
                                 <th>Ver</th>
                                 <th>Editar</th>
@@ -154,7 +153,6 @@ $(document).ready(function () {
 						{data: "id"},
 						{data: "titulo"},
 						{data: "categoria"},
-						{data: "estado"},
 						{data: "descripcion"},
 						{data: "btnVer"},
 						{data: "btnEditar"}
