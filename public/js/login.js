@@ -82,9 +82,9 @@ $(document).ready(function () {
 
                     if (password.length > 7 || $("#password_user").val().length > 7) {
                         if (password.match(/\d/)) {//numeros
-                            if (password.match(/[A-Z]/) && password.match(/[A-z]/)) {//Aa
+                            if (password.match(/[A-Z]/)) {//Aa
                                 // if (password.match(/[@#$%^&+=]/)) {
-                                if (password.match(/[A-z]/)) {
+                                if (password.match(/[a-z]/)) {
                                     $.ajax({
                                         url: 'app/lib/ajax.php',
                                         method: $(this).attr('method'),
@@ -211,8 +211,9 @@ $(document).ready(function () {
         if (password.length > 7 || $("#verifica_clave").val().length > 7) {
           if (password.match(/\d/)) {
             // numeros
-            if (password.match(/[A-Z]/) && password.match(/[A-z]/)) {
+            if (password.match(/[A-Z]/)) {
             //   Aa
+            if(password.match(/[a-z]/)){
               $.ajax({
                 url: "app/lib/ajax.php",
                 method: $(this).attr("method"),
@@ -233,7 +234,14 @@ $(document).ready(function () {
             } else {
               swal({
                 title:
-                  "la contraseña debe de almenos tener 1 una letra en Mayuscula y 1 una en Minuscula ",
+                  "la contraseña debe de almenos tener 1 una letra en Minuscula ",
+                type: "error",
+              });
+            }
+            } else {
+              swal({
+                title:
+                  "la contraseña debe de almenos tener 1 una letra en Mayuscula ",
                 type: "error",
               });
             }
