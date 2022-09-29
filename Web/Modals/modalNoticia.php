@@ -20,7 +20,7 @@
             </div>
 
             <div class="card-body">
-                <form method="POST" id="frm_SearchProduct" action="" autocomplete="off">
+                <form method="POST" id="frm_SearchNoticia" action="" autocomplete="off">
                     <div class="container-fluid">
                         <div class="row">
                             <label class="font-weight-bold">Digite los primeros caracteres</label>
@@ -103,8 +103,8 @@
 <script>
 $(document).ready(function () {
 	  /***************************LIST PRODUCT**************************/
-	  $(function listProduct() {
-        $(document).on("submit", "#frm_SearchProduct", function (event) {
+	  $(function listNoticia() {
+        $(document).on("submit", "#frm_SearchNoticia", function (event) {
 			 event.preventDefault();
         if ($("#codes").val()||$("#noticia").val()||$("#status").val()) {
 			$("#containerModalSearchProduct").show();

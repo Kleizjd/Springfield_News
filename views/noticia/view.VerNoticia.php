@@ -85,7 +85,7 @@
             <div class="modal-content">
 
                 <div class="text-center modal-header">
-                    <h3 class="w-100 modal-title">Búsqueda de noticiaos</h3>
+                    <h3 class="w-100 modal-title">Búsqueda de noticias</h3>
                     <button type="button" class="close" data-dismiss="modal" title="Cerrar">
                         <i class="fa fa-window-close fa-2x text-danger"></i>
                     </button>

@@ -90,8 +90,8 @@
 <!--  -->
 <script>
 $(document).ready(function () {
-	  /***************************LIST PRODUCT**************************/
-	  $(function listProduct() {
+	  /***************************SEARCH USER**************************/
+	  $(function searchUser() {
         $(document).on("submit", "#frm_SearchUser", function (event) {
 			 event.preventDefault();
         if ($("#id_usuario").val()||$("#correo").val()||$("#status").val()) {

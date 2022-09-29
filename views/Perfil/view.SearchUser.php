@@ -49,7 +49,7 @@
 <!--  -->
 <script>
 	$(document).ready(function() {
-		$(function listProduct() {
+		$(function listUser() {
 			$(document).on("submit", "#frm_SearchUser", function(event) {
 				event.preventDefault();
 

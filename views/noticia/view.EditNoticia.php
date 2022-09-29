@@ -41,7 +41,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label" for="titulo">Noticia<span class="required">*</span></label>
-                        <input type="text" class="form-control" id="noticia" name="noticia" placeholder="Titulo" value="<?= $noticia["titulo"]; ?>">
+                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" value="<?= $noticia["titulo"]; ?>">
                     </div>
                     <div class="form-group">
                         <label class="control-label">Descripción <span class="required">*</span></label>
@@ -105,9 +105,9 @@
                 event.preventDefault();
 
                 var formData = new FormData(event.target);
-                formData.append("modulo", "noticiao");
-                formData.append("controlador", "noticiao");
-                formData.append("funcion", "editarnoticiao");
+                formData.append("modulo", "noticia");
+                formData.append("controlador", "noticia");
+                formData.append("funcion", "editarNoticia");
                 $.ajax({
                     url: "../../app/lib/ajax.php",
                     method: "post",

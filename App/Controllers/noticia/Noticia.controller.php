@@ -55,9 +55,9 @@ class Noticia extends Core
 
         $sql = "SELECT id, titulo, categoria, descripcion  FROM noticias WHERE estado LIKE '%$estado%' $condicion";
 
-        $listProduct =  $this->select_all($sql);
+        $listNoticia =  $this->select_all($sql);
 
-        foreach ($listProduct as $list) {
+        foreach ($listNoticia as $list) {
             array_push(
                 $datos,
                 array(
@@ -75,6 +75,7 @@ class Noticia extends Core
         // var_dump($table);
         echo json_encode($table);
     }
+
 
     public function crearNoticia()
     {
@@ -174,9 +175,10 @@ class Noticia extends Core
     public function editarNoticia()
     {
         extract($_POST);
+        // var_dump($_POST);
         $respuesta = array();
 
-        $sql = "UPDATE noticias SET noticia ='$product',  cantidad = '$amount', descripcion = '$description' WHERE codigo='$code_product'";
+        $sql = "UPDATE noticias SET titulo ='$titulo',  categoria = '$categoria', descripcion = '$description' WHERE id='$code_noticia'";
         $actualizarNoticia = $this->select($sql);
 
         // if ($actualizarNoticia) {  $respuesta["tipoRespuesta"] = true; }
@@ -199,5 +201,29 @@ class Noticia extends Core
         }
 
         echo json_encode($respuesta);
+    }
+    public function loadNoticias()
+    {
+
+        $sql = "SELECT *  FROM noticias ";
+
+        $listNoticia =  $this->select_all($sql);
+
+        $cardHtml = '';
+        foreach ($listNoticia as $list) {
+            $cardHtml .= '<div class="col-sm">';
+            $cardHtml .= '<div class="card" style="height: 20rem;">';
+            $cardHtml .= '<img style="height: 7rem;" src="../../public/img/uploads/'.$list['portada'].'" class="card-img-top" alt="...">;';
+            $cardHtml .= '<div class="card-body"></div>';
+            $cardHtml .= '<h5 class="card-title" >'.$list['titulo'].'</h5> ';
+            $cardHtml .= '<p class="card-text"></p>';
+            $cardHtml .= '<a id = "'.$list['id'].'" class="btn btn-primary">Ver Noticia</a>';
+            $cardHtml .= '</div>';
+            $cardHtml .= '</div>';
+            $cardHtml .= '</div>';
+        }
+        // $table = array("data" => $datos);
+        // var_dump($table);
+        echo json_encode($cardHtml);
     }
 }
