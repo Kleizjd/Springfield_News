@@ -30,16 +30,18 @@ class Perfil extends Core
     public function editEmail()
     {
         extract($_POST);
+        // var_dump($_POST);
         $answer = array();
 
-        $sql = "SELECT id_usuario FROM usuarios WHERE email='$email'";
-        $sqlSelect = $this->select($sql);
-        if ($sqlSelect == 0) {
+        $sqlVerify = "SELECT id_usuario, email FROM usuarios WHERE email='$actualiza_correo'";
+        $sql = $this->select_all($sqlVerify);
+        
+        if($sqlVerify == 0 ){
             $sql = "UPDATE usuarios SET email = ? WHERE id_usuario = $userId";
 
             $arrData = array($actualiza_correo);
             $request = $this->update($sql, $arrData);
-
+    
             if ($request != 0) {
                 unset($_SESSION['correo_login']);
                 $_SESSION['correo_login'] = $actualiza_correo;
@@ -48,6 +50,7 @@ class Perfil extends Core
         } else {
             $answer['tipoRespuesta'] = "error";
         }
+       
         echo json_encode($answer);
     }
     public function editPassword()
@@ -78,15 +81,15 @@ class Perfil extends Core
 
                         // if ($request != 0) {
 
-                        $answer["tipoRespuesta"] = "success";
-                        $answer["message"] = "Cambio de contraseña exitoso";
+                            $answer["tipoRespuesta"] = "success";
+                            $answer["message"] = "Cambio de contraseña exitoso";
                         // }
                     } else {
 
                         $answer["tipoRespuesta"] = "warning";
                         $answer["message"] = " las contraseñas no coiciden";
                     }
-                } else {
+                }  else {
                     $answer["tipoRespuesta"] = "wrong";
                     $answer["message"] = "la contraseña Actual es incorrecta";
                 }

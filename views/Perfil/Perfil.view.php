@@ -234,7 +234,11 @@
                     $('.modal-backdrop').remove();
 
                 } else {
+<<<<<<< HEAD
                     alertify.notify("Correo ya existente", res.tipoRespuesta, 2, function() {});
+=======
+                    alertify.notify("Correo ya existe", res.tipoRespuesta, 2, function() {});
+>>>>>>> e7cd07b (email verification)
                 }
             });
         });
@@ -277,6 +281,11 @@
                     swal({
                         title: res.message,
                         type: res.tipoRespuesta
+                    })
+                } else {
+                    swal({
+                        title: "warning",
+                        type: "la contraseña debe ser mayor a 8 caracteres"
                     })
                 }
             });
