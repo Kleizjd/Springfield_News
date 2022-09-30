@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    //=============================[  PRODUCT  ]=================================//	
+    //=============================[  NOTICIA  ]=================================//	
     $(function verNoticia() { var menu = "noticia";
         $(document).on("click", "#verNoticia", function () { llamarVista(menu, menu, menu); }); });
 

@@ -213,7 +213,7 @@ class Noticia extends Core
         foreach ($listNoticia as $list) {
             $cardHtml .= '<div class="col-sm">';
             $cardHtml .= '<div class="card" style="height: 20rem;">';
-            $cardHtml .= '<img style="height: 7rem;" src="../../public/img/uploads/'.$list['portada'].'" class="card-img-top" alt="...">;';
+            $cardHtml .= '<img style="height: 7rem;" src="../../public/img/uploads/'.$list['portada'].'" class="card-img-top" alt="...">';
             $cardHtml .= '<div class="card-body"></div>';
             $cardHtml .= '<h5 class="card-title" >'.$list['titulo'].'</h5> ';
             $cardHtml .= '<p class="card-text"></p>';

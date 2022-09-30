@@ -233,6 +233,8 @@
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
 
+                } else {
+                    alertify.notify("Correo ya existente", res.tipoRespuesta, 2, function() {});
                 }
             });
         });
