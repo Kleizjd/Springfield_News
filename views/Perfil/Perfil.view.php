@@ -276,7 +276,8 @@
                                 contentType: false
                             }).done((res) => {
                                 if (res.tipoRespuesta == "success") {
-                                    $(event.target)[4].reset();
+                                    // $("#form_Edit_Password").reset();//no funciono
+                                    document.getElementById("form_Edit_Password").reset();
                                     swal({title: res.message,type: res.tipoRespuesta})
                                 } else if (res.tipoRespuesta == "warning") {
                                     swal({title: res.message,type: res.tipoRespuesta})

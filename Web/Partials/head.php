@@ -17,5 +17,5 @@
     <script src="<?= base_url() ?>/vendor/jquery/jquery-3.3.1.min.js"></script>
     <link href="<?= media() ?>/css/dashboard.css" rel="stylesheet"><!-- NO BORRAR -->
     
-    <title id="titlePage">Sprinfield News</title>
+    <title id="titlePage">Springfield News</title>
 </head>
