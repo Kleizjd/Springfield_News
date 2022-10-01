@@ -287,28 +287,16 @@
                                 }
                             });
                         } else {
-                            swal({
-                                title: "la contraseña debe de almenos tener 1 una letra en Minuscula",
-                                type: "error"
-                            });
+                            swal({title: "la contraseña debe de almenos tener 1 una letra en Minuscula",type: "error"});
                         }
                     } else {
-                        swal({
-                            title: "la contraseña debe de almenos tener 1 una en Mayuscula",
-                            type: "error"
-                        });
+                        swal({ title: "la contraseña debe de almenos tener 1 una en Mayuscula", type: "error"});
                     }
                 } else {
-                    swal({
-                        title: "la contraseña debe de almenos tener 1 numero ",
-                        type: "error"
-                    });
+                    swal({title: "la contraseña debe de almenos tener 1 numero ",type: "error"});
                 }
             } else {
-                swal({
-                    title: "la contraseña debe de tener mas de  8 caracteres",
-                    type: "error"
-                });
+                swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error"});
             }
 
         });

@@ -5,8 +5,7 @@
 session_start();
 include_once "Config/Config.php";
 include_once "App/lib/Helpers.php"; ?>
-<?php //if (isset($_SESSION)) :  ?>
-<?php // header("Location: WEB/Pages/"); //include_once "Web/Pages/index.php"; ?> 
+
 
 <?php //else : ?>
 <!DOCTYPE html>
