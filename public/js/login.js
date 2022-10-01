@@ -11,9 +11,6 @@ $(document).ready(function () {
             }
         }
     });
-
-
-
     (function validarLogin() {
         $(document).on("submit", "#login_form", function (event) {
             event.preventDefault();
@@ -250,11 +247,7 @@ $(document).ready(function () {
             title: "la contraseña debe de tener mas de  8 caracteres y menos 20 ", type: "error", });
         }
       });
-    })();
-    
-    
-  
-   
+    })();  
 });
 
 $('#to_register').on("click", function () { $('#login_form').hide(); $("#create_account").show(); });

@@ -147,10 +147,7 @@
                 </div>
                 <div class="tab-pane" id="manageUsers">
                     <div class="container-fluid">
-                        <div class="row">
                             <?php include_once "usuarios.php"; ?>
-
-                        </div>
                     </div>
                 </div>
             </div>
