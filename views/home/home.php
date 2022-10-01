@@ -1,7 +1,14 @@
+<?php //header("Status: 301 Moved Permanently"); header("Location: 301 Moved Permanently");
+ ?>
+
 <?php
+session_start();
 include_once "Config/Config.php";
 include_once "App/lib/Helpers.php"; ?>
+<?php //if (isset($_SESSION)) :  ?>
+<?php // header("Location: WEB/Pages/"); //include_once "Web/Pages/index.php"; ?> 
 
+<?php //else : ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,3 +43,4 @@ include_once "App/lib/Helpers.php"; ?>
 <script src="./vendor/moment/moment-with-locales.min.js"></script>
 <script src="./vendor/sweetalert/js/sweetalert2.min.js"></script>
 <!-- \\SCRIPTS -->
+<?php //endif; ?>

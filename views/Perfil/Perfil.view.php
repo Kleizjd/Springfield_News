@@ -12,10 +12,10 @@
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#myProfile" role="tab">Mi perfil</a>
             </li>
-            <?php if($_SESSION["rolid"] == 1): ?>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#manageUsers" role="tab">Usuarios</a>
-            </li>
+            <?php if ($_SESSION["rolid"] == 1) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#manageUsers" role="tab">Usuarios</a>
+                </li>
             <?php endif; ?>
 
         </ul>
@@ -115,14 +115,25 @@
                                     <div class="row pt-3">
                                         <div class="col-sm col-lg"><label for="actual_password">Actual Contrase&ntilde;a</label></div>
                                         <div class="col-sm col-lg"><input type="password" name="actual_password" id="actual_password" class="form-control" required></div>
+                                        <button type="button" class="btn btn-outline-primary showPassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
                                     </div>
                                     <div class="row pt-3">
                                         <div class="col-sm col-lg"><label for="new_password"></label>Nueva Contrase&ntilde;a</div>
                                         <div class="col-sm col-lg"><input type="password" name="new_password" id="new_password" class="form-control" required></div>
+                                        <button type="button" class="btn btn-outline-primary showPassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
                                     </div>
                                     <div class="row pt-3">
+
                                         <div class="col-sm col-lg"><label for="confirm_password"></label>Confirmar Contrase&ntilde;a</div>
                                         <div class="col-sm col-lg"><input type="password" name="confirm_password" id="confirm_password" class="form-control" required></div>
+
+                                        <button type="button" class="btn btn-outline-primary showPassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
                                     </div>
                                     <div class="row pt-3">
                                         <div class="col-sm col-lg d-flex justify-content-center">
@@ -137,8 +148,8 @@
                 <div class="tab-pane" id="manageUsers">
                     <div class="container-fluid">
                         <div class="row">
-                            <?php include_once "usuarios.php";?>
-                            
+                            <?php include_once "usuarios.php"; ?>
+
                         </div>
                     </div>
                 </div>
@@ -226,7 +237,6 @@
                 if (res.tipoRespuesta == "success") {
 
                     alertify.notify("Correo modificado correctamente", "success", 2, function() {});
-
                     document.getElementById("email_user").innerHTML = $("#actualiza_correo").val()
                     $('#emailModal').modal().hide();
 
@@ -234,11 +244,7 @@
                     $('.modal-backdrop').remove();
 
                 } else {
-<<<<<<< HEAD
                     alertify.notify("Correo ya existente", res.tipoRespuesta, 2, function() {});
-=======
-                    alertify.notify("Correo ya existe", res.tipoRespuesta, 2, function() {});
->>>>>>> e7cd07b (email verification)
                 }
             });
         });
@@ -251,45 +257,62 @@
             formData.append('modulo', 'perfil');
             formData.append('controlador', 'perfil');
             formData.append('funcion', 'editPassword');
+            formData.append('email', $("#email_user span").html());
             formData.append('userId', $("#userId").val());
 
-            $.ajax({
-                url: '../../app/lib/ajax.php',
-                method: $(this).attr('method'),
-                dataType: 'JSON',
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false
-            }).done((res) => {
-                if (res.tipoRespuesta == "success") {
-                    swal({
-                        title: res.message,
-                        type: res.tipoRespuesta
-                    })
-                } else if (res.tipoRespuesta == "warning") {
-                    swal({
-                        title: res.message,
-                        type: res.tipoRespuesta
-                    })
-                } else if (res.tipoRespuesta == "error") {
-                    swal({
-                        title: res.message,
-                        type: res.tipoRespuesta
-                    })
-                } else if (res.tipoRespuesta == "wrong") {
-                    swal({
-                        title: res.message,
-                        type: res.tipoRespuesta
-                    })
+            $new_password = $("#new_password").val();
+            if (new_password.length > 7 || $("#confirm_password").val().length > 7) {
+                if ($("#new_password").val().match(/\d/)) { //numeros
+                    if ($("#new_password").val().match(/[A-Z]/)) { //Aa
+                        if ($("#new_password").val().match(/[a-z]/)) {
+
+                            $.ajax({
+                                url: '../../app/lib/ajax.php',
+                                method: $(this).attr('method'),
+                                dataType: 'JSON',
+                                data: formData,
+                                cache: false,
+                                processData: false,
+                                contentType: false
+                            }).done((res) => {
+                                if (res.tipoRespuesta == "success") {
+                                    $(event.target)[4].reset();
+                                    swal({title: res.message,type: res.tipoRespuesta})
+                                } else if (res.tipoRespuesta == "warning") {
+                                    swal({title: res.message,type: res.tipoRespuesta})
+                                } else if (res.tipoRespuesta == "error") {
+                                    swal({title: res.message,type: res.tipoRespuesta})
+                                } else if (res.tipoRespuesta == "warning") {//question,info
+                                    swal({title: res.message,type: res.tipoRespuesta})
+                                }
+                            });
+                        } else {
+                            swal({
+                                title: "la contraseña debe de almenos tener 1 una letra en Minuscula",
+                                type: "error"
+                            });
+                        }
+                    } else {
+                        swal({
+                            title: "la contraseña debe de almenos tener 1 una en Mayuscula",
+                            type: "error"
+                        });
+                    }
                 } else {
                     swal({
-                        title: "warning",
-                        type: "la contraseña debe ser mayor a 8 caracteres"
-                    })
+                        title: "la contraseña debe de almenos tener 1 numero ",
+                        type: "error"
+                    });
                 }
-            });
+            } else {
+                swal({
+                    title: "la contraseña debe de tener mas de  8 caracteres",
+                    type: "error"
+                });
+            }
+
         });
+
         $("#editName").click(function() {
             $("#form_editName").hide();
             $("#form_editName").show(500);

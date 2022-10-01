@@ -56,19 +56,23 @@ class Perfil extends Core
     public function editPassword()
     {
         extract($_POST);
+        // var_dump($_POST);
         $answer = array();
 
         // $message = "la contrasena actual no es correcta";
 
-        $sqlVerify = "SELECT password FROM usuarios WHERE id_usuario = '$userId'";
+        $sqlVerify = "SELECT DISTINCT id_usuario, CONCAT(nombre, ' ', apellido) AS nombre_completo, nombre, apellido, password, rolid, email,imagen_usuario FROM usuarios WHERE email='$email' ";
         $sql = $this->select($sqlVerify);
-
+//  echo $sqlVerify;
         if ($sql != 0) {
 
             $passwordDB = $sql['password'];
-
             if ($actual_password != $new_password) {
+                // echo $actual_password. " - ". $passwordDB;
+
                 if (password_verify($actual_password, $passwordDB)) {
+                        //  echo $actual_password. " ". $passwordDB;
+
                     if ($new_password == $confirm_password) {
 
                         //Encriptar-----------------------------------------------------------------------
@@ -80,7 +84,7 @@ class Perfil extends Core
                         $request = $this->update($sqlUpdate, $arrData);
 
                         // if ($request != 0) {
-
+                            
                             $answer["tipoRespuesta"] = "success";
                             $answer["message"] = "Cambio de contraseña exitoso";
                         // }
@@ -90,7 +94,7 @@ class Perfil extends Core
                         $answer["message"] = " las contraseñas no coiciden";
                     }
                 }  else {
-                    $answer["tipoRespuesta"] = "wrong";
+                    $answer["tipoRespuesta"] = "warning";
                     $answer["message"] = "la contraseña Actual es incorrecta";
                 }
             } else {

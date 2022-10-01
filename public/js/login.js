@@ -209,11 +209,9 @@ $(document).ready(function () {
         formData.append("verifica_clave", $("#verifica_clave").val());
         var password = $("#nueva_clave").val();
         if (password.length > 7 || $("#verifica_clave").val().length > 7) {
-          if (password.match(/\d/)) {
-            // numeros
-            if (password.match(/[A-Z]/)) {
-            //   Aa
-            if(password.match(/[a-z]/)){
+          if (password.match(/\d/)) {// numeros
+            if (password.match(/[A-Z]/)) { //A
+            if(password.match(/[a-z]/)){//a
               $.ajax({
                 url: "app/lib/ajax.php",
                 method: $(this).attr("method"),
@@ -227,35 +225,21 @@ $(document).ready(function () {
                   swal({ type: "success" });
                   location.href = "";
 
-                } else {
-                  swal({ title: "las claves no son iguales", type: "error" });
-                }
+                } else { swal({ title: "las claves no son iguales", type: "error" }); }
               });
             } else {
-              swal({
-                title:
-                  "la contraseña debe de almenos tener 1 una letra en Minuscula ",
-                type: "error",
-              });
+              swal({ title: "la contraseña debe de almenos tener 1 una letra en Minuscula ", type: "error",});
             }
             } else {
-              swal({
-                title:
-                  "la contraseña debe de almenos tener 1 una letra en Mayuscula ",
-                type: "error",
-              });
+              swal({ title:
+                  "la contraseña debe de almenos tener 1 una letra en Mayuscula ", type: "error",});
             }
           } else {
-            swal({
-              title: "la contraseña debe de almenos tener 1 numero ",
-              type: "error",
-            });
+            swal({ title: "la contraseña debe de almenos tener 1 numero ", type: "error", });
           }
         } else {
           swal({
-            title: "la contraseña debe de tener mas de  8 caracteres",
-            type: "error",
-          });
+            title: "la contraseña debe de tener mas de  8 caracteres", type: "error", });
         }
       });
     })();

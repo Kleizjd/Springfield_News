@@ -188,6 +188,19 @@ $(".marcarSoloUnRadio").each(function () {
 	   $(_this).find("input[type=radio]:checked").not(this).prop("checked", false);
    });
 });
+//boton ver o ocultar
+$(document).on("click", ".showPassword", function () {
+	let inputpassword = $(this).parent().find("input");
+	if ($(inputpassword).val() != "") {
+		if ($(inputpassword).prop("type") == "password") {
+			$(inputpassword).prop("type", "text");
+			$(this).html('<i class="fas fa-eye-slash"></i>');
+		} else if ($(inputpassword).prop("type") == "text") {
+			$(inputpassword).prop("type", "password");
+			$(this).html('<i class="fas fa-eye"></i>');
+		}
+	}
+});
 ///=============================[VALIDAR LLAVE PRIMARIA]=============================///
 // $(function validateKey(){
 // 	$(document).on("keyup", "#validateKey", function () {

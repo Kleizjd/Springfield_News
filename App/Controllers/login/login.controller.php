@@ -24,6 +24,8 @@ class Login extends Core
             $passwordDB = $validar_sesion['password'];
 
             if (password_verify($password, $passwordDB)) {
+                // echo $password. " ". $passwordDB;
+                
                 @session_start();
                 $_SESSION['nombre_completo'] = str_replace("*", "", $validar_sesion["nombre_completo"]);
                 $_SESSION['imagen_usuario'] = str_replace("*", "", $validar_sesion["imagen_usuario"]);
