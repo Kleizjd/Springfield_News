@@ -270,7 +270,7 @@
 
             $new_password = $("#new_password").val();
 
-                if (new_password.length > 7 && password.length < 20 || $("#confirm_password").val().length > 7 && $("#confirm_password").val().length < 20) {
+                if (new_password.length > 7 && new_password.length < 20 || $("#confirm_password").val().length > 7 && $("#confirm_password").val().length < 20) {
                 if ($("#new_password").val().match(/\d/)) { //numeros
                     if ($("#new_password").val().match(/[A-Z]/)) { //Aa
                         if ($("#new_password").val().match(/[a-z]/)) {
