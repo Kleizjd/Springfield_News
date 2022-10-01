@@ -224,6 +224,13 @@
             formData.append('funcion', 'editEmail');
             formData.append('userId', $("#userId").val());
 
+            var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+
+            var correoValido = expReg.test($("#actualiza_correo").val());
+
+            if (correoValido != true) {
+                swal({ title: "El correo electronico NO es válido", type: "error" });
+            }else{
             $.ajax({
                 url: '../../App/lib/ajax.php',
                 method: $(this).attr('method'),
@@ -247,6 +254,7 @@
                     alertify.notify("Correo actualmente registrado", res.tipoRespuesta, 2, function() {});
                 }
             });
+             }
         });
 
         $("#form_Edit_Password").on("submit", function() {
@@ -261,7 +269,8 @@
             formData.append('userId', $("#userId").val());
 
             $new_password = $("#new_password").val();
-            if (new_password.length > 7 || $("#confirm_password").val().length > 7) {
+
+                if (new_password.length > 7 && password.length < 20 || $("#confirm_password").val().length > 7 && $("#confirm_password").val().length < 20) {
                 if ($("#new_password").val().match(/\d/)) { //numeros
                     if ($("#new_password").val().match(/[A-Z]/)) { //Aa
                         if ($("#new_password").val().match(/[a-z]/)) {
@@ -297,20 +306,12 @@
                     swal({title: "la contraseña debe de almenos tener 1 numero ",type: "error"});
                 }
             } else {
-                swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error"});
+                swal({ title: "la contraseña debe de tener mas de  8 caracteres y menos 20 ", type: "error"});
             }
 
         });
 
-        $("#editName").click(function() {
-            $("#form_editName").hide();
-            $("#form_editName").show(500);
-        });
-        $("#cancelEditName").click(function() {
-            if ($("#form_editName").is(':visible')) {
-                $("#form_editName").hide();
-            }
-        });
+       
         $("#form_editName").on("submit", function() {
             event.preventDefault();
             var formData = new FormData(event.target);
@@ -320,7 +321,14 @@
             formData.append('controlador', 'perfil');
             formData.append('funcion', 'editName');
             formData.append('userId', $("#userId").val());
-
+            var validaTexto = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/;//crea un objeto con una expresion regular
+            var nombreValido = validaTexto.test($("#name_user").val());
+            var apellidoValido = validaTexto.test($("#lastName").val());
+             if (nombreValido != true) {
+                swal({ title: "El nombre NO es válido", type: "error" });
+            }else if (apellidoValido != true) {
+                swal({ title: "El apellido NO es válido", type: "error" });
+            }else{
             $.ajax({
                 url: '../../app/lib/ajax.php',
                 method: $(this).attr('method'),
@@ -343,6 +351,16 @@
                 }
 
             });
+        }
+        });
+        $("#editName").click(function() {
+            $("#form_editName").hide();
+            $("#form_editName").show(500);
+        });
+        $("#cancelEditName").click(function() {
+            if ($("#form_editName").is(':visible')) {
+                $("#form_editName").hide();
+            }
         });
     });
 </script>

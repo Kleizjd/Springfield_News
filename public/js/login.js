@@ -80,7 +80,7 @@ $(document).ready(function () {
                 if ($("#nombre").val().length <= 15 && $("#apellido").val().length <= 15) {
                 if ($("#respuesta").val().length <= 15) {
 
-                    if (password.length > 7 || $("#password_user").val().length > 7) {
+                    if (password.length > 7 && password.length < 20 || $("#password_user").val().length > 7 && $("#password_user").val().length < 20) {
                         if (password.match(/\d/)) {//numeros
                             if (password.match(/[A-Z]/)) {//Aa
                                 // if (password.match(/[@#$%^&+=]/)) {
@@ -115,7 +115,7 @@ $(document).ready(function () {
                         }
 
                     } else {
-                        swal({ title: "la contraseña debe de tener mas de  8 caracteres", type: "error" });
+                        swal({ title: "la contraseña debe de tener mas de  8 caracteres y menos 20 ", type: "error" });
                     }
                 } else {
                     swal({ title: "La respuesta no debe ser mayor a 15 caracteres", type: "error" });
@@ -134,7 +134,14 @@ $(document).ready(function () {
             formData.append("modulo", "login");
             formData.append("controlador", "login");
             formData.append("funcion", "resetByEmail");
-           
+
+            var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+
+            var correoValido = expReg.test($("#email").val());
+
+            if (correoValido != true) {
+                swal({ title: "El correo electronico NO es válido", type: "error" });
+            }else{
             $.ajax({
                 url: 'app/lib/ajax.php',
                 method: $(this).attr('method'),
@@ -148,7 +155,7 @@ $(document).ready(function () {
                 if (res.tipoRespuesta == "success") {
                     $('#correo_recuperacion').hide();
                     $("#pregunta_segura_valida").show();
-                    swal({  type: "success" });
+                    swal({  title: "Continua" ,type: "success" });
                   
                     $("#correo").text(res.correo);
                     $("#pregunta").text(res.pregunta);
@@ -161,7 +168,7 @@ $(document).ready(function () {
                 } else {
                     swal({ title: "No existe correo", type: "error" });
                 }
-            })
+            })}
         });
     }());
     // 2
@@ -186,7 +193,7 @@ $(document).ready(function () {
             }).done((res) => {
 
                 if (res.tipoRespuesta == "success") {
-                    swal({ type: "success" });
+                    swal({ title: "Respuesta correcta", type: "success" });
                     $("#pregunta_segura_valida").hide();
                     $('#cambio_clave_pornueva').show();
                     
@@ -208,7 +215,7 @@ $(document).ready(function () {
         formData.append("password", $("#nueva_clave").val());
         formData.append("verifica_clave", $("#verifica_clave").val());
         var password = $("#nueva_clave").val();
-        if (password.length > 7 || $("#verifica_clave").val().length > 7) {
+        if (password.length > 7 && password.length < 20 || $("#verifica_clave").val().length > 7 && $("#verifica_clave").val().length < 20) {
           if (password.match(/\d/)) {// numeros
             if (password.match(/[A-Z]/)) { //A
             if(password.match(/[a-z]/)){//a
@@ -225,7 +232,8 @@ $(document).ready(function () {
                   swal({ type: "success" });
                   location.href = "";
 
-                } else { swal({ title: "las claves no son iguales", type: "error" }); }
+                } else if(res.tipoRespuesta == "warning") { swal({ title: "la clave no debe haber sido usada ya.", type: "warning" }); }
+                else { swal({ title: "las claves no son iguales", type: "error" }); }
               });
             } else {
               swal({ title: "la contraseña debe de almenos tener 1 una letra en Minuscula ", type: "error",});
@@ -239,7 +247,7 @@ $(document).ready(function () {
           }
         } else {
           swal({
-            title: "la contraseña debe de tener mas de  8 caracteres", type: "error", });
+            title: "la contraseña debe de tener mas de  8 caracteres y menos 20 ", type: "error", });
         }
       });
     })();

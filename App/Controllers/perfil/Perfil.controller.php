@@ -34,9 +34,10 @@ class Perfil extends Core
         $answer = array();
 
         $sqlVerify = "SELECT id_usuario, email FROM usuarios WHERE email='$actualiza_correo'";
-        $sql = $this->select_all($sqlVerify);
+        $sql = $this->select($sqlVerify);
+        // var_dump($sql);
         
-        if($sqlVerify == 0 ){
+        if($sql == false){
             $sql = "UPDATE usuarios SET email = ? WHERE id_usuario = $userId";
 
             $arrData = array($actualiza_correo);

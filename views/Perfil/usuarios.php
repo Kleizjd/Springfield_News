@@ -151,7 +151,7 @@ $(document).ready(function () {
 				});
 
           
-			} 
+			// } 
             // else {
 			// 	swal({
 			// 		type: "warning",
