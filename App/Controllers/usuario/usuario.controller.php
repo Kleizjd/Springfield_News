@@ -20,17 +20,17 @@ class Usuario extends Core{
 
     public function listUsuario(){
         extract($_POST);
-        // var_dump($_POST);
+        var_dump($_POST);
         $datos = array(); 
         $condicion = "";
 
-        if($id != ""){ $condicion .="AND id_usuario LIKE '$id%'";}
+        // if($id != ""){ $condicion .="AND id_usuario LIKE '$id%'";}
 
-        if($correo != ""){ $condicion .="AND correo LIKE '$correo%'"; }
+        // if($correo != ""){ $condicion .="AND correo LIKE '$correo%'"; }
 
-        if($estado != ""){ if($estado == 'T'){ $estado = null;}}
+        // if($estado != ""){ if($estado == 'T'){ $estado = null;}}
 
-        $sql = "SELECT id_usuario, CONCAT(nombre, ' ', apellido) AS nombre_completo, email, rolid, estado_usuario FROM usuarios WHERE estado_usuario LIKE '%$estado%' $condicion";
+        echo "SELECT id_usuario, CONCAT(nombre, ' ', apellido) AS nombre_completo, email, rolid, estado_usuario FROM usuarios WHERE estado_usuario LIKE '%$estado%' $condicion";
 
         $listUsuario =  $this->select_all($sql);
 
@@ -48,7 +48,7 @@ class Usuario extends Core{
             ));
         }
             $table = array("data" => $datos);
-            echo json_encode($table);
+            // echo json_encode($table);
     }
 
     public function crearUsuario() {

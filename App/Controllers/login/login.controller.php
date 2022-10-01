@@ -1,6 +1,7 @@
 
 <?php
 include_once "../../Config/Core.php";
+@session_start();
 
 class Login extends Core
 {
@@ -237,5 +238,6 @@ public function camposPassword()
     {
         @session_unset();
         @session_destroy();
+        // echo $_SESSION['correo_login'];
     }
 }

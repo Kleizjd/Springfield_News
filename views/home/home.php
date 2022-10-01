@@ -1,8 +1,13 @@
+<?php //header("Status: 301 Moved Permanently"); header("Location: 301 Moved Permanently");
+ ?>
+
 <?php
 session_start();
 include_once "Config/Config.php";
 include_once "App/lib/Helpers.php"; ?>
 
+
+<?php //else : ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -20,7 +25,7 @@ include_once "App/lib/Helpers.php"; ?>
 
   <link rel="stylesheet" href="./public/css/style.css">
 
-  <title>springfield News</title>
+  <title>Sprinfield News</title>
 </head>
 
 <body>
@@ -37,3 +42,4 @@ include_once "App/lib/Helpers.php"; ?>
 <script src="./vendor/moment/moment-with-locales.min.js"></script>
 <script src="./vendor/sweetalert/js/sweetalert2.min.js"></script>
 <!-- \\SCRIPTS -->
+<?php //endif; ?>

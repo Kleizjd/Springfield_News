@@ -244,7 +244,7 @@
                     $('.modal-backdrop').remove();
 
                 } else {
-                    alertify.notify("Correo actualmente registrado", res.tipoRespuesta, 2, function() {});
+                    alertify.notify("Correo ya existente", res.tipoRespuesta, 2, function() {});
                 }
             });
         });
@@ -276,8 +276,7 @@
                                 contentType: false
                             }).done((res) => {
                                 if (res.tipoRespuesta == "success") {
-                                    // $("#form_Edit_Password").reset();//no funciono
-                                    document.getElementById("form_Edit_Password").reset();
+                                    $(event.target)[4].reset();
                                     swal({title: res.message,type: res.tipoRespuesta})
                                 } else if (res.tipoRespuesta == "warning") {
                                     swal({title: res.message,type: res.tipoRespuesta})

@@ -157,7 +157,7 @@ class Noticia extends Core
                             uploadImage($foto, $imgPortada);
                         }
 
-                        if (($nombre_foto == '' && $_POST['foto_remove'] == 1 && $_POST['foto_actual'] != 'portada_categoria.png')
+                        if (($nombre_foto == '' && $_POST['foto_remove'] == 1 && $_POST['foto_actual'] != 'portada_noticia.png')
                             || ($nombre_foto != '' && $_POST['foto_actual'] != 'portada_noticia.png')
                         ) {
                             deleteFile($_POST['foto_actual']);

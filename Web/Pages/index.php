@@ -41,5 +41,5 @@
   </html>
   
   <!-- REDIRECT TO LOGIN -- SE REDIRIGE AL LOGIN SI NO HA INICIADO SESIÓN -->
-<?php else : header("Location: ../"); ?><?php endif; ?>
+<?php else : header("Location: ./"); ?><?php endif; ?>
 <input type="hidden" name="userId" id="userId" value="<?= $_SESSION['id_usuario']; ?>">

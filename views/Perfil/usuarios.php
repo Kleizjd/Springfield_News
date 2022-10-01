@@ -94,10 +94,10 @@ $(document).ready(function () {
 	  $(function searchUser() {
         $(document).on("submit", "#frm_SearchUser", function (event) {
 			 event.preventDefault();
-        if ($("#id_usuario").val()||$("#correo").val()||$("#status").val()) {
-			$("#containerModalSearchProduct").show();
-				var status = $('select[name="status"] option:selected').text();
-				$("#statusProduct").text(status);
+        // if ($("#id_usuario").val()||$("#correo").val()||$("#status").val()) {
+		// 	$("#containerModalSearchProduct").show();
+		// 		var status = $('select[name="status"] option:selected').text();
+		// 		$("#statusProduct").text(status);
 
 
 			var tableModalSearchUser = $("#tableModalSearchUser").DataTable({
@@ -151,12 +151,13 @@ $(document).ready(function () {
 				});
 
           
-			} else {
-				swal({
-					type: "warning",
-					title: "Seleccione un criterio de búsqueda"
-				});
-			}
+			} 
+            // else {
+			// 	swal({
+			// 		type: "warning",
+			// 		title: "Seleccione un criterio de búsqueda"
+			// 	});
+			// }
 		});
 	});
 	$(function viewWatchProduct() {
