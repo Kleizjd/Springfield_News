@@ -210,7 +210,7 @@
 
 <script>
     $(document).ready(function() {
-
+        
         $("#form_Edit_Email").on("submit", function() {
 
             event.preventDefault();

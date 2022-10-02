@@ -14,7 +14,7 @@
                 </li>
                 <?php if ($_SESSION["rolid"] == 1) : ?>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#manageUsers" role="tab">Usuarios</a>
+                        <a class="nav-link" data-toggle="tab" href="#manageUsers" id="manage" role="tab">Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#editUserForm" role="tab">Editar usuario</a>
@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-sm col-lg">
                                     <div class="card-header">
-                                        <form action="" id="form_EditProduct" method="POST" autocomplete="off">
+                                        <form action="" id="form_EditUsuario" method="POST" autocomplete="off">
                                             <?php foreach ($sqlUsuario as $usuario) {
                                             } ?>
                                             <div class="container-fluid">
@@ -56,10 +56,6 @@
                                                         <div class="row pb-3">
                                                             <div class="col-sm-1">
                                                                 <button type="submit" class="btn btn-primary" title="Modificar Noticia"><i class="fa fa-save"></i> </button>
-
-                                                            </div>
-                                                            <div class="col-sm-1">
-                                                                <button type="button" class="btn btn-primary" data-toggle="modal" title="Buscar" data-target="#modalUsuario"><i class="fa fa-search"></i></button>
 
                                                             </div>
                                                             <div class="col-sm-1">
@@ -80,28 +76,42 @@
                                                                 <input type="text" class="form-control" id="code_usuario" name="code_usuario" value="<?= $usuario["id_usuario"]; ?>" readonly>
                                                             </div>
                                                             <div class="col-sm-1">
-                                                                <label for="usuario">correo</label>
+                                                                <label for="email">correo</label>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <input type="text" class="form-control" id="usuario" name="usuario" value="<?= $usuario["email"]; ?>">
+                                                                <input type="text" class="form-control" id="email" name="email" value="<?= $usuario["email"]; ?>">
                                                             </div>
                                                             <div class="col-sm">
                                                                 <label for="rol">Rol</label>
                                                             </div>
-                                                            <div class="col-sm">
-                                                                <select class="form-control">
-                                                                    <option name="" id="columnista" value="3">Columnista</option>
-                                                                    <option name="" id="lector" value="4">Lector</option>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control" id="rol" name="rol">
+                                                                    <!-- <option name="" id="columnista" value="3">Columnista</option>
+                                                                    <option name="" id="lector" value="4">Lector</option> -->
+                                                                    <?php foreach ($sqlPerfil as $rol) : ?>
+                                                                        <?php if ($rol["id"] == $usuario["rolid"]) : ?>
+
+                                                                            <option value="<?= $rol["id"]; ?>" selected><?= $rol["nombre"]; ?></option>
+                                                                        <?php else : ?>
+                                                                            <option value="<?= $rol["id"]; ?>"><?= $rol["nombre"]; ?></option>
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="row">
 
                                                             <div class="col-sm-3">
-                                                                <label for="nombre_completo">Nombre Completo</label>
+                                                                <label for="nombre">Nombre</label>
                                                             </div>
                                                             <div class="col-sm">
-                                                                <input type="text" class="form-control" id="nombre_completo" readonly value="<?= $usuario["nombre_completo"]; ?>">
+                                                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $usuario["nombre"]; ?>">
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label for="nombre_completo">Apellido</label>
+                                                            </div>
+                                                            <div class="col-sm">
+                                                                <input type="text" class="form-control" id="apellido" name="apellido" value="<?= $usuario["apellido"]; ?>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -125,14 +135,60 @@
     </div>
     <script>
         $(document).ready(function() {
+            $("#manage").click(function() {
+			var tableSearchUser = $("#tableSearchUser").DataTable({
+					
+					dom: "Bfrtip",
+					buttons: [{
+						extend: "excelHtml5",
+						text: '<i class="fa fa-file-excel"></i>',
+						titleAttr: "Exportar a Excel",
+						className: "bg-success",
+						filename: "Usuarios",
+						sheetName: "Usuarios"
+					}],
+					language: {
+						"url": "../../vendor/datatable/language/datatablesSpanish.json"
+					},
+					destroy: true,
+					pageLength: 10,
+					autoWidth: true,
+					lengthChange: false,
+					columnDefs: [{
+						"className": "text-center",
+						"targets": "_all"
+                    }],
+                    drawCallback: () => { tableSearchUser.columns.adjust();},
+					ajax: {
+						url: "../../App/lib/ajax.php",
+						method: "POST",
+						// method: $(this).prop("method"),
+						dataType: "json",
+						data: {
+							modulo: "usuario",
+							controlador: "usuario",
+							funcion: "listUsuario",
+						},
+					},
+					columns: [
+						{data: "id_usuario"},
+						{data: "email"},
+						{data: "nombre_completo"},
+						{data: "estado"},
+						{data: "rol"},
+						{data: "btnVer"},
+						{data: "btnEditar"}
+					],
+				});
+            });
             $(function EditProduct() {
-                $(document).on("submit", "#form_EditProduct", function(event) {
+                $(document).on("submit", "#form_EditUsuario", function(event) {
                     event.preventDefault();
 
                     var formData = new FormData(event.target);
                     formData.append("modulo", "usuario");
                     formData.append("controlador", "usuario");
-                    formData.append("funcion", "editarProducto");
+                    formData.append("funcion", "editarUsuario");
                     $.ajax({
                         url: "../../app/lib/ajax.php",
                         method: "post",
@@ -169,7 +225,7 @@
                         allowEscapeKey: false,
                     }).then((result) => {
                         if (result.value) {
-                            var formData = new FormData($("#form_EditProduct")[0]);
+                            var formData = new FormData($("#form_EditUsuario")[0]);
                             formData.append("modulo", "usuario");
                             formData.append("controlador", "usuario");
                             formData.append("funcion", "borrarProducto");

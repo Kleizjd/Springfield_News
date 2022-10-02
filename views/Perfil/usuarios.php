@@ -25,7 +25,7 @@
 <!--  -->
 <script>
 $(document).ready(function () {
-	  /***************************LIST PRODUCT**************************/
+	  /***************************LIST USER**************************/
 	  $(function listProduct() {
 			var tableSearchUser = $("#tableSearchUser").DataTable({
 					
@@ -59,7 +59,6 @@ $(document).ready(function () {
 							modulo: "usuario",
 							controlador: "usuario",
 							funcion: "listUsuario",
-                            estado: "T"
 						},
 					},
 					columns: [

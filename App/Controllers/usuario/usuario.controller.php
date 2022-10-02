@@ -14,7 +14,12 @@ class Usuario extends Core{
 
     public function viewEditarUsuario(){
         extract($_POST);
-        $sqlUsuario = $this->select_all("SELECT CONCAT(nombre, ' ', apellido) AS nombre_completo, email, rolid, id_usuario, estado_usuario FROM usuarios WHERE id_usuario = $id_usuario");
+        $sqlUsuario = $this->select_all("SELECT nombre, apellido, email, rolid, id_usuario, estado_usuario FROM usuarios WHERE id_usuario = $id_usuario");
+        // var_dump($sqlUsuario);
+        $sqlPerfil =  $this->select_all("SELECT * FROM perfiles");
+        // echo "<br>";
+        // var_dump($sqlPerfil);
+
         include_once "../../views/perfil/usuarios/view.EditUsuario.php";
     }
 
@@ -22,17 +27,8 @@ class Usuario extends Core{
         extract($_POST);
         // var_dump($_POST);
         $datos = array(); 
-        $condicion = "";
-
-        // if($id != ""){ $condicion .="AND id_usuario LIKE '$id%'";}
-
-        // if($correo != ""){ $condicion .="AND correo LIKE '$correo%'"; }
-
-        if($estado != ""){ if($estado == 'T'){ $estado = null;}}
-
-        $sql ="SELECT id_usuario, CONCAT(nombre, ' ', apellido) AS nombre_completo, email, rolid, estado_usuario FROM usuarios WHERE estado_usuario LIKE '%$estado%' $condicion";
-        // echo "SELECT id_usuario, CONCAT(nombre, ' ', apellido) AS nombre_completo, email, rolid, estado_usuario FROM usuarios WHERE estado_usuario LIKE '%$estado%' $condicion";
-
+ 
+        $sql ="SELECT id_usuario, CONCAT(u.nombre, ' ', apellido) AS nombre_completo, email, rolid, estado_usuario, p.nombre as perfil FROM usuarios u, perfiles p WHERE rolid = p.id";
         $listUsuario =  $this->select_all($sql);
 
         foreach ($listUsuario as $list) {
@@ -42,7 +38,7 @@ class Usuario extends Core{
                 "email" => $list["email"],
                 "nombre_completo" => $list["nombre_completo"],
                 "estado" => $list["estado_usuario"],
-                "rol" => $list["rolid"],
+                "rol" => $list["perfil"],
                 "btnVer" => '<button type="button" class="text-white btn btn-info" id="verUsuarioVista"><i class="fa fa-eye"></i></button>',
                 "btnEditar" => '<button type="button" class="text-white btn btn-warning" id="viewEditarUsuario"><i class="fa fa-edit"></i></button>'
 
@@ -77,7 +73,7 @@ class Usuario extends Core{
         // var_dump($_POST);
         $respuesta = array();
 
-        $sql = "UPDATE usuarios SET nombre ='$nombre', apellido = '$apellido', password = '$password', email = '$correo' WHERE id_usuario='$id_usuario'";
+        $sql = "UPDATE usuarios SET nombre ='$nombre', apellido = '$apellido', email = '$email', rolid = '$rol' WHERE id_usuario='$code_usuario'";
         $actualizarUusario = $this->select($sql);	
 
         $respuesta["tipoRespuesta"] = true; 

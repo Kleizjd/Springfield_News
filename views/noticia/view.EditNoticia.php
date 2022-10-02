@@ -52,7 +52,7 @@
                         <select class="form-control selectpicker" id="categoria" name="categoria" required="">
                             <option value="">Seleccione...</option>
                             <?php foreach ($noticias_categoria as $categoria) : ?>
-                                <?php if ($categoria["id"] == $noticia["id"]) : ?>
+                                <?php if ($categoria["id"] == $noticia["categoria"]) : ?>
 
                                     <option value="<?= $categoria["id"]; ?>" selected><?= $categoria["nombre"]; ?></option>
                                 <?php else : ?>
