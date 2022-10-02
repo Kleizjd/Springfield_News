@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `datecreated` datetime DEFAULT current_timestamp(),
   `ruta` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12345665 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12345666 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla springfield.noticias: ~6 rows (aproximadamente)
 INSERT INTO `noticias` (`id`, `titulo`, `categoria`, `estado`, `descripcion`, `portada`, `datecreated`, `ruta`) VALUES
@@ -46,8 +46,8 @@ INSERT INTO `noticias` (`id`, `titulo`, `categoria`, `estado`, `descripcion`, `p
 	(2, 'Cafe mata', '3', 'A', 'barato', 'img_86bbb5b0a0d08f7b00ede09bb7ca2065.jpg', '2022-09-29 14:37:42', NULL),
 	(3, 'jovenes', '2', '', 'murieron portada al mar', 'img_2cbec034433250cf3864cc563cb4b4ae.jpg', '2022-09-29 16:54:20', 'jovenes'),
 	(4, 'hombre cae al piso', '2', '', 'quien sabe', 'img_721c1d46eeff581629fbcb49577898bb.jpg', '2022-09-29 17:08:29', 'hombre-cae-al-piso'),
-	(5, '123', '2', '', 'asdas', 'portada_noticia.png', '2022-10-01 18:47:12', '123'),
-	(6, '1234', '2', '', 'asdas', 'img_fb905afe8fa36e2cfc804cae57a6f290.jpg', '2022-10-01 18:47:25', '1234');
+	(6, '1234', '2', '', 'asdas', 'img_fb905afe8fa36e2cfc804cae57a6f290.jpg', '2022-10-01 18:47:25', '1234'),
+	(12345665, 'rapto', '2', '', 'violacion de jovenes amigos de Diana', 'img_759fbcab4132cc401bfd574c48b551d0.jpg', '2022-10-02 00:13:56', 'rapto');
 
 -- Volcando estructura para tabla springfield.perfiles
 CREATE TABLE IF NOT EXISTS `perfiles` (
@@ -91,18 +91,18 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcando datos para la tabla springfield.usuarios: 12 rows
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `password`, `email`, `estado_usuario`, `rolid`, `imagen_usuario`, `id_pregunta`, `respuesta`) VALUES
-	(1, '   José Daniel', '   Grijalba', '$2y$10$cpogeAdHRyRBkotAeQ3nS.tck5whOGT0VAgs6CcPda3/iN.k44qIS', 'jose.jdgo97@gmail.com', 'A', 1, 'imagen-jose-1.jpg', 1, NULL),
+	(1, 'José Daniel', 'Grijalba', '$2y$10$cpogeAdHRyRBkotAeQ3nS.tck5whOGT0VAgs6CcPda3/iN.k44qIS', 'jose.jdgo97@gmail.com', 'A', 1, 'imagen-jose-1.jpg', 1, NULL),
 	(2, 'Juan David', 'Grijalba', '$2y$10$An1ghzpGGYth9vnvA6CHveNqNWNqLtBDzMv.QOLhaIZkpeZsYR6HC', 'juandgo1997@gmail.com', 'A', 2, '', NULL, NULL),
-	(4, '    Diana', '    Aristizabal', '$2y$10$TNQULbSAcW1Jojir7xbW/OKwAPUxAd3tE3Q.ePTsEzi.5qYFk2NxC', 'dianaaristizabal@gmail.com', 'A', 2, 'diana-diana-4.png', NULL, NULL),
+	(4, '    Diana', '    Aristizabal', '$2y$10$TNQULbSAcW1Jojir7xbW/OKwAPUxAd3tE3Q.ePTsEzi.5qYFk2NxC', 'dianaaristizabal@gmail.com', 'A', 1, 'diana-diana-4.png', NULL, NULL),
 	(5, 'mario', 'hernandez', '$2y$10$Bjt2/1DXCYOQ9cWVvbJRnOuZ5bbFCjSUiZBFqDzgLJTMiJNMY8yAm', 'mario@gmail.com', 'A', 2, '2-16.jpg', NULL, NULL),
-	(7, 'Camilo', 'Delgado', '$2y$10$dmDf1V0Ib2b2bw1g7R3QtuGHnOEBQx14RkDS3bXHUy6tkJPDDGBr6', 'camilo@mail.com', 'A', 2, '6-89.jpg', NULL, NULL),
+	(7, 'Camilo', 'Delgado', '$2y$10$dmDf1V0Ib2b2bw1g7R3QtuGHnOEBQx14RkDS3bXHUy6tkJPDDGBr6', 'camilo@mail.com', 'A', 3, '6-89.jpg', NULL, NULL),
 	(8, 'luis', 'garces', '$2y$10$mGIpInBVNSK3jeuSW23b3.iJuPvpRt259TWLKZYTKQ/lYKozA9/Ty', 'luis@mail.com', 'A', 2, '1-1-17.jpg', NULL, NULL),
-	(9, 'arley', 'd', '$2y$10$/AWJxM/m6Z6cm1YaUAvtJ.IRimLpiDUm.eMjrriPXtdwvHxJUG1BG', 'arley@gmail.com', 'A', 2, '2-32.jpg', NULL, NULL),
-	(10, 'pablo', 'neruda', '$2y$10$gDtToYDxzH3HlnIH3iVRzefBnKoFCO8Ag.C4Ffx4xLjNUeAslbc3i', 'pablo@gmai.com', 'A', 2, '', 3, NULL),
+	(9, 'arley', 'd', '$2y$10$/AWJxM/m6Z6cm1YaUAvtJ.IRimLpiDUm.eMjrriPXtdwvHxJUG1BG', 'arley@gmail.com', 'A', 3, '2-32.jpg', NULL, NULL),
+	(10, 'pablo', 'neruda', '$2y$10$gDtToYDxzH3HlnIH3iVRzefBnKoFCO8Ag.C4Ffx4xLjNUeAslbc3i', 'pablo@gmai.com', 'A', 3, '', 3, NULL),
 	(11, 'andres', 'perez', '$2y$10$5UpZfl5EtSsYPqCkf.0s5OhyfgmUTFbiZpCZ/UbCoZFL2Kp4T20mC', 'perez@14perez.com', 'A', 2, '', 2, NULL),
-	(12, 'camilo', 'garzon', '$2y$10$.DgeiyX3xksaR.4e2uVPZueO9K0I9Wv0AZQhYlJdrcfPiL0cVocta', 'camilo@14perez.com', 'A', 2, '', 1, 'lucas'),
+	(12, 'camilo', 'garzon', '$2y$10$.DgeiyX3xksaR.4e2uVPZueO9K0I9Wv0AZQhYlJdrcfPiL0cVocta', 'camilo@14perez.com', 'A', 1, '', 1, 'lucas'),
 	(13, 'pablo', 'picasso', '$2y$10$uhooSh5.jFGg/ttO4PJwIu.Yh00TC.wAOJ.DN7T1W3CIXMT11wRj2', 'pablo@mail.com', 'A', 2, '', 1, 'lucas'),
-	(14, 'naruto', 'uzumaki', '$2y$10$P3nIqGFV4u1CmRFejHn9/.OVRFkr6vOztjkSnL5wuJKNnLJrwF.jS', 'naruto@mail.com', 'A', 2, 'img_721c1d46eeff581629fbcb49577898bb-55.jpg', 1, 'lucas');
+	(14, 'naruto', 'uzumaki', '$2y$10$P3nIqGFV4u1CmRFejHn9/.OVRFkr6vOztjkSnL5wuJKNnLJrwF.jS', 'naruto@mail.com', 'A', 2, 'naruto-14.jpg', 1, 'lucas');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;

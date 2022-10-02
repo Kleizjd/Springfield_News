@@ -121,23 +121,3 @@
         </div>
     </div>
 </div>
-<!-- Modal BUSCAR -->
-<!-- <div class="modal fade" id="modalSearchProduct">
-        <div class="modal-dialog modal-lg" role="document" style="max-width: 80%;">
-            <div class="modal-content">
-
-                <div class="text-center modal-header">
-                    <h3 class="w-100 modal-title">Búsqueda de Usuarios</h3>
-                    <button type="button" class="close" data-dismiss="modal" title="Cerrar">
-                        <i class="fa fa-window-close fa-2x text-danger"></i>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-
-                </div>
-
-            </div>
-        </div>
-    </div> -->
-<!--  -->

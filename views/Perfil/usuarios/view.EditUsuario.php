@@ -25,18 +25,6 @@
                 <div class="col-md-5 align-self-center">
                     <h4 class="text-themecolor">Editar Usuario</h4>
                 </div>
-                <!-- <div class="col-md-7 text-right">
-                    <div class="d-flex justify-content-end">
-
-                        <ol class="breadcrumb">
-
-                            <li class="breadcrumb-item"><a id="ajustes">Perfil</a></li>
-                            <li class="breadcrumb-item" id="verUsuario">usuarios</li>
-                            <li class="breadcrumb-item active">Editar Usuario</li>
-                        </ol>
-
-                    </div>
-                </div> -->
             </div>
         </div>
         <div class="card-body">
