@@ -7,27 +7,23 @@
 	<div class="card-body">
 		<div class="container-fluid">
 			<div class="row" id="latest_new">
-				<?php $count = 5; $i=0; foreach ($listNoticia as $list) : ?>
-				<?php  if( $i == $count) { echo '</div><div class="row">'; $count = $count + 5;}  $i++;?>
-					
+				<?php $count = 5; $i = 0; foreach ($listNoticia as $list) : ?>
+					<?php if ($i == $count) {echo '</div><div class="row">';$count = $count + 5;} $i++; ?>
 					<div class="col-sm-2 mx-auto">
 						<form name="formNoticia">
 							<div class="card" style="height: 10rem;">
 								<img style="height: 5rem;" src="../../public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
 								<div class="card-body">
-								<h5 class="card-title"><?= $list['titulo']; ?></h5>
+									<h5 class="card-title"><?= $list['titulo']; ?></h5>
 
 								</div>
 							</div>
+							<input type="hidden" name="verNorticia" class="numeroCantidadProducto" value="<?= $list['id']; ?>" ReadOnly>
 							<div class="row pb-3">
 								<div class="col-sm-12">
-									<button type="button" class="btn btn-primary " data-toggle="modal" id="verN" title="Ver" data-target="#modalVerNoticia" href="javascript:void(0)">Ver Noticia</button>
+									<a type="button" class="btn btn-primary " data-toggle="modal" id="verN" title="Ver" onclick="openNoticia(<?= $list['id']; ?>)">Ver Noticia</a>
 								</div>
 							</div>
-							<!-- <input type="hidden" id="verNorticia" name="verNorticia" class="numeroCantidadProducto" value="<?= $list['id']; ?>" ReadOnly>
-							<a onclick="openNoticia(this)" class="btn btn-primary" data-target="#modalVerNoticia">Ver Noticia</a>
-							
-							 -->
 						</form>
 					</div>
 				<?php endforeach; ?>
@@ -38,12 +34,7 @@
 
 
 <script>
-	// 	/****Abrir MODAL BUSCAR VerNoticia**
-	$(function openNoticia(element) {
-		$(document).on("click", "#verN", function () {
-			var form = element.parentNode;
-
-
+	function openNoticia(element) {
 		$.ajax({
 			url: '../../app/lib/ajax.php',
 			method: "post",
@@ -52,43 +43,16 @@
 				modulo: "noticia",
 				controlador: "noticia",
 				funcion: "openNoticia",
-				id: form.verNorticia.value,
+				id: element,
 			},
 		}).done((res) => {
-			$('#successForm').modal('show');
-			// $("#modalVerNoticia .modal-body").html(res);
-			// $("#modalVerNoticia").modal({
-			// 	backdrop: "static",
-			// 	keyboard: false
-			// });
+			if (res.tipoRespuesta == true) {
+				$("#titulo_notice").text(res.titulo);
+				$("#descripcion").text(res.descripcion);
+				$("#categoria_notice").text(res.categoria);
+				$("#img_notice").text(res.portada);
+				$('#modalVerNoticia').modal('show');
+			}
 		});
-		})
-		});
-		
-
-
-	// }
-
-
-	// $(document).ready(function() {
-	// 	// 	//________________________IMAGEN USUARIO DE PERFIL_______________________________
-	// 	$(function loadNoticias() {
-	// 		$.ajax({
-	// 			url: '../../app/lib/ajax.php',
-	// 			method: "post",
-	// 			dataType: "JSON",
-	// 			data: {
-	// 				modulo: "noticia",
-	// 				controlador: "noticia",
-	// 				funcion: "loadNoticias",
-	// 			},
-	// 		}).done((res) => {
-	// 			// alert(res)
-	// 			$('#latest_new').html(res);
-	// 		});
-	// 	});
-
-	// });
-
-	//_________________________________________FIN______________________________________________
+	}
 </script>

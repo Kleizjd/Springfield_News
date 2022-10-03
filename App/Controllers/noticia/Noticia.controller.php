@@ -9,16 +9,13 @@ class Noticia extends Core
     public function noticia()
     {
         $data['page_functions_js'] = "functions_noticia.js";
-
         $sqlNoticia = $this->select_all("SELECT * FROM categorias");
-
         include_once "../../views/noticia/Noticia.php";
     }
 
     public function visualizarNoticia()
     {
         extract($_POST);
-        // var_dump($_POST);
         $sqlNoticia = $this->select_all("SELECT * FROM noticias WHERE id = $idNoticia");
         include_once "../../views/noticia/view.verNoticia.php";
     }
@@ -26,7 +23,6 @@ class Noticia extends Core
     public function viewEditarNoticia()
     {
         extract($_POST);
-        // var_dump($_POST);
         $sqlNoticia = $this->select_all("SELECT * FROM noticias WHERE id = $codigo");
         $noticias_categoria = $this->select_all("SELECT id, nombre FROM categorias");
         include_once "../../views/noticia/view.EditNoticia.php";
@@ -72,7 +68,6 @@ class Noticia extends Core
             );
         }
         $table = array("data" => $datos);
-        // var_dump($table);
         echo json_encode($table);
     }
 
@@ -97,7 +92,6 @@ class Noticia extends Core
                 $ruta = str_replace(" ", "-", $ruta);
 
                 $foto            = $_FILES['foto'];
-                // var_dump($foto);
                 $nombre_foto     = $foto['name'];
                 $type            = $foto['type'];
                 $url_temp        = $foto['tmp_name'];
@@ -111,7 +105,6 @@ class Noticia extends Core
 
                     $sql = "SELECT * FROM noticias WHERE titulo = '{$strTitulo}' ";
                     $request = $this->select_all($sql);
-                    // echo "hola" . " Crear";
 
                     if (empty($request)) {
                         $query_insert  = "INSERT INTO noticias(titulo, categoria, descripcion, ruta, portada) VALUES(?,?,?,?,?)";
@@ -124,7 +117,6 @@ class Noticia extends Core
                     $option = 1;
                 } else {
                     //Actualizar
-                    // echo "hola"."  Actualizar";
 
                     if ($nombre_foto == '') {
                         if ($_POST['foto_actual'] != 'portada_noticia.png' && $_POST['foto_remove'] == 0) {
@@ -145,7 +137,6 @@ class Noticia extends Core
                 }
                 if ($request_insert > 0) {
                     if ($option == 1) {
-                        // echo "hola"." Crear arrResponse";
 
                         $arrResponse = array('status' => true, 'msg' => 'Noticia Ingresado exitosamente');
                         if ($nombre_foto != '') {
@@ -175,7 +166,6 @@ class Noticia extends Core
     public function editarNoticia()
     {
         extract($_POST);
-        // var_dump($_POST);
         $respuesta = array();
 
         $sql = "UPDATE noticias SET titulo ='$titulo',  categoria = '$categoria', descripcion = '$description' WHERE id='$code_noticia'";
@@ -203,21 +193,25 @@ class Noticia extends Core
         echo json_encode($respuesta);
     }
     public function openNoticia()
-    {        extract($_POST);
-        var_dump($_POST);
-        $sql = "SELECT *  FROM noticias WHERE id = '$id'";       
+    {   extract($_POST);
+        $sql = "SELECT *  FROM noticias n, categorias c WHERE n.id = '$id' and c.id = n.categoria";       
         
-        $sqlNoticia =  $this->select_all($sql);
+        $sqlNoticia =  $this->select($sql);
 
-        // $usua_perfil = $_SESSION["usua_perfil"];
-        // $sqlTipo = "SELECT Codigo, Descripcion FROM tipo_entidades_seg_social ";
-        // $Tipos = $ObjCajaCompensacion->Consultar($sqlTipo);
+        if ($sqlNoticia) {
+            $respuesta["tipoRespuesta"] = true;
+            $respuesta["titulo"] = $sqlNoticia["titulo"];
+            $respuesta["descripcion"] =  $sqlNoticia["descripcion"];
+            $respuesta["categoria"] =  $sqlNoticia["nombre"];
+            $respuesta["portada"] =  $sqlNoticia["portada"];
+        }
+
+        echo json_encode($respuesta);
     }
     public function loadNoticias()
     {
 
         extract($_POST);
-        // var_dump($_POST);
         $sql = "SELECT *  FROM noticias ";
 
         $listNoticia =  $this->select_all($sql);
