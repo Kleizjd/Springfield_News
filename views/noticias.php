@@ -21,7 +21,7 @@
 							</div>
 							<div class="row pb-3">
 								<div class="col-sm-12">
-									<button type="button" class="btn btn-primary " data-toggle="modal" title="Ver" data-target="#modalVerNoticia">Ver Noticia</button>
+									<button type="button" class="btn btn-primary " data-toggle="modal" id="verN" title="Ver" data-target="#modalVerNoticia" href="javascript:void(0)">Ver Noticia</button>
 								</div>
 							</div>
 							<!-- <input type="hidden" id="verNorticia" name="verNorticia" class="numeroCantidadProducto" value="<?= $list['id']; ?>" ReadOnly>
@@ -39,27 +39,32 @@
 
 <script>
 	// 	/****Abrir MODAL BUSCAR VerNoticia**
-	// function openNoticia(element) {
-	// 	var form = element.parentNode;
+	$(function openNoticia(element) {
+		$(document).on("click", "#verN", function () {
+			var form = element.parentNode;
 
 
-	// 	$.ajax({
-	// 		url: '../../app/lib/ajax.php',
-	// 		method: "post",
-	// 		dataType: "JSON",
-	// 		data: {
-	// 			modulo: "noticia",
-	// 			controlador: "noticia",
-	// 			funcion: "openNoticia",
-	// 			id: form.verNorticia.value,
-	// 		},
-	// 	}).done((res) => {
-	// 		// $("#modalVerNoticia .modal-body").html(res);
-	// 		// $("#modalVerNoticia").modal({
-	// 		// 	backdrop: "static",
-	// 		// 	keyboard: false
-	// 		// });
-	// 	});
+		$.ajax({
+			url: '../../app/lib/ajax.php',
+			method: "post",
+			dataType: "JSON",
+			data: {
+				modulo: "noticia",
+				controlador: "noticia",
+				funcion: "openNoticia",
+				id: form.verNorticia.value,
+			},
+		}).done((res) => {
+			$('#successForm').modal('show');
+			// $("#modalVerNoticia .modal-body").html(res);
+			// $("#modalVerNoticia").modal({
+			// 	backdrop: "static",
+			// 	keyboard: false
+			// });
+		});
+		})
+		});
+		
 
 
 	// }

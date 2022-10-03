@@ -204,7 +204,7 @@ class Noticia extends Core
     }
     public function openNoticia()
     {        extract($_POST);
-        // var_dump($_POST);
+        var_dump($_POST);
         $sql = "SELECT *  FROM noticias WHERE id = '$id'";       
         
         $sqlNoticia =  $this->select_all($sql);
