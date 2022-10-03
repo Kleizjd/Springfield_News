@@ -202,28 +202,46 @@ class Noticia extends Core
 
         echo json_encode($respuesta);
     }
+    public function openNoticia()
+    {        extract($_POST);
+        // var_dump($_POST);
+        $sql = "SELECT *  FROM noticias WHERE id = '$id'";       
+        
+        $sqlNoticia =  $this->select_all($sql);
+
+        // $usua_perfil = $_SESSION["usua_perfil"];
+        // $sqlTipo = "SELECT Codigo, Descripcion FROM tipo_entidades_seg_social ";
+        // $Tipos = $ObjCajaCompensacion->Consultar($sqlTipo);
+    }
     public function loadNoticias()
     {
 
+        extract($_POST);
+        // var_dump($_POST);
         $sql = "SELECT *  FROM noticias ";
 
         $listNoticia =  $this->select_all($sql);
+        include_once "../../views/noticias.php";
 
-        $cardHtml = '';
-        foreach ($listNoticia as $list) {
-            $cardHtml .= '<div class="col-sm">';
-            $cardHtml .= '<div class="card" style="height: 20rem;">';
-            $cardHtml .= '<img style="height: 7rem;" src="../../public/img/uploads/'.$list['portada'].'" class="card-img-top" alt="...">';
-            $cardHtml .= '<div class="card-body"></div>';
-            $cardHtml .= '<h5 class="card-title" >'.$list['titulo'].'</h5> ';
-            $cardHtml .= '<p class="card-text"></p>';
-            $cardHtml .= '<a id = "'.$list['id'].'" class="btn btn-primary">Ver Noticia</a>';
-            $cardHtml .= '</div>';
-            $cardHtml .= '</div>';
-            $cardHtml .= '</div>';
-        }
+
+        // $cardHtml = '';
+        // foreach ($listNoticia as $list) {
+        //     $cardHtml .= '<div class="col-sm">';
+        //     $cardHtml .= '<from name="formNoticia">';
+        //     $cardHtml .= '<div class="card" style="height: 20rem;">';
+        //     $cardHtml .= '<img style="height: 7rem;" src="../../public/img/uploads/'.$list['portada'].'" class="card-img-top" alt="...">';
+        //     $cardHtml .= '<div class="card-body"></div>';
+        //     $cardHtml .= '<h5 class="card-title" >'.$list['titulo'].'</h5> ';
+        //     $cardHtml .= '<p class="card-text"></p>';
+        //     $cardHtml .= '<a id = "numero" value = "'.$list['id'].'"></a>';
+        //     $cardHtml .= '<a onclick="openNoticia(this)"><i class="fas fa-angle-up"></i></a>';
+        //     $cardHtml .= '<button type="submit" class="btn btn-primary" id="btnNoticia" onclick="openNoticia(this)">Ver Noticia</button>';
+        //     $cardHtml .= '</div>';
+        //     $cardHtml .= '</form>';
+        //     $cardHtml .= '</div>';
+        // }
         // $table = array("data" => $datos);
         // var_dump($table);
-        echo json_encode($cardHtml);
+        // echo json_encode($cardHtml);
     }
 }

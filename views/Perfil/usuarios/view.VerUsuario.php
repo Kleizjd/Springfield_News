@@ -17,7 +17,7 @@
                         <a class="nav-link" data-toggle="tab" href="#manageUsers" role="tab">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#verUserForm" role="tab">Editar usuario</a>
+                        <a class="nav-link active" data-toggle="tab" href="#verUserForm" role="tab">Ver usuario</a>
                     </li>
                 <?php endif; ?>
             </ul>
@@ -26,87 +26,67 @@
                     <h4 class="text-themecolor">Visualizando Usuario</h4>
 
                 </div>
-                <!-- <div class="col-md-3 text-right">
-                <button type="button" class="btn btn-primary" data-toggle="modal" title="Buscar" data-target="#modalUsuario"><i class="fa fa-search"></i>Nueva busqueda</button>
-            </div> -->
-
-                <!-- <div class="col-md-4 text-right">
-                <div class="d-flex justify-content-end">
-                    
-                    <ol class="breadcrumb">
-                        
-                        <li class="breadcrumb-item"><a id="ajustes">Perfil</a></li>
-                        <li class="breadcrumb-item" id="verUsuario">Usuario</li>
-                        <li class="breadcrumb-item active">Ver Usuario</li>
-                    </ol>
-            
-                </div>
-            </div> -->
-
             </div>
             <div class="card-body">
                 <div class="card-body">
-                    <div class="card-block">
+                    
                         <div class="tab-content">
                             <div class="tab-pane active" id="verUserForm">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-sm col-lg">
-                                            <form action="" id="frm_Noticia" method="POST" autocomplete="off">
-                                                <?php foreach ($sqlUsuario as $usuario) {
-                                                } ?>
-                                                <div class="container-fluid">
-                                                    <div class="row">
-                                                        <div class="col-sm">
-                                                            <div class="row pb-3">
 
-                                                                <div class="col-sm-1">
-
-
-                                                                </div>
+                                <form action="" id="frm_Noticia" method="POST" autocomplete="off">
+                                    <?php foreach ($sqlUsuario as $usuario) {
+                                    } ?>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <!-- <div class="row pb-3">
 
                                                                 <div class="col-sm-3 offset-1">
                                                                     <h4><span class="badge badge-success" id="statUsuario"><?= $usuario["estado_usuario"]; ?></span></h4>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
 
-                                                            <div class="row pb-3">
-                                                                <div class="col-sm-2">
-                                                                    <label for="code">Codigo del Usuario</label>
-                                                                </div>
-                                                                <div class="col-sm">
-                                                                    <input type="text" class="form-control" value="<?= $usuario["id_usuario"]; ?>" readonly>
-                                                                </div>
-                                                                <div class="col-sm">
-                                                                    <label for="usuario">Usuario</label>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <input type="text" class="form-control" id="email_usuario" value="<?= $usuario["email"]; ?>" readonly>
-                                                                </div>
-                                                                <div class="col-sm">
-                                                                    <label for="rol">Rol</label>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" class="form-control" id="rol" value="<?php
-                                                                                                                            echo (($usuario["rolid"] == '2') ?   'Columnista' : 'Lector'); ?>" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-
-                                                                <div class="col-sm-3">
-                                                                    <label for="nombre_completo">Nombre Completo</label>
-                                                                </div>
-                                                                <div class="col-sm">
-                                                                    <input type="text" class="form-control" id="nombre_completo" readonly value="<?= $usuario["nombre_completo"]; ?>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                <div class="row pb-3">
+                                                    <div class="col-sm-1">
+                                                        <label for="code">Codigo</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" value="<?= $usuario["id_usuario"]; ?>" readonly>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <label for="usuario">Usuario</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" id="email_usuario" value="<?= $usuario["email"]; ?>" readonly>
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        <label for="rol">Rol</label>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="rol" value="<?php echo (($usuario["rolid"] == '2') ?   'Columnista' : 'Lector'); ?>" readonly>
                                                     </div>
                                                 </div>
-                                            </form>
+                                                <div class="row">
+
+                                                    <div class="col-sm-3">
+                                                        <label for="nombre_completo">Nombre Completo</label>
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        <input type="text" class="form-control" id="nombre_completo" readonly value="<?= $usuario["nombre_completo"]; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <?php if (!empty($usuario["imagen_usuario"])): ?>
+                                                    <img class="" src="<?= $ruta . $usuario["imagen_usuario"]; ?>" alt="<?= preg_replace("/\.[^.]+$/", "", $usuario["imagen_usuario"]); ?>" width  = "178" height = "178" >
+                                                <?php else : ?>
+                                                    <img class="img__img" src="../../public/img/svg/upload-user.svg" width  = "178" height = "178" />
+                                                <?php endif ?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+
                             </div>
                             <div class="tab-pane" id="manageUsers">
                                 <div class="container-fluid">
@@ -115,7 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

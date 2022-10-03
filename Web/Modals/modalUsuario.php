@@ -55,7 +55,7 @@
                                                     <div class="col-sm-3">
                                                         <select name="rol" id="rol" class="form-control">
                                                             <option value="" >Seleccione...</option>
-                                                            <option value="1">Administrador</option>
+                                                            <!-- <option value="1">Administrador</option> -->
                                                             <option value="2">Lector</option>
                                                             <option value="3">Columnista</option>
                                                         </select>

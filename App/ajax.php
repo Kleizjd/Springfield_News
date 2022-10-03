@@ -1,3 +1,4 @@
+<script type="text/javascript" src="../../public/js/global.js"></script>
 <?php
 
 extract($_POST);
@@ -41,6 +42,11 @@ if (!empty($_POST)) {
     if(file_exists("views/home/main.php")){
         include_once("views/home/main.php");
     } else{
-        include_once "../../views/noticias.php";
+        // include_once "../../views/noticias.php";
+       echo "<script>
+       var menu = 'noticia';
+       llamarVista(menu, menu, 'loadNoticias');
+
+        </script>";
     }
 }

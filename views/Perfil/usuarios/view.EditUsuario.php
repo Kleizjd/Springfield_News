@@ -50,15 +50,15 @@
                                                                 <button type="button" class="btn btn-danger" id="deleteProduct" title="Eliminar Noticia"><i class="fas fa-trash-alt"></i> </button>
 
                                                             </div>
-                                                            <div class="col-sm-3 offset-1">
+                                                            <!-- <div class="col-sm-3 offset-1">
                                                                 <h4><span class="badge badge-success" id="statProduct"><?= $usuario["estado_usuario"]; ?></span></h4>
-                                                            </div>
+                                                            </div> -->
 
                                                         </div>
 
                                                         <div class="row pb-3">
                                                             <div class="col-sm-1">
-                                                                <label for="code">ID</label>
+                                                                <label for="code">Codigo</label>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <input type="text" class="form-control" id="code_usuario" name="code_usuario" value="<?= $usuario["id_usuario"]; ?>" readonly>
@@ -76,13 +76,16 @@
                                                                 <select class="form-control" id="rol" name="rol">
                                                                     <!-- <option name="" id="columnista" value="3">Columnista</option>
                                                                     <option name="" id="lector" value="4">Lector</option> -->
-                                                                    <?php foreach ($sqlPerfil as $rol) : ?>
+                                                                    <?php $i=0; foreach ($sqlPerfil as $rol) : ?>
+
+                                                                    <?php if ($i > 0) : ?>
                                                                         <?php if ($rol["id"] == $usuario["rolid"]) : ?>
 
                                                                             <option value="<?= $rol["id"]; ?>" selected><?= $rol["nombre"]; ?></option>
                                                                         <?php else : ?>
                                                                             <option value="<?= $rol["id"]; ?>"><?= $rol["nombre"]; ?></option>
                                                                         <?php endif; ?>
+                                                                        <?php endif; $i++;?>
                                                                     <?php endforeach; ?>
                                                                 </select>
                                                             </div>

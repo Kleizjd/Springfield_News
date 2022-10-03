@@ -8,7 +8,9 @@ class Usuario extends Core{
 
     public function visualizarUsuario(){
         extract($_POST);
-        $sqlUsuario = $this->select_all("SELECT CONCAT(nombre, ' ', apellido) AS nombre_completo, email, rolid, id_usuario, estado_usuario FROM usuarios WHERE id_usuario = $id_usuario");
+        $ruta = "../../views/perfil/Files/";
+
+        $sqlUsuario = $this->select_all("SELECT CONCAT(nombre, ' ', apellido) AS nombre_completo, email, rolid, id_usuario, estado_usuario, imagen_usuario FROM usuarios WHERE id_usuario = $id_usuario");
         include_once "../../views/perfil/usuarios/view.VerUsuario.php";
     }
 
@@ -30,8 +32,14 @@ class Usuario extends Core{
  
         $sql ="SELECT id_usuario, CONCAT(u.nombre, ' ', apellido) AS nombre_completo, email, rolid, estado_usuario, p.nombre as perfil FROM usuarios u, perfiles p WHERE rolid = p.id";
         $listUsuario =  $this->select_all($sql);
-
+        $administrador = "";
         foreach ($listUsuario as $list) {
+            
+            if($list["rolid"]==1){
+                 $administrador = '<i class="fa fa-user-circle"></i>';
+            } else {
+                $administrador = '<button type="button" class="text-white btn btn-warning" id="viewEditarUsuario"><i class="fa fa-edit"></i></button>';
+            }
             array_push($datos,
             array(
                 "id_usuario" => $list["id_usuario"],
@@ -40,7 +48,7 @@ class Usuario extends Core{
                 "estado" => $list["estado_usuario"],
                 "rol" => $list["perfil"],
                 "btnVer" => '<button type="button" class="text-white btn btn-info" id="verUsuarioVista"><i class="fa fa-eye"></i></button>',
-                "btnEditar" => '<button type="button" class="text-white btn btn-warning" id="viewEditarUsuario"><i class="fa fa-edit"></i></button>'
+                "btnEditar" => $administrador,
 
             ));
         }
