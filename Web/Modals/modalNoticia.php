@@ -22,50 +22,34 @@
             <div class="card-body">
                 <form method="POST" id="frm_SearchNoticia" action="" autocomplete="off">
                     <div class="container-fluid">
-                        <div class="row">
-                            <label class="font-weight-bold">Digite los primeros caracteres</label>
-                        </div>
-                        <div class="align-items-center pb-4 border row">
-                            <div class="col-8">
-                                <div class="row">
-                                    <div class="p-1 col-4">
-                                        <label class="font-weight-bold" for="idNoticia">Id</label>
 
-                                        <input type="text" name="idNoticia" id="idNoticia" class="form-control">
-                                    </div>
-                                    <div class="p-1 col-4">
-                                        <label class="font-weight-bold" for="noticia">Noticia</label>
+                        <div class="align-items-center pb-4  row">
+                           
+                                <div class="row ">
+                                    <div class="col-3">
+                                        <label class="font-weight-bold" for="categoria_noticia">Categoria</label>
 
-                                        <input type="text" name="noticia" id="noticia" class="form-control">
                                     </div>
-                                    <div class="p-1 col-4">
-                                        <label class="font-weight-bold" for="status">Estado</label>
-                                        <select name="status" id="status" class="form-control">
+                                    <div class="p-1 col-7">
+                                        <select name="categoria_noticia" id="categoria_noticia" class="form-control">
                                             <option value="">Seleccione ...</option>
+                                            <option value="1">Moda y Farandula</option>
+                                            <option value="2">Politica</option>
+                                            <option value="3">Tecnologia</option>
+                                            <option value="4">Deportes</option>
                                             <option value="T">Todos</option>
-                                            <option value="A">Actual</option>
                                         </select>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="col-4">
-                                <div class="row">
-                                    <div class="col-5 offset-1">
-                                        <button type="submit" class="px-3 py-2 btn btn-primary" id="btnSearchProduct" title="Buscar">
+                                    <div class="col-2 ">
+                                        <button type="submit" class="px-3 py-2 btn btn-primary" title="Buscar">
                                             <i class="fa fa-search"></i>
                                         </button>
-                                        <button type="reset" class="px-3 py-2 btn btn-primary" id="btnNewSearch" title="Nueva búsqueda">
-                                            <i class="fa fa-file"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="col-5 offset-1">
-                                            <h4><span class="badge badge-success" id="statusProduct"></span></h4>
-                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
+                            
+
+
 
                         </div>
 
@@ -101,87 +85,92 @@
 
 <!--  -->
 <script>
-$(document).ready(function () {
-	  /***************************LIST PRODUCT**************************/
-	  $(function listNoticia() {
-        $(document).on("submit", "#frm_SearchNoticia", function (event) {
-			 event.preventDefault();
-        if ($("#codes").val()||$("#noticia").val()||$("#status").val()) {
-			$("#containerModalSearchProduct").show();
-				var status = $('select[name="status"] option:selected').text();
-				$("#statusProduct").text(status);
+    $(document).ready(function() {
+        /***************************LIST PRODUCT**************************/
+        $(function listNoticia() {
+            $(document).on("submit", "#frm_SearchNoticia", function(event) {
+                event.preventDefault();
+                if ($("#categoria_noticia").val()) {
+                    $("#containerModalSearchProduct").show();
+                    var status = $('select[name="status"] option:selected').text();
+                    $("#statusProduct").text(status);
 
 
-			var tableModalSearchNoticia = $("#tableModalSearchNoticia").DataTable({
-					
-					dom: "Bfrtip",
-					buttons: [{
-						extend: "excelHtml5",
-						text: '<i class="fa fa-file-excel"></i>',
-						titleAttr: "Exportar a Excel",
-						className: "bg-success",
-						filename: "Noticia",
-						sheetName: "Noticia"
-					}],
-					language: {
-						"url": "../../vendor/datatable/language/datatablesSpanish.json"
-					},
-					destroy: true,
-					pageLength: 10,
-					autoWidth: false,
-					lengthChange: false,
-					columnDefs: [{
-						"className": "text-center",
-						"targets": "_all"
-                    }],
-                    drawCallback: () => {
-						tableModalSearchNoticia.columns.adjust();
-					},
-					ajax: {
-						url: "../../App/lib/ajax.php",
-						method: $(this).prop("method"),
-						data: {
-							modulo: "noticia",
-							controlador: "noticia",
-							funcion: "listNoticia",
-                            idNoticia: $("#idNoticia").val(),
-                            noticia: $("#noticia").val(),
-                            estado: $("#status").val()
-						},
-					},
-					columns: [
-						{data: "id"},
-						{data: "titulo"},
-						{data: "categoria"},
-						{data: "descripcion"},
-						{data: "btnVer"},
-						{data: "btnEditar"}
-					],
-				});
+                    var tableModalSearchNoticia = $("#tableModalSearchNoticia").DataTable({
 
-          
-			} else {
-				swal({
-					type: "warning",
-					title: "Seleccione un criterio de búsqueda"
-				});
-			}
-		});
-	});
-	$(function viewWatchProduct() {
-		$(document).on("click", "#verNoticiaVista", function () {
-			let data = $("#tableModalSearchNoticia").DataTable().row($(this).parents("tr")).data();
-			llamarVista("noticia", "noticia", "visualizarNoticia", {idNoticia: data.id}, true);});});
+                        dom: "Bfrtip",
+                        buttons: [{
+                            extend: "excelHtml5",
+                            text: '<i class="fa fa-file-excel"></i>',
+                            titleAttr: "Exportar a Excel",
+                            className: "bg-success",
+                            filename: "Noticia",
+                            sheetName: "Noticia"
+                        }],
+                        language: {
+                            "url": "../../vendor/datatable/language/datatablesSpanish.json"
+                        },
+                        destroy: true,
+                        pageLength: 10,
+                        autoWidth: false,
+                        lengthChange: false,
+                        columnDefs: [{
+                            "className": "text-center",
+                            "targets": "_all"
+                        }],
+                        drawCallback: () => {
+                            tableModalSearchNoticia.columns.adjust();
+                        },
+                        ajax: {
+                            url: "../../App/lib/ajax.php",
+                            method: $(this).prop("method"),
+                            data: {
+                                modulo: "noticia",
+                                controlador: "noticia",
+                                funcion: "listNoticia",
+                                idNoticia: $("#idNoticia").val(),
+                                noticia: $("#noticia").val(),
+                                categoria_notice: $("#categoria_noticia").val()
+                            },
+                        },
+                        columns: [{data: "id"},
+                            {data: "titulo" },
+                            {data: "categoria"},
+                            {data: "descripcion"},
+                            {data: "btnVer"},
+                            {data: "btnEditar"}
+                        ],
+                    });
 
-	$(function viewEditProduct() {
-		$(document).on("click", "#viewEditarNoticia", function () {
-			let data = $("#tableModalSearchNoticia").DataTable().row($(this).parents("tr")).data();
-			llamarVista("noticia", "noticia", "viewEditarNoticia", {codigo: data.id}, true);
-		});
-	});
-	
-});
- // REMPLAZA CARACTERES
+
+                } else {
+                    swal({
+                        type: "warning",
+                        title: "Seleccione una Categoria"
+                    });
+                }
+            });
+        });
+        $(function viewWatchProduct() {
+            $(document).on("click", "#verNoticiaVista", function() {
+                let data = $("#tableModalSearchNoticia").DataTable().row($(this).parents("tr")).data();
+                llamarVista("noticia", "noticia", "visualizarNoticia", {
+                    idNoticia: data.id
+                }, true);
+            });
+        });
+
+        $(function viewEditProduct() {
+            $(document).on("click", "#viewEditarNoticia", function() {
+                let data = $("#tableModalSearchNoticia").DataTable().row($(this).parents("tr")).data();
+                llamarVista("noticia", "noticia", "viewEditarNoticia", {
+                    codigo: data.id
+                }, true);
+            });
+        });
+
+    });
+    // REMPLAZA CARACTERES
     //          var done = res.replace(/[*+\-^${}()|[\]\\]/g,'');
     //         document.getElementById('cargarVista').innerHTML = "";
     //         $('#cargarVista').html(done); //_jQuery

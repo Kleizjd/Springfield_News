@@ -19,7 +19,10 @@ $(document).ready(function () {
 				processData: false,
 				contentType: false
 			}).done((res) => {
-                if (res.status == true) {  swal({ title: res.msg , type: 'success' });} else {  swal({ title: res.msg , type: 'error' });}
+                if (res.status == true) { 
+					document.getElementById("frm_Noticia").reset();
+					
+					swal({ title: res.msg , type: 'success' });} else {  swal({ title: res.msg , type: 'error' });}
 			});
 		});
 	});

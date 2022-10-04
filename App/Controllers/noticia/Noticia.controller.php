@@ -35,21 +35,15 @@ class Noticia extends Core
         $datos = array();
         $condicion = "";
 
-        if ($idNoticia != "") {
-            $condicion .= "AND id LIKE '$idNoticia%'";
-        }
+  
 
-        if ($noticia != "") {
-            $condicion .= "AND noticias LIKE '$noticia%'";
-        }
-
-        if ($estado != "") {
-            if ($estado == 'T') {
-                $estado = null;
+        if ($categoria_notice != "") {
+            if ($categoria_notice == 'T') {
+                $categoria_notice = null;
             }
         }
 
-        $sql = "SELECT id, titulo, categoria, descripcion  FROM noticias WHERE estado LIKE '%$estado%' $condicion";
+        $sql = "SELECT n.id, titulo, categoria, nombre, descripcion  FROM noticias n, categorias c WHERE c.id LIKE '%$categoria_notice%' $condicion";
 
         $listNoticia =  $this->select_all($sql);
 
@@ -59,7 +53,7 @@ class Noticia extends Core
                 array(
                     "id" => $list["id"],
                     "titulo" => $list["titulo"],
-                    "categoria" => $list["categoria"],
+                    "categoria" => $list["nombre"],
                     "descripcion" => $list["descripcion"],
                     "btnVer" => '<button type="button" class="text-white btn btn-info" id="verNoticiaVista"><i class="fa fa-eye"></i></button>',
                     "btnEditar" => '<button type="button" class="text-white btn btn-warning" id="viewEditarNoticia"><i class="fa fa-edit"></i></button>'

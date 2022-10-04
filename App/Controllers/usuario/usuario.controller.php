@@ -57,25 +57,43 @@ class Usuario extends Core{
     }
 
     public function crearUsuario() {
-       
-        
-    //     extract($_POST);
-    //     // var_dump($_POST);
-    //     $codigo_usuario = $_POST["codigo"];
-    //     $usuario = $_POST["usuario"];
-    //     $valor =  $_POST["valor"];
-    //     $cantidad =  $_POST["cantidad"];
-    //     $descripcion =  $_POST["descripcion"];
+        extract($_POST);
+        // var_dump($_POST);
+        // $email = $_POST['email'];
+        // $nombre = $_POST['nombre'];
+        // $apellido = $_POST['apellido'];
+        // $password = $_POST['password_user'];
+        // $password_verify = $_POST['password_verify'];
+        // $pregunta = $_POST['pregunta'];
+        // $respuesta = $_POST['respuesta'];
+        $estado = "'A'";
 
-    //    $sql= "INSERT INTO usuario (codigo, usuario) VALUES  (?,?)";	
+        if ($password_user === $password_verify) {
+            $sql = "SELECT id_usuario FROM usuarios WHERE email='$email'";
+            $sqlSelect = $this->select($sql);
+            if ($sqlSelect == 0) {
 
-    //    $arrData = array($codigo_usuario, $usuario);
-    //    $sql = $this->insert($sql, $arrData);
-    
-       
-    //    if ($sql) {  $respuesta["tipoRespuesta"] = true; } 
-    //     echo json_encode($respuesta);  
+                //Encriptar-----------------------------------------------------------------------
+                $passEncrypt = password_hash($password_user, PASSWORD_DEFAULT); //password_user encripted
+                //-------------------------------------------------------------------------------
+
+                $sql = "INSERT INTO usuarios(nombre, apellido, email, password, estado_usuario, rolid, id_pregunta, respuesta) VALUES (?,?,?,?,?,?,?,?)";
+
+                $arrData = array($nombre, $apellido, $email, $passEncrypt, 'A', '2', $pregunta, $respuesta);
+                $sql = $this->insert($sql, $arrData);
+
+                if ($sql != null) {
+                    $answer["tipoRespuesta"] = "success";
+                }
+            } else {
+                $answer['tipoRespuesta'] = "duplicate";
+            }
+        } else {
+            $answer['tipoRespuesta'] = "error";
+        }
+        echo json_encode($answer);
     }
+
     public function editarUsuario() {
         extract($_POST);
         // var_dump($_POST);
