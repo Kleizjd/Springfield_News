@@ -59,22 +59,22 @@ class Usuario extends Core{
     public function crearUsuario() {
        
         
-        extract($_POST);
-        // var_dump($_POST);
-        $codigo_usuario = $_POST["codigo"];
-        $usuario = $_POST["usuario"];
-        $valor =  $_POST["valor"];
-        $cantidad =  $_POST["cantidad"];
-        $descripcion =  $_POST["descripcion"];
+    //     extract($_POST);
+    //     // var_dump($_POST);
+    //     $codigo_usuario = $_POST["codigo"];
+    //     $usuario = $_POST["usuario"];
+    //     $valor =  $_POST["valor"];
+    //     $cantidad =  $_POST["cantidad"];
+    //     $descripcion =  $_POST["descripcion"];
 
-       $sql= "INSERT INTO usuario (codigo, usuario) VALUES  (?,?)";	
+    //    $sql= "INSERT INTO usuario (codigo, usuario) VALUES  (?,?)";	
 
-       $arrData = array($codigo_usuario, $usuario);
-       $sql = $this->insert($sql, $arrData);
+    //    $arrData = array($codigo_usuario, $usuario);
+    //    $sql = $this->insert($sql, $arrData);
     
        
-       if ($sql) {  $respuesta["tipoRespuesta"] = true; } 
-        echo json_encode($respuesta);  
+    //    if ($sql) {  $respuesta["tipoRespuesta"] = true; } 
+    //     echo json_encode($respuesta);  
     }
     public function editarUsuario() {
         extract($_POST);

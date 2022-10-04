@@ -194,17 +194,59 @@ class Noticia extends Core
     }
     public function openNoticia()
     {   extract($_POST);
-        $sql = "SELECT *  FROM noticias n, categorias c WHERE n.id = '$id' and c.id = n.categoria";       
-        
-        $sqlNoticia =  $this->select($sql);
+        // echo $id_Notice;
 
+        $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' and c.id = n.categoria";       
+        $sqlNoticia =  $this->select($sql);
+        $sqlgusta = "SELECT * FROM reaccion WHERE email = '$email' and id_noticia = '$id_Notice'";       
+        $sqlLike =  $this->select($sqlgusta);
+        $cantidad = "SELECT COUNT(id_noticia) as total FROM reaccion WHERE id_noticia = '$id_Notice'";
+        $sqlCantidad =  $this->select($cantidad);
+
+        // echo $sqlCantidad["cantidad"];
         if ($sqlNoticia) {
             $respuesta["tipoRespuesta"] = true;
             $respuesta["titulo"] = $sqlNoticia["titulo"];
             $respuesta["descripcion"] =  $sqlNoticia["descripcion"];
             $respuesta["categoria"] =  $sqlNoticia["nombre"];
             $respuesta["portada"] =  $sqlNoticia["portada"];
+            $respuesta["total"] =  $sqlCantidad["total"];
+            $respuesta["id_noticia"] =  $id_Notice;
+            $respuesta["cantidad"] =  $id_Notice;
+
+            if($sqlLike){
+                $respuesta["like"] =  true;
+                // echo $sqlLike["id_noticia"];
+                // echo  "true";
+            } else {
+                $respuesta["like"] =  false;
+                // echo  "false";
+
+            }
         }
+
+        echo json_encode($respuesta);
+    }
+    public function likeNoticia()
+    {   extract($_POST);
+    // dep($_POST);
+        $sql = "SELECT * FROM reaccion WHERE  email='$email' AND id_noticia = '$id_noticia'"; 
+        $sqlNoticia =  $this->select($sql);
+        // var_dump($sqlNoticia);
+
+        if(!$sqlNoticia){ 
+            $sql = "INSERT INTO reaccion(email,id_noticia) VALUES (?,?)"; 
+            $arrData = array($email, $id_noticia);
+            $request = $this->insert($sql, $arrData);
+            $respuesta["tipoRespuesta"] = true;
+
+        } else { 
+            $sql = "DELETE FROM reaccion WHERE email='$email' AND id_noticia = '$id_noticia'";
+            $request = $this->delete($sql);
+            $respuesta["tipoRespuesta"] = false;
+
+        }     
+        
 
         echo json_encode($respuesta);
     }
