@@ -51,7 +51,7 @@
 
 			},
 		}).done((res) => {
-			if (res.tipoRespuesta == true) {
+			if (res.tipoRespuestaOpen == true) {
 				$("#titulo_notice").text(res.titulo);
 				$("#descripcion").text(res.descripcion);
 				$("#categoria_notice").text(res.categoria);

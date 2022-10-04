@@ -9,7 +9,7 @@
 <div class="modal fade" id="modalVerNoticia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
 	<!-- <div class="modal fade" id="modalSearchProduct"> -->
-	<div class="modal-dialog modal-lg" role="document"   style="max-width: 80%;">
+	<div class="modal-dialog modal-lg" role="document" style="max-width: 80%;">
 		<div class="modal-content">
 
 			<div class="text-center modal-header">
@@ -20,8 +20,8 @@
 			</div>
 
 			<div class="card-body">
-		<input type="hidden" name="email" id="email" value="<?= $_SESSION["correo_login"]; ?>">
-		<input type="hidden" name="id_noticia" id="id_noticia" value="">
+				<input type="hidden" name="email" id="email" value="<?= $_SESSION["correo_login"]; ?>">
+				<input type="hidden" name="id_noticia" id="id_noticia" value="">
 
 				<div class="row">
 					<div class="col">
@@ -33,7 +33,15 @@
 								<h1 id="titulo_notice">Titulo</h1>
 								<p class="text-muted" id="categoria_notice">categoria_noticia</p>
 								<p class="" id="descripcion">descripcion</p>
-								<p><input type="checkbox" name="" id="me_gusta"><b id="n_likes">0</b> Me gusta</p>
+								<p><input type="checkbox" name="option" id="me_gusta" >
+									<label for="check1">
+										<span class="fa-stack">
+											<!-- <i class="far fa-thumbs-up fa-stack-1x"></i> -->
+											<i class="fa fa-thumbs-up fa-stack-1x"></i>
+										</span>
+									</label>
+									<b id="n_likes"> 0</b> Me gusta
+								</p>
 
 							</div>
 						</div>
@@ -46,8 +54,12 @@
 		</div>
 	</div>
 </div>
+<!-- <style>input[type="checkbox"]:checked + label .fa-thumbs-up {
+display: block;
+color: blue;
+}</style> -->
 <script>
-	$(document).on("change", "#me_gusta", function (e) {
+	$(document).on("change", "#me_gusta", function(e) {
 		// alert("hola");
 		$.ajax({
 			url: '../../app/lib/ajax.php',
@@ -61,11 +73,11 @@
 				id_noticia: $("#id_noticia").val(),
 			},
 		}).done((res) => {
-			if(res['tipoRespuesta'] == true) {
+			if (res['tipoRespuesta'] == true) {
 				var me_gusta = $("#n_likes").text();
 				var suma = parseInt(me_gusta) + 1;
 				$("#n_likes").text(suma);
-			} else if(res['tipoRespuesta'] == false)  {
+			} else if (res['tipoRespuesta'] == false) {
 				var me_gusta = $("#n_likes").text();
 				var suma = me_gusta - 1;
 				$("#n_likes").text(suma);
@@ -75,4 +87,4 @@
 
 		});
 	});
-	</script>
+</script>

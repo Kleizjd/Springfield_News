@@ -187,19 +187,22 @@ class Noticia extends Core
         echo json_encode($respuesta);
     }
     public function openNoticia()
-    {   extract($_POST);
+    {   
+        extract($_POST);
+        // var_dump($_POST);
         // echo $id_Notice;
 
-        $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' and c.id = n.categoria";       
+        $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' AND c.id = n.categoria";       
         $sqlNoticia =  $this->select($sql);
-        $sqlgusta = "SELECT * FROM reaccion WHERE email = '$email' and id_noticia = '$id_Notice'";       
+        $sqlgusta = "SELECT * FROM reaccion WHERE email = '$email' AND id_noticia = '$id_Notice' AND me_gusta IS NOT NULL";       
         $sqlLike =  $this->select($sqlgusta);
-        $cantidad = "SELECT COUNT(id_noticia) as total FROM reaccion WHERE id_noticia = '$id_Notice'";
+        // var_dump($sqlLike);
+        $cantidad = "SELECT COUNT(me_gusta) as total FROM reaccion WHERE id_noticia = '$id_Notice'";
         $sqlCantidad =  $this->select($cantidad);
 
         // echo $sqlCantidad["cantidad"];
         if ($sqlNoticia) {
-            $respuesta["tipoRespuesta"] = true;
+            $respuesta["tipoRespuestaOpen"] = true;
             $respuesta["titulo"] = $sqlNoticia["titulo"];
             $respuesta["descripcion"] =  $sqlNoticia["descripcion"];
             $respuesta["categoria"] =  $sqlNoticia["nombre"];
@@ -221,22 +224,34 @@ class Noticia extends Core
 
         echo json_encode($respuesta);
     }
+    public function comentNoticia()
+    {   extract($_POST);
+        $sql = "SELECT * FROM reaccion WHERE  email='$email'"; 
+        $sqlNoticia =  $this->select($sql);
+    }
     public function likeNoticia()
     {   extract($_POST);
     // dep($_POST);
-        $sql = "SELECT * FROM reaccion WHERE  email='$email' AND id_noticia = '$id_noticia'"; 
+        $sql = "SELECT * FROM reaccion WHERE  email='$email' AND id_noticia = '$id_noticia' AND me_gusta IS NOT NULL"; 
         $sqlNoticia =  $this->select($sql);
         // var_dump($sqlNoticia);
+        // echo "sqlNoticia";
 
         if(!$sqlNoticia){ 
-            $sql = "INSERT INTO reaccion(email,id_noticia) VALUES (?,?)"; 
-            $arrData = array($email, $id_noticia);
+            // echo "true";
+            $sql = "INSERT INTO reaccion(email,id_noticia,me_gusta) VALUES (?,?,?)"; 
+            $arrData = array($email, $id_noticia,1);
             $request = $this->insert($sql, $arrData);
             $respuesta["tipoRespuesta"] = true;
+            
 
         } else { 
-            $sql = "DELETE FROM reaccion WHERE email='$email' AND id_noticia = '$id_noticia'";
-            $request = $this->delete($sql);
+            // echo "false";
+
+            $sql = "UPDATE reaccion SET me_gusta = NULL WHERE email='$email' AND id_noticia = '$id_noticia'";
+        
+            $actualizarNoticia = $this->select($sql);
+
             $respuesta["tipoRespuesta"] = false;
 
         }     
