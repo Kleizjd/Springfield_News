@@ -9,7 +9,7 @@
 
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav ml-auto">
-            <li class="hover-effect nav-item" id="btnInicio"><a href="#" id="coffee" class="nav-link">Principal</a>
+            <li class="hover-effect nav-item" id="btnInicio"><a href="#" id="coffee" class="nav-link">Inicio</a>
             </li>
             <li class="hover-effect nav-item" id="btnContact"><a href="#" id="contactanos" class="nav-link">news</a>
             </li>
