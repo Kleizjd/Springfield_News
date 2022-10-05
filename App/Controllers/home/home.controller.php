@@ -5,7 +5,8 @@ include_once "Config/core.php";
 class home extends Core{
     
     public function coffee(){
-
+        $sql = "SELECT * FROM noticias ORDER BY id DESC LIMIT 5";
+        $listNoticia =  $this->select_all($sql);
         include_once "views/home/main.php";
         
     }

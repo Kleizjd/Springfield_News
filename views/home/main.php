@@ -1,43 +1,38 @@
 <div class="container-fluid bg-dark">
-<div class="row">
+<!-- <div class="row">
 	<div class="col">
 		<img src="public/img/carousel/NOTICE0.jpg">
 	</div>
 	<div class="col">
 		<img src="public/img/carousel/NOTICE3.jpg">
 	</div>
+</div>[ pb-3 ]-->
+<div class="row" id="latest_new">
+				<?php foreach ($listNoticia as $list) : ?>
+					<div class="col-sm-2 mx-auto">
+						<form name="formNoticia">
+							<input type="hidden" name="email" id="email" value="<?= $_SESSION["correo_login"]; ?>">
+
+						<div class="card" style="width: 9rem;">
+						<ul class="list-group list-group-flush">
+							<li class="list-group">
+							<img style="height: 5rem;" src="../../public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
+							</li>
+							<li class="list-group-item">
+							<h5 class="card-title"><?= $list['titulo']; ?></h5>
+							</li>
+							<li class="list-group-item">
+							<a type="button" class="btn btn-primary " data-toggle="modal" id="verN" title="Ver" onclick="openNoticia(<?= $list['id']; ?>)">Ver Noticia</a>
+							</li>
+						</ul>
+						</div>
+						</form>
+					</div>
+				<?php endforeach; ?>
+			</div>
 </div>
-</div>
 
 
-
-<!-- Carrusel de imgenes -->
-<!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-	<ol class="carousel-indicators">
-		<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-		<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-		<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-	</ol>
-	<div class="carousel-inner" align="center">
-		<div class="carousel-item active">
-			<img class="d-block w-50 " src="public/img/carousel/NOTICE0.jpg" alt="Primer slide">
-		</div>
-		<div class="carousel-item">
-			<img class="d-block w-50 " src="public/img/carousel/NOTICE2.jpeg" alt="Tercer slide">
-		</div>
-		<div class="carousel-item">
-			<img class="d-block w-50 " src="public/img/carousel/NOTICE3.jpg" alt="Segundo slide">
-		</div>
-	</div>
-	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
-	</a>
-	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
-	</a>
-</div> -->
 
 <!-- Iframe google maps-->
 <div class="map">

@@ -14,8 +14,7 @@
             <li class="hover-effect nav-item" id="btnContact"><a href="#" id="contactanos" class="nav-link">news</a>
             </li>
             </li>
-            <li class="hover-effect nav-item" id="btnColab"><a href="#" id="contributors" class="nav-link">Colaboradores</a>
-            </li>
+          
             <li class="hover-effect nav-item" id="btnLogin" ><a href="#" id="join" class="nav-link">Ingresar</a>
             </li>
 
