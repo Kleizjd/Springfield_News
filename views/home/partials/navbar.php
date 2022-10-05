@@ -11,8 +11,7 @@
         <ul class="nav navbar-nav ml-auto">
             <li class="hover-effect nav-item" id="btnInicio"><a href="#" id="coffee" class="nav-link">Inicio</a>
             </li>
-            <li class="hover-effect nav-item" id="btnContact"><a href="#" id="contactanos" class="nav-link">news</a>
-            </li>
+     
             </li>
           
             <li class="hover-effect nav-item" id="btnLogin" ><a href="#" id="join" class="nav-link">Ingresar</a>
