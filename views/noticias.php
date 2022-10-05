@@ -22,7 +22,7 @@
 							<h5 class="card-title"><?= $list['titulo']; ?></h5>
 							</li>
 							<li class="list-group-item">
-							<a type="button" class="btn btn-primary " data-toggle="modal" id="verN" title="Ver" onclick="openNoticia(<?= $list['id']; ?>)">Ver Noticia</a>
+							<a type="button" class="btn btn-primary " data-toggle="modal" id="verN" data-target="#modalNoticia"title="Ver" onclick="openNoticia(<?= $list['id']; ?>)">Ver Noticia</a>
 							</li>
 						</ul>
 						</div>

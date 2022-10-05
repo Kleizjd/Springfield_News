@@ -221,6 +221,22 @@ class Noticia extends Core
 
         echo json_encode($respuesta);
     }
+    public function openNoticiaMain()
+    {   extract($_POST);
+        // echo $id_Notice;
+
+        $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' and c.id = n.categoria";       
+        $sqlNoticia =  $this->select($sql);
+    
+  
+
+        // echo $sqlCantidad["cantidad"];
+        if ($sqlNoticia) {
+            $respuesta["tipoRespuesta"] = true;
+        }
+
+        echo json_encode($respuesta);
+    }
     public function likeNoticia()
     {   extract($_POST);
     // dep($_POST);

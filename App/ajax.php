@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../../public/js/global.js"></script>
+<!-- <script type="text/javascript" src="./public/js/global_home.js"></script> -->
 <?php
 
 extract($_POST);
@@ -40,7 +40,13 @@ if (!empty($_POST)) {
     }
 } else {
     if(file_exists("views/home/main.php")){
-        include_once("views/home/main.php");
+        include_once "Config/core.php";
+
+        $noticias= new Core();
+        $sql = "SELECT * FROM noticias ORDER BY id DESC LIMIT 5";
+        $listNoticia =  $this->select_all($sql);
+        include_once "views/home/main.php";
+        
     } else{
         // include_once "../../views/noticias.php";
        echo "<script>

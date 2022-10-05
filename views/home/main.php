@@ -1,3 +1,5 @@
+<?php include_once "Web/Modals/modalVerNoticiaMain.php";?>
+
 <div class="container-fluid bg-dark">
 <!-- <div class="row">
 	<div class="col">
@@ -11,12 +13,11 @@
 				<?php foreach ($listNoticia as $list) : ?>
 					<div class="col-sm-2 mx-auto">
 						<form name="formNoticia">
-							<input type="hidden" name="email" id="email" value="<?= $_SESSION["correo_login"]; ?>">
 
 						<div class="card" style="width: 9rem;">
 						<ul class="list-group list-group-flush">
 							<li class="list-group">
-							<img style="height: 5rem;" src="../../public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
+							<img style="height: 5rem;" src="./public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
 							</li>
 							<li class="list-group-item">
 							<h5 class="card-title"><?= $list['titulo']; ?></h5>
@@ -105,3 +106,23 @@
 	</div>
 </div>
 <!-- //Footer pie de pagina -->
+<script>
+   	function openNoticia(element) {
+		$.ajax({
+			url: 'app/lib/ajax.php',
+			method: "post",
+			dataType: "JSON",
+			data: {
+				modulo: "noticia",
+				controlador: "noticia",
+				funcion: "openNoticiaMain",
+				id_Notice: element,
+				
+			},
+		}).done((res) => {
+			$('#modalVerNoticia').modal('show');
+			
+		})
+	}
+ 
+</script>
