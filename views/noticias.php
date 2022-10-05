@@ -15,7 +15,7 @@
 
 						<div class="card" style="width: 9rem;">
 						<ul class="list-group list-group-flush">
-							<li>
+							<li class="list-group">
 							<img style="height: 5rem;" src="../../public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
 							</li>
 							<li class="list-group-item">
@@ -51,7 +51,7 @@
 
 			},
 		}).done((res) => {
-			if (res.tipoRespuestaOpen == true) {
+			if (res.tipoRespuesta == true) {
 				$("#titulo_notice").text(res.titulo);
 				$("#descripcion").text(res.descripcion);
 				$("#categoria_notice").text(res.categoria);

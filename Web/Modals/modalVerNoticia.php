@@ -1,3 +1,4 @@
+
 <!-- 
 <style>
     div.dataTables_wrapper {
@@ -20,20 +21,18 @@
 			</div>
 
 			<div class="card-body">
-				<input type="hidden" name="email" id="email" value="<?= $_SESSION["correo_login"]; ?>">
+				<input type="hidden" name="email" id="email"value="<?= $_SESSION["correo_login"]; ?>">
 				<input type="hidden" name="id_noticia" id="id_noticia" value="">
 
 				<div class="row">
-					<div class="col">
+					<div class="col-6 border">
 						<div class="row">
-							<div class="col">
+							<div class="col-5">
 								<img class="img__img" id="img_notice" src="../../public/img/svg/upload-user.svg" width="178" height="178" />
-							</div>
-							<div class="col">
-								<h1 id="titulo_notice">Titulo</h1>
+
+								<h4 id="titulo_notice">Titulo</h4>
 								<p class="text-muted" id="categoria_notice">categoria_noticia</p>
-								<p class="" id="descripcion">descripcion</p>
-								<p><input type="checkbox" name="option" id="me_gusta" >
+								<p><input type="checkbox" name="option" id="me_gusta">
 									<label for="check1">
 										<span class="fa-stack">
 											<!-- <i class="far fa-thumbs-up fa-stack-1x"></i> -->
@@ -42,13 +41,40 @@
 									</label>
 									<b id="n_likes"> 0</b> Me gusta
 								</p>
+							</div>
+							<div class="col-7">
+								<p class="" id="descripcion">descripcion</p>
+
 
 							</div>
 						</div>
 					</div>
-					<div class="col">
-						<input type="text" class="form-control" placeholder="Realice un comentario">
+					<div class="col-5">
+						<div class="row">
+							<div class="col">
+								<form id="form_comment">
+									<div class="input-group">
+										<input type="text" class="form-control" name="comentario" placeholder="Realice un comentario" aria-label="Input group example" aria-describedby="btnGroupAddon">
+										<div class="input-group-prepend ">
+											<button class="btn btn-primary" id="btnGroupAddon" type="submit">
+												<i class="far fa-paper-plane"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<div class="border" rows="10" cols="4">
+									Contrary to popular belief, Lorem Ipsum is not simply random
+								</div>
+							</div>
+						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</div>
@@ -82,8 +108,35 @@ color: blue;
 				var suma = me_gusta - 1;
 				$("#n_likes").text(suma);
 			}
-			// var likes = $("#n_likes").text();
-			// var op = $("#n_likes").text();
+		});
+	});
+	$(document).on("submit", "#form_comment", function(e) {
+		e.preventDefault();
+		var formData = new FormData(event.target);
+		formData.append("modulo", "noticia");
+		formData.append("controlador", "noticia");
+		formData.append("funcion", "comentaNoticia");
+		formData.append("email", $("#email").val());
+		formData.append("id_noticia", $("#id_noticia").val());
+		
+		$.ajax({
+			url: '../../App/lib/ajax.php',
+			method: 'POST',
+			dataType: 'JSON',
+			data: formData,
+			cache: false,
+			processData: false,
+			contentType: false
+		}).done((res) => {
+			if (res['tipoRespuesta'] == true) {
+				// var me_gusta = $("#n_likes").text();
+				// var suma = parseInt(me_gusta) + 1;
+				// $("#n_likes").text(suma);
+			} else if (res['tipoRespuesta'] == false) {
+				/* 	var me_gusta = $("#n_likes").text();
+					var suma = me_gusta - 1;
+					$("#n_likes").text(suma); */
+			}
 
 		});
 	});
