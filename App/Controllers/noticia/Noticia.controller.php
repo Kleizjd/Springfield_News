@@ -287,6 +287,7 @@ class Noticia extends Core
             $respuesta["tipoRespuesta"] = "actualiza";
         } else {
     }
+    }
     public function loadNoticias()
     {
 
