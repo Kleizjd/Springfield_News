@@ -67,8 +67,8 @@
 
 						<div class="row">
 							<div class="col">
-								<div class="border" rows="10" cols="4">
-									Contrary to popular belief, Lorem Ipsum is not simply random
+								<div class="border" rows="10" cols="4" id="comentar">
+									<!-- Contrary to popular belief, Lorem Ipsum is not simply random -->
 								</div>
 							</div>
 						</div>
@@ -128,14 +128,19 @@ color: blue;
 			processData: false,
 			contentType: false
 		}).done((res) => {
-			if (res['tipoRespuesta'] == true) {
+			if (res['tipoRespuesta'] == "actualiza") {
 				// var me_gusta = $("#n_likes").text();
 				// var suma = parseInt(me_gusta) + 1;
 				// $("#n_likes").text(suma);
-			} else if (res['tipoRespuesta'] == false) {
+			} else if (res['tipoRespuesta'] == "insert") {
+
+				// swal({ title: "success", message: "bien echo"})
 				/* 	var me_gusta = $("#n_likes").text();
-					var suma = me_gusta - 1;
-					$("#n_likes").text(suma); */
+					var suma = me_gusta - 1;*/
+					var actual = $("#comentar").html();
+					var add = actual+"<b>Jose Daniel:</b><p>hurra es hora de un cambio</p>";
+					$("#comentar").html(add); 
+					// $("#comentar").html(res.comentario); 
 			}
 
 		});

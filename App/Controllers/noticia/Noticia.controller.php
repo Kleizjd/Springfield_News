@@ -269,13 +269,16 @@ class Noticia extends Core
         $sqlComentario =  $this->select($sql);
 
         if(!$sqlComentario){
+            
             $sql = "UPDATE comentario = '$comentario' WHERE  email='$email' and id_noticia='$id_noticia'"; 
             $sqlComentario =  $this->select($sql);
-            $respuesta["tipoRespuesta"] = true;
+            $respuesta["tipoRespuesta"] = "actualiza";
         } else {
-            $sql = "INSERT INTO comentaio(email,id_noticia,comentario) VALUES (?,?,?)"; 
-            $arrData = array($email, $id_noticia,1);
-            $respuesta["tipoRespuesta"] = false;
+            // echo ($email."".$id_noticia."".$comentario);
+
+            $sql = "INSERT INTO comentario(email,id_noticia,comentario) VALUES (?,?,?)"; 
+            $arrData = array($email, $id_noticia,$comentario);
+            $respuesta["tipoRespuesta"] = "insert";
         }
         echo json_encode($respuesta);
     }
