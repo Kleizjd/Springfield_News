@@ -265,22 +265,27 @@ class Noticia extends Core
     public function comentaNoticia()
     {   extract($_POST);
     // var_dump($_POST);
-        $sql = "SELECT * FROM comentario WHERE  email='$email' and id_noticia='$id_noticia'"; 
-        $sqlComentario =  $this->select($sql);
-
-        if(!$sqlComentario){
-            
-            $sql = "UPDATE comentario = '$comentario' WHERE  email='$email' and id_noticia='$id_noticia'"; 
-            $sqlComentario =  $this->select($sql);
-            $respuesta["tipoRespuesta"] = "actualiza";
-        } else {
+       
             // echo ($email."".$id_noticia."".$comentario);
 
             $sql = "INSERT INTO comentario(email,id_noticia,comentario) VALUES (?,?,?)"; 
             $arrData = array($email, $id_noticia,$comentario);
+            var_dump($arrData); 
             $respuesta["tipoRespuesta"] = "insert";
-        }
         echo json_encode($respuesta);
+    }
+    public function comentActualiza()
+    {
+        extract($_POST);
+        $sql = "SELECT * FROM comentario WHERE  email='$email' and id_noticia='$id_noticia'"; 
+        $sqlComentario =  $this->select($sql);
+
+        if($sqlComentario){
+            
+            $sql = "UPDATE comentario SET comentario = '$comentario' WHERE  email='$email' AND id_noticia='$id_noticia'"; 
+            $sqlComentario =  $this->select($sql);
+            $respuesta["tipoRespuesta"] = "actualiza";
+        } else {
     }
     public function loadNoticias()
     {
