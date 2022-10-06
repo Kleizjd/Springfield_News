@@ -121,9 +121,10 @@ public function camposPassword()
         // var_dump($_POST);
 
         $answer = array();
-        $sqlPssword = $this->select_all("SELECT * FROM usuarios WHERE email ='$nueva_clave'");
+        $sql = "SELECT * FROM usuarios WHERE email ='$email'";
+        $sqlPssword = $this->select($sql);
 
-        if($sqlPssword == 0){
+    // if(!$sqlPssword){
         if($nueva_clave === $verifica_clave){
             //Encriptar-----------------------------------------------------------------------
             $passEncrypt = password_hash($nueva_clave, PASSWORD_DEFAULT); //password encripted
@@ -144,10 +145,10 @@ public function camposPassword()
         } else {
             $answer['tipoRespuesta'] = "error";
         }
-    } else {
-        $answer['tipoRespuesta'] = "warning";
+    // } else {
+    //     $answer['tipoRespuesta'] = "warning";
 
-    }
+    // }
         echo json_encode($answer);
 
     }

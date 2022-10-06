@@ -188,12 +188,16 @@
                                             contentType: false
                                         }).done((res) => {
                                             if (res.tipoRespuesta == "success") {
-                                                resload_table();
                                                 $(event.target)[0].reset();
                                                 swal({
                                                     title: "Creacion de usuario exitoso",
-                                                    type: res.tipoRespuesta
-                                                });
+                                                    type: res.tipoRespuesta,
+                                                    timer: 111000,
+                                                }).then(function(){
+                                                window.location.reload();
+
+                                        
+                                    })
                                             } else if (res.tipoRespuesta == "duplicate") {
                                                 swal({
                                                     title: "Usuario existente",
@@ -248,53 +252,7 @@
                 }
             }
         });
-        function resload_table() {
-			var tableSearchUser = $("#tableSearchUser").DataTable({
-					
-					dom: "Bfrtip",
-					buttons: [{
-						extend: "excelHtml5",
-						text: '<i class="fa fa-file-excel"></i>',
-						titleAttr: "Exportar a Excel",
-						className: "bg-success",
-						filename: "Usuarios",
-						sheetName: "Usuarios"
-					}],
-					language: {
-						"url": "../../vendor/datatable/language/datatablesSpanish.json"
-					},
-					destroy: true,
-					pageLength: 10,
-					autoWidth: true,
-					lengthChange: false,
-					columnDefs: [{
-						"className": "text-center",
-						"targets": "_all"
-                    }],
-                    drawCallback: () => { tableSearchUser.columns.adjust();},
-					ajax: {
-						url: "../../App/lib/ajax.php",
-						method: "POST",
-						// method: $(this).prop("method"),
-						dataType: "json",
-						data: {
-							modulo: "usuario",
-							controlador: "usuario",
-							funcion: "listUsuario",
-						},
-					},
-					columns: [
-						{data: "id_usuario"},
-						{data: "email"},
-						{data: "nombre_completo"},
-						{data: "estado"},
-						{data: "rol"},
-						{data: "btnVer"},
-						{data: "btnEditar"}
-					],
-				});
-          
-        }
+      
     }());
        
 </script>

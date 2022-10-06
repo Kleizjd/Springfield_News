@@ -196,8 +196,13 @@ class Noticia extends Core
         $sqlLike =  $this->select($sqlgusta);//REACCIONES
         $cantidad = "SELECT COUNT(id_noticia) as total FROM reaccion WHERE id_noticia = '$id_Notice'";
         $sqlCantidad =  $this->select($cantidad);//CANTIDAD GENERAL DE REACCIONES
-     
-        // echo $sqlCantidad["cantidad"];
+        $comentario = "SELECT nombre, u.email, id_noticia, comentario FROM comentario c, usuarios u WHERE c.email = u.email AND id_noticia = '$id_Notice'";
+        $sqlComentario =  $this->select_all($comentario);//COMENTARIOS
+        $comentarios = "";
+        
+         foreach ($sqlComentario as $comment) {
+                $comentarios .= '<p><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'</b>';
+        }
         if ($sqlNoticia) {
             $respuesta["tipoRespuesta"] = true;
             $respuesta["titulo"] = $sqlNoticia["titulo"];
@@ -207,6 +212,7 @@ class Noticia extends Core
             $respuesta["total"] =  $sqlCantidad["total"];
             $respuesta["id_noticia"] =  $id_Notice;
             $respuesta["cantidad"] =  $id_Notice;
+            $respuesta["comentarios"] =  $comentarios;
 
             if($sqlLike){
                 $respuesta["like"] =  true;
@@ -215,7 +221,6 @@ class Noticia extends Core
             } else {
                 $respuesta["like"] =  false;
                 // echo  "false";
-
             }
         }
 
@@ -276,15 +281,7 @@ class Noticia extends Core
             // }
         echo json_encode($respuesta);
     }
-    public function cuadroComentarios()
-    {   extract($_POST);
 
-        $sql = "SELECT * FROM comentario WHERE id_noticia='$id_noticia'"; 
-        if($sql){
-        $respuesta["tipoRespuesta"] = "success";
-        }
-        echo json_encode($respuesta);
-    }
     // public function comentActualiza()
     // {
     //     extract($_POST);

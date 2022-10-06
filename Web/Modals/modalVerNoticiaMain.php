@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalVerNoticia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalVerNoticia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 100000">
 	<div class="modal-dialog modal-lg" role="document" style="max-width: 80%;">
 		<div class="modal-content">
 			<div class="text-center modal-header">

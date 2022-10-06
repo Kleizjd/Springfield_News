@@ -15,7 +15,7 @@
 						<th>ID</th>
 						<th>Correo</th>
 						<th>Nombre Completo</th>
-						<th>Estado</th>
+						<!-- <th>Estado</th> -->
 						<th>Rol</th>
 						<th>Ver</th>
 						<th>Editar</th>
@@ -77,9 +77,9 @@
 					{
 						data: "nombre_completo"
 					},
-					{
-						data: "estado"
-					},
+					// {
+					// 	data: "estado"
+					// },
 					{
 						data: "rol"
 					},

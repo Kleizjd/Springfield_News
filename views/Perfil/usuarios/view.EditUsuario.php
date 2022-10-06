@@ -43,11 +43,11 @@
                                                     <div class="col-sm">
                                                         <div class="row pb-3">
                                                             <div class="col-sm-1">
-                                                                <button type="submit" class="btn btn-primary" title="Modificar Noticia"><i class="fa fa-save"></i> </button>
+                                                                <button type="submit" class="btn btn-primary" title="Modificar Usuario"><i class="fa fa-save"></i> </button>
 
                                                             </div>
                                                             <div class="col-sm-1">
-                                                                <button type="button" class="btn btn-danger" id="deleteProduct" title="Eliminar Noticia"><i class="fas fa-trash-alt"></i> </button>
+                                                                <button type="button" class="btn btn-danger" id="deleteUsuario" title="Eliminar Usuario"><i class="fas fa-trash-alt"></i> </button>
 
                                                             </div>
                                                             <!-- <div class="col-sm-3 offset-1">
@@ -126,52 +126,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $("#manage").click(function() {
-			var tableSearchUser = $("#tableSearchUser").DataTable({
-					
-					dom: "Bfrtip",
-					buttons: [{
-						extend: "excelHtml5",
-						text: '<i class="fa fa-file-excel"></i>',
-						titleAttr: "Exportar a Excel",
-						className: "bg-success",
-						filename: "Usuarios",
-						sheetName: "Usuarios"
-					}],
-					language: {
-						"url": "../../vendor/datatable/language/datatablesSpanish.json"
-					},
-					destroy: true,
-					pageLength: 10,
-					autoWidth: true,
-					lengthChange: false,
-					columnDefs: [{
-						"className": "text-center",
-						"targets": "_all"
-                    }],
-                    drawCallback: () => { tableSearchUser.columns.adjust();},
-					ajax: {
-						url: "../../App/lib/ajax.php",
-						method: "POST",
-						// method: $(this).prop("method"),
-						dataType: "json",
-						data: {
-							modulo: "usuario",
-							controlador: "usuario",
-							funcion: "listUsuario",
-						},
-					},
-					columns: [
-						{data: "id_usuario"},
-						{data: "email"},
-						{data: "nombre_completo"},
-						{data: "estado"},
-						{data: "rol"},
-						{data: "btnVer"},
-						{data: "btnEditar"}
-					],
-				});
-            });
+            
             $(function EditProduct() {
                 $(document).on("submit", "#form_EditUsuario", function(event) {
                     event.preventDefault();
@@ -191,22 +146,19 @@
                     }).done((res) => {
                         // alertify.notify(res.mensaje, res.tipoRespuesta, 4);
                         swal({
-                            title: 'Noticia modificado exitosamente',
+                            title: 'Usuario modificado exitosamente',
                             type: 'success',
+                            timer: 111000
                         });
                     });
                 });
             });
-            $(function deleteProduct() {
-                $(document).on("click", "#deleteProduct", function() {
+            $(function deleteUsuario() {
+                $(document).on("click", "#deleteUsuario", function() {
                     let status = $("#statProduct").text();
-                    // alert(status);
-
-                    // if(status = "Existente"){
-
                     swal({
                         type: "warning",
-                        title: "Esta seguro que desea eliminar el registro?",
+                        title: "Esta seguro que desea eliminar el Usuario?",
                         showCancelButton: true,
                         confirmButtonColor: "#337ab7",
                         confirmButtonText: "Sí",
@@ -219,8 +171,8 @@
                             var formData = new FormData($("#form_EditUsuario")[0]);
                             formData.append("modulo", "usuario");
                             formData.append("controlador", "usuario");
-                            formData.append("funcion", "borrarProducto");
-                            formData.append("codigo", $("#code_usuario").val());
+                            formData.append("funcion", "borrarUsuario");
+                            formData.append("id_usuario", $("#code_usuario").val());
                             $.ajax({
                                 url: "../../App/lib/ajax.php",
                                 method: "POST",
@@ -233,17 +185,19 @@
                                 if (res.tipoRespuesta == true) {
                                     // alertify.notify(res.mensaje, res.tipoRespuesta, 4);
                                     swal({
-                                        title: 'Noticia Eliminada exitosamente',
+                                        title: 'Usuario Eliminada exitosamente',
                                         type: 'success',
-                                    });
-                                    var menu = "usuario";
-                                    llamarVista(menu, menu, menu);;
+                                        timer: 111000,
+                                        buttons: false,
+
+                                    }).then(function(){
+                                window.location.href = "../../Web/Pages/index.php";
+                                        
+                                    })
                                 }
                             });
                         }
                     });
-
-                    // }
                 });
             });
 

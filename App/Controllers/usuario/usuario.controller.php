@@ -4,7 +4,7 @@ include_once "../../Config/core.php";
 
 class Usuario extends Core{
     
-    public function usuario(){ include_once "../../views/usuario/usuario.php";}
+    public function usuario(){ include_once "../../views/Perfil/usuarios.php";}
 
     public function visualizarUsuario(){
         extract($_POST);
@@ -112,8 +112,8 @@ class Usuario extends Core{
         $respuesta = array();
 
         $sql = "DELETE FROM usuarios WHERE id_usuario='$id_usuario'";
-        $borrarProducto = $this->delete($sql);
-        if ($borrarProducto) { $respuesta["tipoRespuesta"] = true;  }
+        $borrarUsuario = $this->delete($sql);
+        if ($borrarUsuario) { $respuesta["tipoRespuesta"] = true;  }
         
         echo json_encode($respuesta); 
     }

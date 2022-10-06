@@ -226,8 +226,9 @@ $(document).ready(function () {
                 contentType: false,
               }).done((res) => {
                 if (res.tipoRespuesta == "success") {
-                  swal({ type: "success" });
-                  location.href = "";
+                  swal({ title: "Clave cambiada con exito", type: "success",  timer: 111000,
+                }).then(function(){
+                window.location.href = "";})
 
                 } else if(res.tipoRespuesta == "warning") { swal({ title: "la clave no debe haber sido usada ya.", type: "warning" }); }
                 else { swal({ title: "las claves no son iguales", type: "error" }); }
