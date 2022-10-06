@@ -1,11 +1,4 @@
 
-<!-- 
-<style>
-    div.dataTables_wrapper {
-        margin: 0 auto;
-        width: 80%;
-    }
-</style> -->
 <!-- Modal BUSCAR -->
 <div class="modal fade" id="modalVerNoticia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -22,6 +15,7 @@
 
 			<div class="card-body">
 				<input type="hidden" name="email" id="email"value="<?= $_SESSION["correo_login"]; ?>">
+				<input type="hidden" name="nombre_user" id="nombre_user"value="<?= $_SESSION["nombres"]; ?>">
 				<input type="hidden" name="id_noticia" id="id_noticia" value="">
 
 				<div class="row">
@@ -54,7 +48,8 @@
 							<div class="col">
 								<form id="form_comment">
 									<div class="input-group">
-										<input type="text" class="form-control" name="comentario" placeholder="Realice un comentario" aria-label="Input group example" aria-describedby="btnGroupAddon">
+										<input type="text" class="form-control" name="comentario" id="comentario"
+										placeholder="Realice un comentario" aria-label="Input group example" aria-describedby="btnGroupAddon">
 										<div class="input-group-prepend ">
 											<button class="btn btn-primary" id="btnGroupAddon" type="submit">
 												<i class="far fa-paper-plane"></i>
@@ -69,6 +64,7 @@
 							<div class="col">
 								<div class="border" rows="10" cols="4" id="comentar">
 									<!-- Contrary to popular belief, Lorem Ipsum is not simply random -->
+							
 								</div>
 							</div>
 						</div>
@@ -128,19 +124,21 @@ color: blue;
 			processData: false,
 			contentType: false
 		}).done((res) => {
-			if (res['tipoRespuesta'] == "actualiza") {
-				// var me_gusta = $("#n_likes").text();
-				// var suma = parseInt(me_gusta) + 1;
-				// $("#n_likes").text(suma);
-			} else if (res['tipoRespuesta'] == "insert") {
+			if (res['tipoRespuesta'] == "success") {
 
 				// swal({ title: "success", message: "bien echo"})
 				/* 	var me_gusta = $("#n_likes").text();
 					var suma = me_gusta - 1;*/
-					var actual = $("#comentar").html();
-					var add = actual+"<b>Jose Daniel:</b><p>hurra es hora de un cambio</p>";
-					$("#comentar").html(add); 
-					// $("#comentar").html(res.comentario); 
+					// var mensaje = `<p><b>${nombre} : </b>${envia}</b>`;
+
+					var nombre = $("#nombre_user").val();
+					var envia = $("#comentario").val();
+					var actual = $("#comentar").val();
+					var mensaje = `<p><b>${nombre} : </b>${envia}</b>`;
+// 
+					// alert(actual);
+					// var add = `${mensaje} ${actual}`;
+					$("#comentar").append(mensaje); 
 			}
 
 		});

@@ -66,6 +66,7 @@
 				$("#img_notice").attr("src",imagen_url);
 				$('#modalVerNoticia').modal('show');
 				$("#comentar").html("");
+				document.getElementById("form_comment").reset();
 			}
 		});
 	}

@@ -191,12 +191,12 @@ class Noticia extends Core
         // echo $id_Notice;
 
         $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' AND c.id = n.categoria";       
-        $sqlNoticia =  $this->select($sql);
+        $sqlNoticia =  $this->select($sql);//NOTICIA
         $sqlgusta = "SELECT * FROM reaccion WHERE email = '$email' AND id_noticia = '$id_Notice'";       
-        $sqlLike =  $this->select($sqlgusta);
+        $sqlLike =  $this->select($sqlgusta);//REACCIONES
         $cantidad = "SELECT COUNT(id_noticia) as total FROM reaccion WHERE id_noticia = '$id_Notice'";
-        $sqlCantidad =  $this->select($cantidad);
-
+        $sqlCantidad =  $this->select($cantidad);//CANTIDAD GENERAL DE REACCIONES
+     
         // echo $sqlCantidad["cantidad"];
         if ($sqlNoticia) {
             $respuesta["tipoRespuesta"] = true;
@@ -264,30 +264,40 @@ class Noticia extends Core
     }
     public function comentaNoticia()
     {   extract($_POST);
-    // var_dump($_POST);
-       
-            // echo ($email."".$id_noticia."".$comentario);
+        // var_dump($_POST);// echo ($email."".$id_noticia."".$comentario);
+        $respuesta = array();
 
-            $sql = "INSERT INTO comentario(email,id_noticia,comentario) VALUES (?,?,?)"; 
+            $sqlInsert = "INSERT INTO comentario(email,id_noticia,comentario) VALUES (?,?,?)"; 
             $arrData = array($email, $id_noticia,$comentario);
-            var_dump($arrData); 
-            $respuesta["tipoRespuesta"] = "insert";
+            $sql = $this->insert($sqlInsert, $arrData);
+
+            // if($sql){
+                $respuesta["tipoRespuesta"] = "success";
+            // }
         echo json_encode($respuesta);
     }
-    public function comentActualiza()
-    {
-        extract($_POST);
-        $sql = "SELECT * FROM comentario WHERE  email='$email' and id_noticia='$id_noticia'"; 
-        $sqlComentario =  $this->select($sql);
+    public function cuadroComentarios()
+    {   extract($_POST);
 
-        if($sqlComentario){
+        $sql = "SELECT * FROM comentario WHERE id_noticia='$id_noticia'"; 
+        if($sql){
+        $respuesta["tipoRespuesta"] = "success";
+        }
+        echo json_encode($respuesta);
+    }
+    // public function comentActualiza()
+    // {
+    //     extract($_POST);
+    //     $sql = "SELECT * FROM comentario WHERE  email='$email' AND id_noticia='$id_noticia'"; 
+    //     $sqlComentario =  $this->select($sql);
+
+    //     if($sqlComentario){
             
-            $sql = "UPDATE comentario SET comentario = '$comentario' WHERE  email='$email' AND id_noticia='$id_noticia'"; 
-            $sqlComentario =  $this->select($sql);
-            $respuesta["tipoRespuesta"] = "actualiza";
-        } else {
-    }
-    }
+    //         $sql = "UPDATE comentario SET comentario = '$comentario' WHERE  email='$email' AND id_noticia='$id_noticia'"; 
+    //         $sqlComentario =  $this->select($sql);
+    //         $respuesta["tipoRespuesta"] = "actualiza";
+    //     }
+    // }
     public function loadNoticias()
     {
 
