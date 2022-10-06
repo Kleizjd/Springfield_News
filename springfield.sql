@@ -27,6 +27,17 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 	(3, 'Tecnologia'),
 	(4, 'Deportes');
 
+-- Volcando estructura para tabla springfield.comentario
+CREATE TABLE IF NOT EXISTS `comentario` (
+  `email` varchar(67) DEFAULT NULL,
+  `id_noticia` int(11) DEFAULT NULL,
+  `comentario` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Volcando datos para la tabla springfield.comentario: ~1 rows (aproximadamente)
+INSERT INTO `comentario` (`email`, `id_noticia`, `comentario`) VALUES
+	('dianaaristizabal@gmail.com', 7, '123asd');
+
 -- Volcando estructura para tabla springfield.noticias
 CREATE TABLE IF NOT EXISTS `noticias` (
   `id` int(50) NOT NULL AUTO_INCREMENT,
@@ -38,19 +49,18 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `datecreated` datetime DEFAULT current_timestamp(),
   `ruta` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12345673 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12345674 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla springfield.noticias: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla springfield.noticias: ~8 rows (aproximadamente)
 INSERT INTO `noticias` (`id`, `titulo`, `categoria`, `estado`, `descripcion`, `portada`, `datecreated`, `ruta`) VALUES
-	(1, 'el murio', '3', 'A', 'jose vamos', 'img_ab4a831d138ff790e95133a788594777.jpg', '2022-09-29 14:37:29', NULL),
+	(1, 'no lo se', '2', '', 'yo lo mate por que me debia dinero', 'img_6f90321cbdab98218da1f7f1571a5fd8.jpg', '2022-10-03 18:10:32', 'no-lo-se'),
 	(2, 'Cafe mata', '3', 'A', 'barato', 'img_86bbb5b0a0d08f7b00ede09bb7ca2065.jpg', '2022-09-29 14:37:42', NULL),
 	(3, 'jovenes', '2', '', 'murieron portada al mar', 'img_2cbec034433250cf3864cc563cb4b4ae.jpg', '2022-09-29 16:54:20', 'jovenes'),
 	(4, 'hombre cae al piso', '2', '', 'quien sabe', 'img_721c1d46eeff581629fbcb49577898bb.jpg', '2022-09-29 17:08:29', 'hombre-cae-al-piso'),
-	(6, '1234', '2', '', 'asdas', 'img_fb905afe8fa36e2cfc804cae57a6f290.jpg', '2022-10-01 18:47:25', '1234'),
 	(7, 'rapto', '2', '', 'violacion de jovenes amigos de Diana', 'img_759fbcab4132cc401bfd574c48b551d0.jpg', '2022-10-02 00:13:56', 'rapto'),
 	(8, 'llovio', '2', '', 'y lo mato un rayo', 'img_e26c6cb7b2b54d46229d672e970b19c2.jpg', '2022-10-03 00:33:35', 'llovio'),
-	(9, 'no lo se', '2', '', 'yo lo mate por que me debia dinero', 'img_6f90321cbdab98218da1f7f1571a5fd8.jpg', '2022-10-03 18:10:32', 'no-lo-se'),
-	(10, 'Gana eleccion', '2', '', 'Presidente Petro', 'img_427e011ed4270425462ac97f9575bb8f.jpg', '2022-10-04 03:35:49', 'gana-eleccion');
+	(9, 'el murio', '3', 'A', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up', 'img_ab4a831d138ff790e95133a788594777.jpg', '2022-09-29 14:37:29', NULL),
+	(10, 'Gana eleccion Petro ', '2', '', 'Colombia eligió y tiene nuevo Presidente para el periodo 2022-2026. Este domingo 19 de junio se llevó a cabo la segunda vuelta de las elecciones presidenciales. Gustavo Petro se convierte en el mandatario número 42 del país tras vencer a Rodolfo Hern', 'img_427e011ed4270425462ac97f9575bb8f.jpg', '2022-10-04 03:35:49', 'gana-eleccion');
 
 -- Volcando estructura para tabla springfield.perfiles
 CREATE TABLE IF NOT EXISTS `perfiles` (
@@ -79,26 +89,40 @@ INSERT INTO `preguntas` (`id`, `pregunta`) VALUES
 -- Volcando estructura para tabla springfield.reaccion
 CREATE TABLE IF NOT EXISTS `reaccion` (
   `email` varchar(50) DEFAULT NULL,
-  `id_noticia` int(11) DEFAULT NULL
+  `id_noticia` int(11) DEFAULT NULL,
+  `comentario` varchar(50) DEFAULT NULL,
+  `me_gusta` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla springfield.reaccion: ~5 rows (aproximadamente)
-INSERT INTO `reaccion` (`email`, `id_noticia`) VALUES
-	('jose.jdgo97@gmail.com', 1),
-	('dianaaristizabal@gmail.com', 1),
-	('dianaaristizabal@gmail.com', 2),
-	('dianaaristizabal@gmail.com', 6),
-	('dianaaristizabal@gmail.com', 4),
-	('naruto@mail.com', 12345667),
-	('naruto@mail.com', 2),
-	('naruto@mail.com', 1),
-	('naruto@mail.com', 6),
-	('jose.jdgo97@gmail.com', 12345670),
-	('jose.jdgo97@gmail.com', 12345672),
-	('jose.jdgo97@gmail.com', 12345669),
-	('jose.jdgo97@gmail.com', 10),
-	('jose.jdgo97@gmail.com', 8),
-	('jose.jdgo97@gmail.com', 7);
+-- Volcando datos para la tabla springfield.reaccion: ~26 rows (aproximadamente)
+INSERT INTO `reaccion` (`email`, `id_noticia`, `comentario`, `me_gusta`) VALUES
+	('dianaaristizabal@gmail.com', 1, NULL, NULL),
+	('dianaaristizabal@gmail.com', 1, NULL, NULL),
+	('dianaaristizabal@gmail.com', 1, NULL, NULL),
+	('dianaaristizabal@gmail.com', 1, NULL, 1),
+	('dianaaristizabal@gmail.com', 3, NULL, 1),
+	('jose.jdgo97@gmail.com', 3, NULL, 1),
+	('jose.jdgo97@gmail.com', 6, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, 1),
+	('jose.jdgo97@gmail.com', NULL, NULL, NULL),
+	('jose.jdgo97@gmail.com', NULL, NULL, NULL),
+	('jose.jdgo97@gmail.com', NULL, NULL, NULL),
+	('jose.jdgo97@gmail.com', NULL, NULL, NULL),
+	('jose.jdgo97@gmail.com', NULL, NULL, NULL),
+	('jose.jdgo97@gmail.com', 2, NULL, NULL),
+	('dianaaristizabal@gmail.com', 10, NULL, NULL);
 
 -- Volcando estructura para tabla springfield.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -115,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`id_usuario`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla springfield.usuarios: 12 rows
+-- Volcando datos para la tabla springfield.usuarios: 16 rows
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `password`, `email`, `estado_usuario`, `rolid`, `imagen_usuario`, `id_pregunta`, `respuesta`) VALUES
 	(1, 'José Daniel', 'Grijalba', '$2y$10$cpogeAdHRyRBkotAeQ3nS.tck5whOGT0VAgs6CcPda3/iN.k44qIS', 'jose.jdgo97@gmail.com', 'A', 1, 'imagen-jose-1.jpg', 1, NULL),
