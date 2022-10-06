@@ -201,7 +201,10 @@ class Noticia extends Core
         $comentarios = "";
         
          foreach ($sqlComentario as $comment) {
+            // if(isset($comment) && ($comment!==null)){
                 $comentarios .= '<p><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'</b>';
+
+            // }
         }
         if ($sqlNoticia) {
             $respuesta["tipoRespuesta"] = true;

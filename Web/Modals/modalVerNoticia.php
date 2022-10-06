@@ -125,20 +125,11 @@ color: blue;
 			contentType: false
 		}).done((res) => {
 			if (res['tipoRespuesta'] == "success") {
-
-				// swal({ title: "success", message: "bien echo"})
-				/* 	var me_gusta = $("#n_likes").text();
-					var suma = me_gusta - 1;*/
-					// var mensaje = `<p><b>${nombre} : </b>${envia}</b>`;
-
 					var nombre = $("#nombre_user").val();
 					var envia = $("#comentario").val();
 					var actual = $("#comentar").val();
 					var mensaje = `<p><b>${nombre} : </b>${envia}</b>`;
-// 
-					// alert(actual);
-					// var add = `${mensaje} ${actual}`;
-					$("#comentar").append(mensaje); 
+					$("#comentar").prepend(mensaje); 
 			}
 
 		});

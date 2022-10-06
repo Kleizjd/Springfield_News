@@ -66,9 +66,8 @@
 				$("#img_notice").attr("src",imagen_url);
 				$('#modalVerNoticia').modal('show');
 				$("#comentar").html("");
-				if(res.usuario != ""){
+				if(res.usuario != undefined){
 				$("#comentar").html(`<p><b>${res.usuario} : </b>${res.comentarios}</b>`);
-
 				}
 				document.getElementById("form_comment").reset();
 			}
