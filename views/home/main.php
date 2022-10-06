@@ -1,7 +1,10 @@
-<?php include_once "Web/Modals/modalVerNoticiaMain.php";?>
+<?php
+include_once "Config/Config.php";
+include_once "App/lib/Helpers.php"; ?>
+<?php include_once "Web/Modals/modalVerNoticiaMain.php"; ?>
 
-<div class="container-fluid bg-dark">
-<!-- <div class="row">
+<div class="container-fluid bg-dark pt-3 pb-3">
+	<!-- <div class="row">
 	<div class="col">
 		<img src="public/img/carousel/NOTICE0.jpg">
 	</div>
@@ -9,28 +12,28 @@
 		<img src="public/img/carousel/NOTICE3.jpg">
 	</div>
 </div>[ pb-3 ]-->
-<div class="row" id="latest_new">
-				<?php foreach ($listNoticia as $list) : ?>
-					<div class="col-sm-2 mx-auto">
-						<form name="formNoticia">
+	<div class="row" id="latest_new">
+		<?php foreach ($listNoticia as $list) : ?>
+			<div class="col-sm-2 mx-auto">
+				<form name="formNoticia">
 
-						<div class="card" style="width: 9rem;">
+					<div class="card" style="width: 10rem;">
 						<ul class="list-group list-group-flush">
 							<li class="list-group">
-							<img style="height: 5rem;" src="./public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
+								<img style="height: 5rem;" src="./public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
+							</li>
+							<li class="list-group-item" style="height: 5rem;">
+								<h6 class="card-title"><?= $list['titulo']; ?></h6>
 							</li>
 							<li class="list-group-item">
-							<h5 class="card-title"><?= $list['titulo']; ?></h5>
-							</li>
-							<li class="list-group-item">
-							<a type="button" class="btn btn-primary " data-toggle="modal" id="verN" title="Ver" onclick="openNoticia(<?= $list['id']; ?>)">Ver Noticia</a>
+								<a type="button" class="btn btn-primary " data-toggle="modal" id="verN" title="Ver" onclick="openNoticia(<?= $list['id']; ?>)">Ver Noticia</a>
 							</li>
 						</ul>
-						</div>
-						</form>
 					</div>
-				<?php endforeach; ?>
+				</form>
 			</div>
+		<?php endforeach; ?>
+	</div>
 </div>
 
 
@@ -107,7 +110,15 @@
 </div>
 <!-- //Footer pie de pagina -->
 <script>
-   	function openNoticia(element) {
+	function openNoticia(element) {
+		var base_url = window.location.origin;
+		// "http://stackoverflow.com"
+
+		var host = window.location.host;
+		// stackoverflow.com
+
+		var pathArray = window.location.pathname;
+		// alert(base_url);
 		$.ajax({
 			url: 'app/lib/ajax.php',
 			method: "post",
@@ -117,12 +128,19 @@
 				controlador: "noticia",
 				funcion: "openNoticiaMain",
 				id_Notice: element,
-				
+
 			},
 		}).done((res) => {
+			$("#titulo_notice").text(res.titulo);
+			$("#descripcion").text(res.descripcion);
+			$("#categoria_notice").text(res.categoria);
+			$("#id_noticia").val(res.id_noticia);
 			$('#modalVerNoticia').modal('show');
-			
+			var imagen_url = pathArray + "public/img/uploads/" + res.portada;
+			// var imagen_url = `../../public/img/uploads/${res.portada}`;
+			$("#img_notice").attr("src", imagen_url);
+			$('#modalVerNoticia').modal('show');
+
 		})
 	}
- 
 </script>

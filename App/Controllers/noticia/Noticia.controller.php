@@ -190,9 +190,9 @@ class Noticia extends Core
     {   extract($_POST);
         // echo $id_Notice;
 
-        $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' and c.id = n.categoria";       
+        $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' AND c.id = n.categoria";       
         $sqlNoticia =  $this->select($sql);
-        $sqlgusta = "SELECT * FROM reaccion WHERE email = '$email' and id_noticia = '$id_Notice'";       
+        $sqlgusta = "SELECT * FROM reaccion WHERE email = '$email' AND id_noticia = '$id_Notice'";       
         $sqlLike =  $this->select($sqlgusta);
         $cantidad = "SELECT COUNT(id_noticia) as total FROM reaccion WHERE id_noticia = '$id_Notice'";
         $sqlCantidad =  $this->select($cantidad);
@@ -224,15 +224,17 @@ class Noticia extends Core
     public function openNoticiaMain()
     {   extract($_POST);
         // echo $id_Notice;
-
         $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' and c.id = n.categoria";       
         $sqlNoticia =  $this->select($sql);
     
-  
 
         // echo $sqlCantidad["cantidad"];
         if ($sqlNoticia) {
             $respuesta["tipoRespuesta"] = true;
+            $respuesta["titulo"] = $sqlNoticia["titulo"];
+            $respuesta["descripcion"] =  $sqlNoticia["descripcion"];
+            $respuesta["categoria"] =  $sqlNoticia["nombre"];
+            $respuesta["portada"] =  $sqlNoticia["portada"];
         }
 
         echo json_encode($respuesta);
@@ -281,7 +283,7 @@ class Noticia extends Core
     {
 
         extract($_POST);
-        $sql = "SELECT *  FROM noticias ";
+        $sql = "SELECT *  FROM noticias ORDER BY id DESC";
 
         $listNoticia =  $this->select_all($sql);
         include_once "../../views/noticias.php";
