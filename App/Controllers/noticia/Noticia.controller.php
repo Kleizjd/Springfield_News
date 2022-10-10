@@ -196,16 +196,16 @@ class Noticia extends Core
         $sqlLike =  $this->select($sqlgusta);//REACCIONES
         $cantidad = "SELECT COUNT(id_noticia) as total FROM reaccion WHERE id_noticia = '$id_Notice'";
         $sqlCantidad =  $this->select($cantidad);//CANTIDAD GENERAL DE REACCIONES
-        $comentario = "SELECT nombre, u.email, id_noticia, comentario FROM comentario c, usuarios u WHERE c.email = u.email AND id_noticia = '$id_Notice'";
+        $comentario = "SELECT c.id, nombre, u.email, id_noticia, comentario FROM comentario c, usuarios u WHERE c.email = u.email AND id_noticia = '$id_Notice'  ORDER BY c.id DESC";
         $sqlComentario =  $this->select_all($comentario);//COMENTARIOS
         $comentarios = "";
         
          foreach ($sqlComentario as $comment) {
                 if($comment['email']=== $email){
-                // $comentarios .= '<p><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'</b><button type="button" class="btn btn-primary btn-sm" id="borraComentario"><i class="fa fa-edit"></i></button>';
+                $comentarios .= '<div class="border rounded"><p><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'<button type="button" class="btn btn-danger btn-sm float-sm-right" id="borraComentario" onclick="deleteComentario('.$comment['id'].')"><i class="fas fa-backspace"></i></button></p></div>';
 
                 } else {
-                    $comentarios .= '<p><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'</b>';
+                    $comentarios .= '<div class="border rounded"><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'</b></div>';
 
                 }
         }
@@ -222,11 +222,8 @@ class Noticia extends Core
 
             if($sqlLike){
                 $respuesta["like"] =  true;
-                // echo $sqlLike["id_noticia"];
-                // echo  "true";
             } else {
                 $respuesta["like"] =  false;
-                // echo  "false";
             }
         }
 
@@ -234,12 +231,10 @@ class Noticia extends Core
     }
     public function openNoticiaMain()
     {   extract($_POST);
-        // echo $id_Notice;
-        $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' and c.id = n.categoria";       
+        $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' AND c.id = n.categoria";       
         $sqlNoticia =  $this->select($sql);
     
 
-        // echo $sqlCantidad["cantidad"];
         if ($sqlNoticia) {
             $respuesta["tipoRespuesta"] = true;
             $respuesta["titulo"] = $sqlNoticia["titulo"];
@@ -281,8 +276,14 @@ class Noticia extends Core
             $sqlInsert = "INSERT INTO comentario(email,id_noticia,comentario) VALUES (?,?,?)"; 
             $arrData = array($email, $id_noticia,$comentario);
             $sql = $this->insert($sqlInsert, $arrData);
+            
+            $sqlComent = "SELECT id FROM comentario WHERE  email='$email' AND id_noticia = '$id_noticia' ORDER BY id DESC LIMIT 1";
+            $sqlComentario =  $this->select($sqlComent);
+
 
             // if($sql){
+                $respuesta["id"] = $sqlComentario["id"];
+                // echo $respuesta["id"];
                 $respuesta["tipoRespuesta"] = "success";
             // }
         echo json_encode($respuesta);

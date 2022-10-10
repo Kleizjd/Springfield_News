@@ -128,11 +128,8 @@ color: blue;
 					var nombre = $("#nombre_user").val();
 					var envia = $("#comentario").val();
 					var actual = $("#comentar").val();
-					// nombre.pop("undefined");
-
-					var mensaje = `<p><b>${nombre} : </b>${envia}</b></p>`;
-					// $("#nombre").removeProp("undefined");
-					// document.getElementById("nombre").pop();
+					var mensaje = `<div class="border rounded"><p><b>${nombre} : </b>${envia}<button type="button" class="btn btn-danger btn-sm float-sm-right" id="borraComentario" onclick="deleteComentario(${res.id})"><i class="fas fa-backspace"></i></button></p></div>`;
+					document.getElementById("form_comment").reset();
 					$("#comentar").prepend(mensaje); 
 			}
 
