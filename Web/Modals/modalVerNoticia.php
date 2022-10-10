@@ -15,7 +15,7 @@
 
 			<div class="card-body">
 				<input type="hidden" name="email" id="email"value="<?= $_SESSION["correo_login"]; ?>">
-				<input type="hidden" name="nombre_user" id="nombre_user"value="<?= $_SESSION["nombres"]; ?>">
+				<input type="hidden" name="nombre_user" id="nombre_user" value="<?= $_SESSION["nombres"]; ?>">
 				<input type="hidden" name="id_noticia" id="id_noticia" value="">
 
 				<div class="row">
@@ -62,8 +62,8 @@
 
 						<div class="row">
 							<div class="col">
-								<div class="border" rows="10" cols="4" id="comentar">
-									<!-- Contrary to popular belief, Lorem Ipsum is not simply random -->
+								<div class="border" id="comentar">
+									<!-- <p><b>${res.usuario} : </b>${res.comentarios}</b> -->
 							
 								</div>
 							</div>
@@ -128,7 +128,11 @@ color: blue;
 					var nombre = $("#nombre_user").val();
 					var envia = $("#comentario").val();
 					var actual = $("#comentar").val();
-					var mensaje = `<p><b>${nombre} : </b>${envia}</b>`;
+					// nombre.pop("undefined");
+
+					var mensaje = `<p><b>${nombre} : </b>${envia}</b></p>`;
+					// $("#nombre").removeProp("undefined");
+					// document.getElementById("nombre").pop();
 					$("#comentar").prepend(mensaje); 
 			}
 

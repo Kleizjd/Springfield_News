@@ -56,19 +56,17 @@
 				$("#descripcion").text(res.descripcion);
 				$("#categoria_notice").text(res.categoria);
 				$("#id_noticia").val(res.id_noticia);
-				// alert(res.cantidad);
 				$("#n_likes").text(res.total);
-				// alert(res.id);
-				var imagen_url = "../../public/img/uploads/"+res.portada;
-				// var imagen_url = `../../public/img/uploads/${res.portada}`;
+				// var imagen_url = "../../public/img/uploads/"+res.portada;
+				var imagen_url = `../../public/img/uploads/${res.portada}`;
 				if(res.like === true){$( "#me_gusta" ).prop( "checked", true );} else {$( "#me_gusta" ).prop( "checked", false );}
 				$("#img_notice").attr("src",imagen_url);
 				$("#img_notice").attr("src",imagen_url);
 				$('#modalVerNoticia').modal('show');
-				$("#comentar").html("");
-				if(res.usuario != undefined){
-				$("#comentar").html(`<p><b>${res.usuario} : </b>${res.comentarios}</b>`);
-				}
+			
+				let usuario  = ((res.usuario === "undefined") ? res.usuario+":": "");
+				$("#comentar").html(`<p><b>${usuario} </b>${res.comentarios}</b>`);
+
 				document.getElementById("form_comment").reset();
 			}
 		});
