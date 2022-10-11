@@ -118,10 +118,7 @@
                     contentType: false
                 }).done((res) => {
                     // alertify.notify(res.mensaje, res.tipoRespuesta, 4);
-                    swal({
-                        title: 'Noticia modificado exitosamente',
-                        type: 'success',
-                    });
+                    swal({title: 'Noticia modificado exitosamente', type: 'success', });
                 });
             });
         });
@@ -160,10 +157,7 @@
                         }).done((res) => {
                             if (res.tipoRespuesta == true) {
                                 // alertify.notify(res.mensaje, res.tipoRespuesta, 4);
-                                swal({
-                                    title: 'Noticia Eliminada exitosamente',
-                                    type: 'success',
-                                });
+                                swal({title: 'Noticia Eliminada exitosamente', type: 'success',});
                                 var menu = "noticia";
                                 llamarVista(menu, menu, menu);;
                             }

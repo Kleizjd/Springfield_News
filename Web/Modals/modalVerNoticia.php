@@ -62,7 +62,7 @@
 
 						<div class="row">
 							<div class="col">
-								<div class="border" id="comentar">
+								<div class="border rounded" id="comentar">
 									<!-- <p><b>${res.usuario} : </b>${res.comentarios}</b> -->
 							
 								</div>
@@ -81,6 +81,28 @@ display: block;
 color: blue;
 }</style> -->
 <script>
+    function deleteComentario(element){
+		var element = element.id;
+		$.ajax({
+			url: '../../app/lib/ajax.php',
+			method: "post",
+			dataType: "JSON",
+			data: {
+				modulo: "noticia",
+				controlador: "noticia",
+				funcion: "deleteComentario",
+				idComent: element,
+				email: $("#email").val(),
+				id_noticia: $("#id_noticia").val(),
+
+			},
+		}).done((res) => {
+			if (res['tipoRespuesta'] == true) {
+				var comentario = res.id_comentario.toString();
+				$(`[name=${comentario}]`).html("");
+			}
+		});
+	}
 	$(document).on("change", "#me_gusta", function(e) {
 		// alert("hola");
 		$.ajax({
@@ -128,10 +150,10 @@ color: blue;
 					var nombre = $("#nombre_user").val();
 					var envia = $("#comentario").val();
 					var actual = $("#comentar").val();
-					var mensaje = `<div class="border rounded"><p><b>${nombre} : </b>${envia}<button type="button" class="btn btn-danger btn-sm float-sm-right" id="borraComentario" onclick="deleteComentario(${res.id})"><i class="fas fa-backspace"></i></button></p></div>`;
+					var mensaje = `<div class="border rounded" name="${res.id}"><p><b>${nombre} : </b>${envia}<button type="button" class="btn btn-danger btn-sm float-sm-right" id="${res.id}" onclick="deleteComentario(this)"><i class="fas fa-backspace"></i></button></p></div>`;
 					document.getElementById("form_comment").reset();
 					$("#comentar").prepend(mensaje); 
-			}
+			} 
 
 		});
 	});

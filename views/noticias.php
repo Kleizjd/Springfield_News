@@ -48,7 +48,6 @@
 				funcion: "openNoticia",
 				id_Notice: element,
 				email: $("#email").val(),
-
 			},
 		}).done((res) => {
 			if (res.tipoRespuesta == true) {
@@ -65,7 +64,7 @@
 				$('#modalVerNoticia').modal('show');
 			
 				let usuario  = ((res.usuario === "undefined") ? res.usuario+":": "");
-				$("#comentar").html(`<p><b>${usuario} </b>${res.comentarios}</b>`);
+				$("#comentar").html(`${usuario} ${res.comentarios}</b>`);
 
 				document.getElementById("form_comment").reset();
 			}

@@ -74,10 +74,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 <!--  -->
 <script>
     $(document).ready(function() {
@@ -129,20 +125,13 @@
                             },
                         },
                         columns: [{data: "id"},
-                            {data: "titulo" },
-                            {data: "categoria"},
-                            {data: "descripcion"},
-                            {data: "btnVer"},
-                            {data: "btnEditar"}
-                        ],
-                    });
-
-
+                                  {data: "titulo" },
+                                  {data: "categoria"},
+                                  {data: "descripcion"},
+                                  {data: "btnVer"},
+                                  {data: "btnEditar"}],});
                 } else {
-                    swal({
-                        type: "warning",
-                        title: "Seleccione una Categoria"
-                    });
+                    swal({type: "warning",title: "Seleccione una Categoria"});
                 }
             });
         });

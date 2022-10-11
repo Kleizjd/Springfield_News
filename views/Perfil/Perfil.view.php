@@ -339,10 +339,8 @@
 
                     $('#complete_name').text(res.nombre + " " + res.apellido);
 
-                    swal({
-                        title: res.message,
-                        type: res.tipoRespuesta
-                    }).then(function(isConfirm) {
+                    swal({title: res.message,type: res.tipoRespuesta}).then(function(isConfirm) {
+                        
                         $("#complete_name_field").html(res.nombre + " " + res.apellido);
                     })
                 }

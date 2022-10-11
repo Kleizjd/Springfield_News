@@ -22,7 +22,7 @@ $(document).ready(function () {
                 if (res.status == true) { 
 					document.getElementById("frm_Noticia").reset();
 					
-					swal({ title: res.msg , type: 'success' });} else {  swal({ title: res.msg , type: 'error' });}
+					swal({ title: res.msg , type: 'success' });}else{ swal({ title: res.msg , type: 'error' });}
 			});
 		});
 	});

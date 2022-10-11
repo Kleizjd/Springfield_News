@@ -119,7 +119,7 @@ class Noticia extends Core
                     }
                     $sql = "SELECT * FROM noticias WHERE titulo = '{$strTitulo}' AND id != $this->intIdnoticia";
                     $request = $this->select_all($sql);
-                    // echo "hola";
+                    
                     if (empty($request)) {
                         $sql = "UPDATE categoria SET nombre = ?, descripcion = ?, portada = ?, ruta = ?, status = ? WHERE idcategoria = $this->intIdnoticia ";
                         $arrData = array($strTitulo, $categoria, $strDescripcion, $ruta, $imgPortada);
@@ -188,7 +188,6 @@ class Noticia extends Core
     }
     public function openNoticia()
     {   extract($_POST);
-        // echo $id_Notice;
 
         $sql = "SELECT * FROM noticias n, categorias c WHERE n.id = '$id_Notice' AND c.id = n.categoria";       
         $sqlNoticia =  $this->select($sql);//NOTICIA
@@ -202,7 +201,8 @@ class Noticia extends Core
         
          foreach ($sqlComentario as $comment) {
                 if($comment['email']=== $email){
-                $comentarios .= '<div class="border rounded"><p><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'<button type="button" class="btn btn-danger btn-sm float-sm-right" id="borraComentario" onclick="deleteComentario('.$comment['id'].')"><i class="fas fa-backspace"></i></button></p></div>';
+
+                $comentarios .= '<div class="border rounded" name="'.$comment['id'].'"><p><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'<button type="button" class="btn btn-danger btn-sm float-sm-right"  id="'.$comment['id'].'" onclick="deleteComentario(this)"><i class="fas fa-backspace"></i></button></p></div>';
 
                 } else {
                     $comentarios .= '<div class="border rounded"><b>'.$comment['nombre'].': </b>'.$comment['comentario'].'</b></div>';
@@ -227,6 +227,27 @@ class Noticia extends Core
             }
         }
 
+        echo json_encode($respuesta);
+    }
+    public function comentaNoticia()
+    {   extract($_POST);
+        // var_dump($_POST);// echo ($email."".$id_noticia."".$comentario);
+        $respuesta = array();
+            if($comentario != ""){
+                $sqlInsert = "INSERT INTO comentario(email,id_noticia,comentario) VALUES (?,?,?)"; 
+                $arrData = array($email, $id_noticia,$comentario);
+                $sql = $this->insert($sqlInsert, $arrData);
+                
+                $sqlComent = "SELECT id FROM comentario WHERE  email='$email' AND id_noticia = '$id_noticia' ORDER BY id DESC LIMIT 1";
+                $sqlComentario =  $this->select($sqlComent);
+    
+    
+                // if($sql){
+                    $respuesta["id"] = $sqlComentario["id"];
+                    $respuesta["tipoRespuesta"] = "success";
+                // }
+            } 
+            
         echo json_encode($respuesta);
     }
     public function openNoticiaMain()
@@ -268,40 +289,28 @@ class Noticia extends Core
 
         echo json_encode($respuesta);
     }
-    public function comentaNoticia()
-    {   extract($_POST);
-        // var_dump($_POST);// echo ($email."".$id_noticia."".$comentario);
-        $respuesta = array();
+   
 
-            $sqlInsert = "INSERT INTO comentario(email,id_noticia,comentario) VALUES (?,?,?)"; 
-            $arrData = array($email, $id_noticia,$comentario);
-            $sql = $this->insert($sqlInsert, $arrData);
+    public function deleteComentario()
+    {
+        extract($_POST);
+        // $sql = "SELECT * FROM comentario WHERE  email='$email' AND id_noticia='$id_noticia'"; 
+        // $sqlComentario =  $this->select($sql);
+
+        // if($sqlComentario){
             
-            $sqlComent = "SELECT id FROM comentario WHERE  email='$email' AND id_noticia = '$id_noticia' ORDER BY id DESC LIMIT 1";
-            $sqlComentario =  $this->select($sqlComent);
+            $sql = "DELETE FROM comentario WHERE  email='$email' AND id_noticia='$id_noticia' AND id = '$idComent'";  
+            $sqlComentario =  $this->delete($sql);
+            $respuesta["tipoRespuesta"] = true;
+            $id_comentario = strval($idComent);
+            // $id_comentario = "#".strval($idComent);
 
+            $respuesta["id_comentario"] = $id_comentario;
 
-            // if($sql){
-                $respuesta["id"] = $sqlComentario["id"];
-                // echo $respuesta["id"];
-                $respuesta["tipoRespuesta"] = "success";
-            // }
         echo json_encode($respuesta);
+
+        // }
     }
-
-    // public function comentActualiza()
-    // {
-    //     extract($_POST);
-    //     $sql = "SELECT * FROM comentario WHERE  email='$email' AND id_noticia='$id_noticia'"; 
-    //     $sqlComentario =  $this->select($sql);
-
-    //     if($sqlComentario){
-            
-    //         $sql = "UPDATE comentario SET comentario = '$comentario' WHERE  email='$email' AND id_noticia='$id_noticia'"; 
-    //         $sqlComentario =  $this->select($sql);
-    //         $respuesta["tipoRespuesta"] = "actualiza";
-    //     }
-    // }
     public function loadNoticias()
     {
 
