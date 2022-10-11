@@ -180,6 +180,8 @@ class Noticia extends Core
 
         $sql = "DELETE FROM noticias WHERE id='$Id'";
         $borrarNoticia = $this->delete($sql);
+        echo "DELETE FROM comentario WHERE id_noticia='$Id'";
+        $comentario = $this->delete($sqlComent);
         if ($borrarNoticia) {
             $respuesta["tipoRespuesta"] = true;
         }
