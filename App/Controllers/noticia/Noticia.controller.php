@@ -91,9 +91,7 @@ class Noticia extends Core
                 $url_temp        = $foto['tmp_name'];
                 $imgPortada      = 'portada_noticia.png';
                 $request_insert  = "";
-                if ($nombre_foto != '') {
-                    $imgPortada = 'img_' . md5(date('d-m-Y H:i:s')) . '.jpg';
-                }
+                if ($nombre_foto != '') { $imgPortada = 'img_' . md5(date('d-m-Y H:i:s')) . '.jpg'; }
 
                 if ($intIdnoticia == 0) {
 
@@ -180,7 +178,9 @@ class Noticia extends Core
 
         $sql = "DELETE FROM noticias WHERE id='$Id'";
         $borrarNoticia = $this->delete($sql);
-        echo "DELETE FROM comentario WHERE id_noticia='$Id'";
+        $sqlComent = "DELETE FROM comentario WHERE id_noticia='$Id'";
+        $comentario = $this->delete($sqlComent);
+        $sqlComent = "DELETE FROM reaccion WHERE id_noticia='$Id'";
         $comentario = $this->delete($sqlComent);
         if ($borrarNoticia) {
             $respuesta["tipoRespuesta"] = true;
