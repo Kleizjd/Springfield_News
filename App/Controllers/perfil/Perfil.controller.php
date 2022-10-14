@@ -1,8 +1,6 @@
 <?php
 include_once "../../Config/core.php";
 // include_once "Utilities/Utilities.controller.php";
-
-
 class Perfil extends Core
 {
     public function perfil()
@@ -59,12 +57,10 @@ class Perfil extends Core
         extract($_POST);
         // var_dump($_POST);
         $answer = array();
-
         // $message = "la contrasena actual no es correcta";
 
         $sqlVerify = "SELECT DISTINCT id_usuario, CONCAT(nombre, ' ', apellido) AS nombre_completo, nombre, apellido, password, rolid, email,imagen_usuario FROM usuarios WHERE email='$email' ";
         $sql = $this->select($sqlVerify);
-//  echo $sqlVerify;
         if ($sql != 0) {
 
             $passwordDB = $sql['password'];
@@ -121,14 +117,5 @@ class Perfil extends Core
 
         $tipoRespuesta = "success";
         echo json_encode(array('tipoRespuesta' => $tipoRespuesta, 'message' => 'Nombre Cambiado exitosamente', 'nombre' => $nombre, 'apellido' => $apellido));
-    }
-
-    public function listUsers()
-    {
-        extract($_POST);
-    }
-    public function editUser()
-    {
-        extract($_POST);
     }
 }

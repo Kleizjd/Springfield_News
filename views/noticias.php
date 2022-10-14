@@ -38,6 +38,7 @@
 <script>
 	
 	function openNoticia(element) {
+
 		$.ajax({
 			url: '../../app/lib/ajax.php',
 			method: "post",
@@ -56,9 +57,11 @@
 				$("#categoria_notice").text(res.categoria);
 				$("#id_noticia").val(res.id_noticia);
 				$("#n_likes").text(res.total);
+				$(`#${res.calificacion}`).prop("checked", true)  
 				// var imagen_url = "../../public/img/uploads/"+res.portada;
 				var imagen_url = `../../public/img/uploads/${res.portada}`;
 				if(res.like === true){$( "#me_gusta" ).prop( "checked", true );} else {$( "#me_gusta" ).prop( "checked", false );}
+				// if(res.calificacion === ""){$( `#${res.calificacion}` ).prop( "checked", false );} else {$( `#${res.calificacion}` ).prop( "checked", true );}
 				$("#img_notice").attr("src",imagen_url);
 				$("#img_notice").attr("src",imagen_url);
 				$('#modalVerNoticia').modal('show');
@@ -70,4 +73,5 @@
 			}
 		});
 	}
+	
 </script>

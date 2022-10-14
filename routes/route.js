@@ -11,7 +11,7 @@ $(document).ready(function () {
 });
      //=============================[   HOME / INICIO ]=========================//	
      $(function pageHome() { 
-        $(document).on("click", "#coffee", function () { var menu = "home"; llamarVista(menu, menu, "coffee"); })
+        $(document).on("click", "#principal", function () { var menu = "home"; llamarVista(menu, menu, "coffee"); })
         $(document).on("click", "#contactanos", function () { var menu = "home"; llamarVista(menu, menu, "contactanos"); })
         $(document).on("click", "#contributors", function () { var menu = "home"; llamarVista(menu, menu, "contributors"); })
         $(document).on("click", "#join", function () { var menu = "home"; llamarVista(menu, menu, "join"); })

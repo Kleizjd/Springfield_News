@@ -35,8 +35,6 @@ class Noticia extends Core
         $datos = array();
         $condicion = "";
 
-  
-
         if ($categoria_notice != "") {
             if ($categoria_notice == 'T') {
                 $categoria_notice = null;
@@ -199,6 +197,9 @@ class Noticia extends Core
         $sqlCantidad =  $this->select($cantidad);//CANTIDAD GENERAL DE REACCIONES
         $comentario = "SELECT c.id, nombre, u.email, id_noticia, comentario FROM comentario c, usuarios u WHERE c.email = u.email AND id_noticia = '$id_Notice'  ORDER BY c.id DESC";
         $sqlComentario =  $this->select_all($comentario);//COMENTARIOS
+        $rating = "SELECT * FROM rating WHERE email = '$email' AND id_noticia = '$id_Notice'";
+        $sqlRating =  $this->select($rating);//CALIFICACION
+        // var_dump($sqlRating);
         $comentarios = "";
         
          foreach ($sqlComentario as $comment) {
@@ -221,6 +222,9 @@ class Noticia extends Core
             $respuesta["id_noticia"] =  $id_Notice;
             $respuesta["cantidad"] =  $id_Notice;
             $respuesta["comentarios"] =  $comentarios;
+            if($sqlRating){
+            $respuesta["calificacion"] =  $sqlRating["calificacion"];
+            } 
 
             if($sqlLike){
                 $respuesta["like"] =  true;
@@ -233,7 +237,6 @@ class Noticia extends Core
     }
     public function comentaNoticia()
     {   extract($_POST);
-        // var_dump($_POST);// echo ($email."".$id_noticia."".$comentario);
         $respuesta = array();
             if($comentario != ""){
                 $sqlInsert = "INSERT INTO comentario(email,id_noticia,comentario) VALUES (?,?,?)"; 
@@ -287,8 +290,28 @@ class Noticia extends Core
             $respuesta["tipoRespuesta"] = false;
 
         }     
-        
+        echo json_encode($respuesta);
+    }
+    public function ratingNoticia()
+    {   extract($_POST);
+    // dep($_POST);
+        $sql = "SELECT * FROM rating WHERE  email='$email' AND id_noticia = '$id_noticia'"; 
+        $sqlNoticia =  $this->select($sql);
+        // var_dump($sqlNoticia);
 
+        if(!$sqlNoticia){ 
+            $sql = "INSERT INTO rating(email,id_noticia, calificacion) VALUES (?,?,?)"; 
+            $arrData = array($email, $id_noticia, $calificacion);
+            $request = $this->insert($sql, $arrData);
+            $respuesta["tipoRespuesta"] = true;
+
+        } else { 
+    // dep($_POST);
+
+            $sqlRating = "UPDATE rating SET calificacion = '$calificacion' WHERE email ='$email' AND  id_noticia = '$id_noticia'";
+            $actualizarRating = $this->select($sqlRating);
+            $respuesta["tipoRespuesta"] = false;
+        }     
         echo json_encode($respuesta);
     }
    
@@ -296,51 +319,22 @@ class Noticia extends Core
     public function deleteComentario()
     {
         extract($_POST);
-        // $sql = "SELECT * FROM comentario WHERE  email='$email' AND id_noticia='$id_noticia'"; 
-        // $sqlComentario =  $this->select($sql);
-
-        // if($sqlComentario){
             
             $sql = "DELETE FROM comentario WHERE  email='$email' AND id_noticia='$id_noticia' AND id = '$idComent'";  
             $sqlComentario =  $this->delete($sql);
             $respuesta["tipoRespuesta"] = true;
             $id_comentario = strval($idComent);
-            // $id_comentario = "#".strval($idComent);
 
             $respuesta["id_comentario"] = $id_comentario;
 
         echo json_encode($respuesta);
 
-        // }
     }
     public function loadNoticias()
-    {
-
-        extract($_POST);
+    {  extract($_POST);
         $sql = "SELECT *  FROM noticias ORDER BY id DESC";
 
         $listNoticia =  $this->select_all($sql);
         include_once "../../views/noticias.php";
-
-
-        // $cardHtml = '';
-        // foreach ($listNoticia as $list) {
-        //     $cardHtml .= '<div class="col-sm">';
-        //     $cardHtml .= '<from name="formNoticia">';
-        //     $cardHtml .= '<div class="card" style="height: 20rem;">';
-        //     $cardHtml .= '<img style="height: 7rem;" src="../../public/img/uploads/'.$list['portada'].'" class="card-img-top" alt="...">';
-        //     $cardHtml .= '<div class="card-body"></div>';
-        //     $cardHtml .= '<h5 class="card-title" >'.$list['titulo'].'</h5> ';
-        //     $cardHtml .= '<p class="card-text"></p>';
-        //     $cardHtml .= '<a id = "numero" value = "'.$list['id'].'"></a>';
-        //     $cardHtml .= '<a onclick="openNoticia(this)"><i class="fas fa-angle-up"></i></a>';
-        //     $cardHtml .= '<button type="submit" class="btn btn-primary" id="btnNoticia" onclick="openNoticia(this)">Ver Noticia</button>';
-        //     $cardHtml .= '</div>';
-        //     $cardHtml .= '</form>';
-        //     $cardHtml .= '</div>';
-        // }
-        // $table = array("data" => $datos);
-        // var_dump($table);
-        // echo json_encode($cardHtml);
     }
 }
