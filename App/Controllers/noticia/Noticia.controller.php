@@ -41,7 +41,7 @@ class Noticia extends Core
             }
         }
 
-        $sql = "SELECT n.id, titulo, categoria, nombre, descripcion  FROM noticias n, categorias c WHERE c.id LIKE '%$categoria_notice%' $condicion";
+        $sql = "SELECT n.id, titulo, categoria, nombre, descripcion  FROM noticias n, categorias c WHERE n.categoria = c.id AND  c.id LIKE'%$categoria_notice%' $condicion";
 
         $listNoticia =  $this->select_all($sql);
 
