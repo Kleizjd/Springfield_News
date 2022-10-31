@@ -1,6 +1,4 @@
 <?php getModal('modalNoticia'); ?>
-
-<!-- Modal -->
 <div class="card">
   <div class="card-header headerRegister">
     <h5 class="card-title" id="titleModal">Nueva Noticia</h5>
@@ -57,7 +55,6 @@
 
       <div class="tile-footer">
         <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText" title="Crear Noticia">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-        <!-- <button class="btn btn-danger" type="button" data-dismiss="card"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button> -->
       </div>
     </form>
   </div>

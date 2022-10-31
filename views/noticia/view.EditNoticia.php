@@ -117,7 +117,6 @@
                     processData: false,
                     contentType: false
                 }).done((res) => {
-                    // alertify.notify(res.mensaje, res.tipoRespuesta, 4);
                     swal({title: 'Noticia modificado exitosamente', type: 'success', });
                 });
             });
@@ -125,10 +124,6 @@
         $(function deletenoticia() {
             $(document).on("click", "#deletenoticia", function() {
                 let status = $("#statnoticia").text();
-                // alert(status);
-
-                // if(status = "Existente"){
-
                 swal({
                     type: "warning",
                     title: "Esta seguro que desea eliminar el registro?",
@@ -156,7 +151,6 @@
                             contentType: false
                         }).done((res) => {
                             if (res.tipoRespuesta == true) {
-                                // alertify.notify(res.mensaje, res.tipoRespuesta, 4);
                                 swal({title: 'Noticia Eliminada exitosamente', type: 'success',});
                                 var menu = "noticia";
                                 llamarVista(menu, menu, menu);;
@@ -164,8 +158,6 @@
                         });
                     }
                 });
-
-                // }
             });
         });
 

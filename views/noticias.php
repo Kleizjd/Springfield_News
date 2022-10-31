@@ -11,21 +11,20 @@
 					<?php if ($i == $count) {echo '</div><div class="row">';$count = $count + 5;} $i++; ?>
 					<div class="col-sm-2 mx-auto">
 						<form name="formNoticia">
-		<input type="hidden" name="email" id="email" value="<?= $_SESSION["correo_login"]; ?>">
-
-						<div class="card" style="width: 10rem;">
-						<ul class="list-group list-group-flush">
-							<li class="list-group">
-							<img style="height: 5rem;" src="../../public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
-							</li>
-							<li class="list-group-item">
-							<h6 class="card-title"><?= $list['titulo']; ?></h6>
-							</li>
-							<li class="list-group-item">
-							<a type="button" class="btn btn-primary " data-toggle="modal" id="verN" data-target="#modalNoticia"title="Ver" onclick="openNoticia(<?= $list['id']; ?>)">Ver Noticia</a>
-							</li>
-						</ul>
-						</div>
+							<input type="hidden" name="email" id="email" value="<?= $_SESSION["correo_login"]; ?>">
+							<div class="card" style="width: 10rem;">
+								<ul class="list-group list-group-flush">
+									<li class="list-group">
+									<img style="height: 5rem;" src="../../public/img/uploads/<?= $list['portada']; ?>" class="card-img-top" alt="...">
+									</li>
+									<li class="list-group-item">
+									<h6 class="card-title"><?= $list['titulo']; ?></h6>
+									</li>
+									<li class="list-group-item">
+									<a type="button" class="btn btn-primary " data-toggle="modal" id="verN" data-target="#modalNoticia"title="Ver" onclick="openNoticia(<?= $list['id']; ?>)">Ver Noticia</a>
+									</li>
+								</ul>
+							</div>
 						</form>
 					</div>
 				<?php endforeach; ?>

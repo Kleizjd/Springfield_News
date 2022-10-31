@@ -9,19 +9,15 @@ class Usuario extends Core{
     public function visualizarUsuario(){
         extract($_POST);
         $ruta = "../../views/perfil/Files/";
-
         $sqlUsuario = $this->select_all("SELECT CONCAT(nombre, ' ', apellido) AS nombre_completo, email, rolid, id_usuario, estado_usuario, imagen_usuario FROM usuarios WHERE id_usuario = $id_usuario");
         include_once "../../views/perfil/usuarios/view.VerUsuario.php";
     }
 
     public function viewEditarUsuario(){
         extract($_POST);
-        $sqlUsuario = $this->select_all("SELECT nombre, apellido, email, rolid, id_usuario, estado_usuario FROM usuarios WHERE id_usuario = $id_usuario");
-        // var_dump($sqlUsuario);
+        $ruta = "../../views/perfil/Files/";
+        $sqlUsuario = $this->select_all("SELECT nombre, apellido, email, rolid, id_usuario, estado_usuario,imagen_usuario FROM usuarios WHERE id_usuario = $id_usuario");
         $sqlPerfil =  $this->select_all("SELECT * FROM perfiles");
-        // echo "<br>";
-        // var_dump($sqlPerfil);
-
         include_once "../../views/perfil/usuarios/view.EditUsuario.php";
     }
 
@@ -58,14 +54,6 @@ class Usuario extends Core{
 
     public function crearUsuario() {
         extract($_POST);
-        // var_dump($_POST);
-        // $email = $_POST['email'];
-        // $nombre = $_POST['nombre'];
-        // $apellido = $_POST['apellido'];
-        // $password = $_POST['password_user'];
-        // $password_verify = $_POST['password_verify'];
-        // $pregunta = $_POST['pregunta'];
-        // $respuesta = $_POST['respuesta'];
         $estado = "'A'";
 
         if ($password_user === $password_verify) {
@@ -94,16 +82,33 @@ class Usuario extends Core{
         echo json_encode($answer);
     }
 
-    public function editarUsuario() {
+    public function editarUsuario()
+    {
         extract($_POST);
         // var_dump($_POST);
         $respuesta = array();
+        if ($password_user != "" || $password_verify != "") {
+            if ($password_user <= 7 && $password_verify <= 7) {
+                if ($password_user === $password_verify) {
+                    //Encriptar-----------------------------------------------------------------------
+                    $passEncrypt = password_hash($password_user, PASSWORD_DEFAULT); //password encripted
+                    //---------------------------------------------------------------/contraseña encriptada
+                    $sql = "UPDATE usuarios SET password = '$passEncrypt', nombre ='$nombre', apellido = '$apellido', email = '$email', rolid = '$rol' WHERE id_usuario='$code_usuario'";
+                    $actualizarUusario = $this->select($sql);
 
-        $sql = "UPDATE usuarios SET nombre ='$nombre', apellido = '$apellido', email = '$email', rolid = '$rol' WHERE id_usuario='$code_usuario'";
-        $actualizarUusario = $this->select($sql);	
-
-        $respuesta["tipoRespuesta"] = true; 
-        echo json_encode($respuesta);  
+                    $respuesta = array("tipoRespuesta" => 'success', "msg" => 'Usuario modificado exitosamente.');
+                } else {
+                    $respuesta = array("tipoRespuesta" => 'info', "msg" => 'La contraseña no es igual.');
+                }
+            } else {
+                $respuesta = array("tipoRespuesta" => 'error', "msg" => 'La contraseña de debe ser mayor o igual a 8 caracteres. y debe contener letras');
+            }
+        } else {
+            $sql = "UPDATE usuarios SET nombre ='$nombre', apellido = '$apellido', email = '$email', rolid = '$rol' WHERE id_usuario='$code_usuario'";
+            $actualizarUusario = $this->select($sql);
+            $respuesta = array("tipoRespuesta" => 'success', "msg" => 'Usuario modificado exitosamente.');
+        }
+        echo json_encode($respuesta);
     }
     
 

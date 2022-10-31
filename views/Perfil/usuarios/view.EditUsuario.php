@@ -36,11 +36,10 @@
                                 <div class="col-sm col-lg">
                                     <div class="card-header">
                                         <form action="" id="form_EditUsuario" method="POST" autocomplete="off">
-                                            <?php foreach ($sqlUsuario as $usuario) {
-                                            } ?>
+                                            <?php foreach ($sqlUsuario as $usuario) {} ?>
                                             <div class="container-fluid">
                                                 <div class="row">
-                                                    <div class="col-sm">
+                                                    <div class="col-9">
                                                         <div class="row pb-3">
                                                             <div class="col-sm-1">
                                                                 <button type="submit" class="btn btn-primary" title="Modificar Usuario"><i class="fa fa-save"></i> </button>
@@ -53,56 +52,86 @@
                                                             <!-- <div class="col-sm-3 offset-1">
                                                                 <h4><span class="badge badge-success" id="statProduct"><?= $usuario["estado_usuario"]; ?></span></h4>
                                                             </div> -->
-
-                                                        </div>
-
-                                                        <div class="row pb-3">
                                                             <div class="col-sm-1">
                                                                 <label for="code">Codigo</label>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <input type="text" class="form-control" id="code_usuario" name="code_usuario" value="<?= $usuario["id_usuario"]; ?>" readonly>
                                                             </div>
+
+                                                        </div>
+
+                                                        <div class="row pb-3">
+
                                                             <div class="col-sm-1">
                                                                 <label for="email">correo</label>
                                                             </div>
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-5">
                                                                 <input type="text" class="form-control" id="email" name="email" value="<?= $usuario["email"]; ?>">
                                                             </div>
-                                                            <div class="col-sm">
+                                                            <div class="col-sm-1">
                                                                 <label for="rol">Rol</label>
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-5">
                                                                 <select class="form-control" id="rol" name="rol">
-                                                                    <!-- <option name="" id="columnista" value="3">Columnista</option>
-                                                                    <option name="" id="lector" value="4">Lector</option> -->
-                                                                    <?php $i=0; foreach ($sqlPerfil as $rol) : ?>
 
-                                                                    <?php if ($i > 0) : ?>
-                                                                        <?php if ($rol["id"] == $usuario["rolid"]) : ?>
+                                                                    <?php $i = 0;
+                                                                    foreach ($sqlPerfil as $rol) : ?>
 
-                                                                            <option value="<?= $rol["id"]; ?>" selected><?= $rol["nombre"]; ?></option>
-                                                                        <?php else : ?>
-                                                                            <option value="<?= $rol["id"]; ?>"><?= $rol["nombre"]; ?></option>
-                                                                        <?php endif; ?>
-                                                                        <?php endif; $i++;?>
+                                                                        <?php if ($i > 0) : ?>
+                                                                            <?php if ($rol["id"] == $usuario["rolid"]) : ?>
+
+                                                                                <option value="<?= $rol["id"]; ?>" selected><?= $rol["nombre"]; ?></option>
+                                                                            <?php else : ?>
+                                                                                <option value="<?= $rol["id"]; ?>"><?= $rol["nombre"]; ?></option>
+                                                                            <?php endif; ?>
+                                                                        <?php endif;
+                                                                        $i++; ?>
                                                                     <?php endforeach; ?>
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-
-                                                            <div class="col-sm-3">
+                                                        <div class="row pb-3">
+                                                            <div class="col-sm-1">
                                                                 <label for="nombre">Nombre</label>
                                                             </div>
-                                                            <div class="col-sm">
+                                                            <div class="col-sm-5">
                                                                 <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $usuario["nombre"]; ?>">
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-1">
                                                                 <label for="nombre_completo">Apellido</label>
                                                             </div>
-                                                            <div class="col-sm">
+                                                            <div class="col-sm-5">
                                                                 <input type="text" class="form-control" id="apellido" name="apellido" value="<?= $usuario["apellido"]; ?>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="input-group form-group">
+                                                                    <input type="password" class="form-control" placeholder="Contrase&ntilde;a" name="password_user" id="password_user" />
+                                                                    <button type="button" class="btn btn-outline-primary showPassword">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="input-group form-group">
+                                                                    <input type="password" class="form-control" placeholder="Validar Contrase&ntilde;a" name="password_verify" id="password_verify" />
+                                                                    <button type="button" class="btn btn-outline-primary showPassword">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <?php if (!empty($usuario["imagen_usuario"])) : ?>
+                                                                    <img class="" src="<?= $ruta . $usuario["imagen_usuario"]; ?>" alt="<?= preg_replace("/\.[^.]+$/", "", $usuario["imagen_usuario"]); ?>" width="178" height="178">
+                                                                <?php else : ?>
+                                                                    <img class="img__img" src="../../public/img/svg/upload-user.svg" width="178" height="178" />
+                                                                <?php endif ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -144,12 +173,16 @@
                         processData: false,
                         contentType: false
                     }).done((res) => {
-                        // alertify.notify(res.mensaje, res.tipoRespuesta, 4);
-                        swal({
-                            title: 'Usuario modificado exitosamente',
-                            type: 'success',
-                            timer: 111000
-                        });
+                        if (res.tipoRespuesta == 'success') {
+                            swal({title: res.msg, type: res.tipoRespuesta,timer: 11100});
+                            $("#tableSearchUser").DataTable().ajax.reload();
+                            $("#password_user").text("");
+                            $("#password_verify").text("");
+                        } else if (res.tipoRespuesta == 'info') {
+                            swal({title: res.msg, type: res.tipoRespuesta,timer: 11100});
+                        } else if (res.tipoRespuesta == 'error') {
+                            swal({title: res.msg, type: res.tipoRespuesta,timer: 11100});
+                        }
                     });
                 });
             });
